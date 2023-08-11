@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="主題介紹簡介淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預">
+  <meta name="description" content="基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cervical Lymph Node Classification">
 <meta property="og:url" content="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="主題介紹簡介淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預">
+<meta property="og:description" content="基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/image1.png">
 <meta property="og:image" content="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/image2.png">
 <meta property="og:image" content="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/img.png">
 <meta property="article:published_time" content="2023-08-06T04:43:42.000Z">
-<meta property="article:modified_time" content="2023-08-11T07:58:27.384Z">
+<meta property="article:modified_time" content="2023-08-11T08:44:09.712Z">
 <meta property="article:author" content="YuMingChang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/image1.png">
@@ -194,10 +194,11 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-11 15:58:27" itemprop="dateModified" datetime="2023-08-11T15:58:27+08:00">2023-08-11</time>
+                <time title="Modified: 2023-08-11 16:44:09" itemprop="dateModified" datetime="2023-08-11T16:44:09+08:00">2023-08-11</time>
               </span>
 
           
+            <div class="post-description">基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類</div>
 
         </div>
       </header>
@@ -217,7 +218,7 @@
 
 <h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>在我們的實驗結果中，比較了不同的訓練方法所達成的效果，在監督式學習表現上都遜色於DINO以及我們所提出RBKD。</p>
 <p><img src="img.png" alt="img.png"></p>
-<h2 id="討論"><a href="#討論" class="headerlink" title="討論"></a>討論</h2><h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2>
     </div>
 
     
@@ -235,7 +236,10 @@
     <a href="/2023/08/06/Apply-Network-augmentation-on-yolov8/" rel="prev" title="Apply Network augmentation on yolov8">
       <i class="fa fa-chevron-left"></i> Apply Network augmentation on yolov8
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/08/11/ToF/" rel="next" title="ToF">
+      ToF <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -294,7 +298,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E9%A1%8C%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">主題介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">1.3.</span> <span class="nav-text">結果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%8E%E8%AB%96"><span class="nav-number">1.4.</span> <span class="nav-text">討論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">參考</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E9%A1%8C%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">主題介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">1.3.</span> <span class="nav-text">結果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">1.4.</span> <span class="nav-text">參考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
