@@ -28,7 +28,7 @@
 <meta property="og:description" content="感測器針對真實場景之旁觀者偵測演算法開發">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-11T08:11:27.000Z">
-<meta property="article:modified_time" content="2023-08-11T08:55:58.425Z">
+<meta property="article:modified_time" content="2023-08-19T04:41:12.000Z">
 <meta property="article:author" content="YuMingChang">
 <meta name="twitter:card" content="summary">
 
@@ -182,10 +182,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-08-11 16:11:27 / Modified: 16:55:58" itemprop="dateCreated datePublished" datetime="2023-08-11T16:11:27+08:00">2023-08-11</time>
+              <time title="Created: 2023-08-11 16:11:27" itemprop="dateCreated datePublished" datetime="2023-08-11T16:11:27+08:00">2023-08-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-08-19 12:41:12" itemprop="dateModified" datetime="2023-08-19T12:41:12+08:00">2023-08-19</time>
+              </span>
 
           
             <div class="post-description">感測器針對真實場景之旁觀者偵測演算法開發</div>
@@ -199,7 +205,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="針對真實場景之旁觀者偵測演算法開發"><a href="#針對真實場景之旁觀者偵測演算法開發" class="headerlink" title="針對真實場景之旁觀者偵測演算法開發"></a>針對真實場景之旁觀者偵測演算法開發</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h2 id="訓練過程"><a href="#訓練過程" class="headerlink" title="訓練過程"></a>訓練過程</h2><h2 id="應用範疇"><a href="#應用範疇" class="headerlink" title="應用範疇"></a>應用範疇</h2>
+        <h1 id="針對真實場景之旁觀者偵測演算法開發"><a href="#針對真實場景之旁觀者偵測演算法開發" class="headerlink" title="針對真實場景之旁觀者偵測演算法開發"></a>針對真實場景之旁觀者偵測演算法開發</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>近年來各式各樣的感測器，逐漸被使用在高階智慧型手機以上，裝備了感測器裝置的手機能夠進行手勢辨識、改善夜間自拍的人像，物件偵測等功能，帶來一個新的研究方向。我們使用的感測器模組可將電腦使用者的視野分4x4或16個獨立偵測的區域，通過各個獨立區域的偵測，讓我們可以識別物體位在感測器所偵測到的範圍的哪一個位置。本文使用dToF模組來進行旁觀者偵測演算法的開發，旁觀者偵測為當使用者在使用電腦或筆電時，為了安全以及隱私權的保護，我們希望可以讓使用者知道使否有旁觀者存在，藉以提醒使用者目前有旁觀者在旁邊觀看。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h2 id="應用範疇"><a href="#應用範疇" class="headerlink" title="應用範疇"></a>應用範疇</h2><p>在旁觀者偵測的開發中，我們使用了不同的流程以及計算方法來嘗試去找到旁觀者是否存在在使用者背後，基本上現行的算法都仰賴感測器是否能夠取得好的距離資訊，如果背後放一個椅子，基本上距離資訊變動的幅度就比較大，也是以判成旁觀者為主，如果背後的旁觀者完全靜止不動，那也很容易被判成為物體，所以在距離資訊的訊號處理上，需要在更進一步的分析，例如單個區域的負責到實際狀況的面積是多少，距離的響應與物體表面是否存在關係能夠去量化，這都是未來可以持續精進的方向。</p>
+
     </div>
 
     
@@ -276,7 +284,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%9D%E5%B0%8D%E7%9C%9F%E5%AF%A6%E5%A0%B4%E6%99%AF%E4%B9%8B%E6%97%81%E8%A7%80%E8%80%85%E5%81%B5%E6%B8%AC%E6%BC%94%E7%AE%97%E6%B3%95%E9%96%8B%E7%99%BC"><span class="nav-number">1.</span> <span class="nav-text">針對真實場景之旁觀者偵測演算法開發</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%93%E7%B7%B4%E9%81%8E%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">訓練過程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87"><span class="nav-number">1.4.</span> <span class="nav-text">應用範疇</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%9D%E5%B0%8D%E7%9C%9F%E5%AF%A6%E5%A0%B4%E6%99%AF%E4%B9%8B%E6%97%81%E8%A7%80%E8%80%85%E5%81%B5%E6%B8%AC%E6%BC%94%E7%AE%97%E6%B3%95%E9%96%8B%E7%99%BC"><span class="nav-number">1.</span> <span class="nav-text">針對真實場景之旁觀者偵測演算法開發</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87"><span class="nav-number">1.3.</span> <span class="nav-text">應用範疇</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
