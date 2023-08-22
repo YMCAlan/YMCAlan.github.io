@@ -27,13 +27,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/rbkd.png">
-<meta property="og:image" content="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/clca.png">
+<meta property="og:image" content="http://example.com/images/Cervical-Lymph-Node-Classification/rbkd.png">
+<meta property="og:image" content="http://example.com/images/Cervical-Lymph-Node-Classification/clca.png">
 <meta property="article:published_time" content="2023-08-06T04:43:42.000Z">
-<meta property="article:modified_time" content="2023-08-22T15:33:03.315Z">
+<meta property="article:modified_time" content="2023-08-22T15:35:45.474Z">
 <meta property="article:author" content="YuMingChang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/rbkd.png">
+<meta name="twitter:image" content="http://example.com/images/Cervical-Lymph-Node-Classification/rbkd.png">
 
 <link rel="canonical" href="http://example.com/2023/08/06/Cervical-Lymph-Node-Classification/">
 
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-22 23:33:03" itemprop="dateModified" datetime="2023-08-22T23:33:03+08:00">2023-08-22</time>
+                <time title="Modified: 2023-08-22 23:35:45" itemprop="dateModified" datetime="2023-08-22T23:35:45+08:00">2023-08-22</time>
               </span>
 
           
@@ -209,8 +209,8 @@
 
       
         <h1 id="主題介紹"><a href="#主題介紹" class="headerlink" title="主題介紹"></a>主題介紹</h1><h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預訓練，並透過知識蒸餾提高模型的準確性。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>我們使用自蒸餾(self-distillation)訓練方法來訓練模型，並透過交互注意力的方式來將特徵傳遞給學生模型，我們的訓練方式稱為RBKD，全名為<br>Relational-Based Knowledge Distillation with Cross-Attention for Multi-Layer Distillation，架構如下圖所示<br><img src="rbkd.png" alt="rbkd.png"></p>
-<p>CLCA為Cross-layer Cross-attention module，主要用於將前後兩層的特徵進行萃取，並進行交互注意力機制的作用。<br><img src="clca.png" alt="clca.png"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>我們使用自蒸餾(self-distillation)訓練方法來訓練模型，並透過交互注意力的方式來將特徵傳遞給學生模型，我們的訓練方式稱為RBKD，全名為<br>Relational-Based Knowledge Distillation with Cross-Attention for Multi-Layer Distillation，架構如下圖所示<br><img src="/images/Cervical-Lymph-Node-Classification/rbkd.png" alt="rbkd.png"></p>
+<p>CLCA為Cross-layer Cross-attention module，主要用於將前後兩層的特徵進行萃取，並進行交互注意力機制的作用。<br><img src="/images/Cervical-Lymph-Node-Classification/clca.png" alt="clca.png"></p>
 <h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>在我們的實驗結果中，比較了不同的訓練方法所達成的效果，在監督式學習表現上都遜色於DINO以及我們所提出RBKD。</p>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2>
     </div>
