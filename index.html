@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/13/LeetCode-509-Fibonacci-Number/" class="post-title-link" itemprop="url">LeetCode 509.Fibonacci Number</a>
+            <a href="/2023/09/13/LeetCode-509-Fibonacci-Number/" class="post-title-link" itemprop="url">LeetCode 1137.N-th Tribonacci Number</a>
         </h2>
 
         <div class="post-meta">
@@ -180,7 +180,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-09-13 10:25:32 / Modified: 10:25:56" itemprop="dateCreated datePublished" datetime="2023-09-13T10:25:32+08:00">2023-09-13</time>
+              <time title="Created: 2023-09-13 10:25:32 / Modified: 11:20:18" itemprop="dateCreated datePublished" datetime="2023-09-13T10:25:32+08:00">2023-09-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -203,7 +203,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="LeetCode-1137：Link"><a href="#LeetCode-1137：Link" class="headerlink" title="LeetCode 1137：Link"></a>LeetCode 1137：<a target="_blank" rel="noopener" href="https://leetcode.com/problems/n-th-tribonacci-number/">Link</a></h1><h2 id="題目描述"><a href="#題目描述" class="headerlink" title="題目描述"></a>題目描述</h2><p>The Tribonacci sequence Tn is defined as follows:<br>T0 &#x3D; 0, T1 &#x3D; 1, T2 &#x3D; 1, and Tn+3 &#x3D; Tn + Tn+1 + Tn+2 for n &gt;&#x3D; 0.<br>Given n, return the value of Tn.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
+<p>Input: n &#x3D; 4<br>Output: 4<br>Explanation:<br>T_3 &#x3D; 0 + 1 + 1 &#x3D; 2<br>T_4 &#x3D; 1 + 1 + 2 &#x3D; 4<br>Example 2:</p>
+<p>Input: n &#x3D; 25<br>Output: 1389537</p>
+<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code></p>
+<h2 id="解題思路-1"><a href="#解題思路-1" class="headerlink" title="解題思路 1"></a>解題思路 1</h2><p>此題跟費波那契數列解題方式基本一樣，使用Recursive方式解題。</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">## Code C++</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tribonacci(n<span class="number">-1</span>) + tribonacci(n<span class="number">-2</span>) + tribonacci(n<span class="number">-3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>不過這段程式碼在測資是不過的，時間複雜度超過了。<br>時間複雜度分析: O(3^n)<br>空間複雜度分析: 我不知道</p>
+<h2 id="解題思路-2"><a href="#解題思路-2" class="headerlink" title="解題思路 2"></a>解題思路 2</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        vector&lt;<span class="built_in">int</span>&gt; arr&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                arr.push<span class="constructor">_back(<span class="params">arr</span>[<span class="params">i</span>-1] + <span class="params">arr</span>[<span class="params">i</span>-2] + <span class="params">arr</span>[<span class="params">i</span>-3])</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>時間複雜度分析: O(n)<br>空間複雜度分析: O(n)</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>遞迴只應天上有 凡人應當用迴圈!</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度 —遞迴(上)</a></p>
+
       
     </div>
 
@@ -382,7 +394,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-22 23:35:45" itemprop="dateModified" datetime="2023-08-22T23:35:45+08:00">2023-08-22</time>
+                <time title="Modified: 2023-09-13 11:14:33" itemprop="dateModified" datetime="2023-09-13T11:14:33+08:00">2023-09-13</time>
               </span>
 
           
