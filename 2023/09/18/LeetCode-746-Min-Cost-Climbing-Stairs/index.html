@@ -28,7 +28,7 @@
 <meta property="og:description" content="LeetCode 746. Min Cost Climbing Stairs">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-18T08:29:38.000Z">
-<meta property="article:modified_time" content="2023-09-18T12:51:51.296Z">
+<meta property="article:modified_time" content="2023-09-20T03:46:25.879Z">
 <meta property="article:author" content="YuMingChang">
 <meta name="twitter:card" content="summary">
 
@@ -187,10 +187,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-09-18 16:29:38 / Modified: 20:51:51" itemprop="dateCreated datePublished" datetime="2023-09-18T16:29:38+08:00">2023-09-18</time>
+              <time title="Created: 2023-09-18 16:29:38" itemprop="dateCreated datePublished" datetime="2023-09-18T16:29:38+08:00">2023-09-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-09-20 11:46:25" itemprop="dateModified" datetime="2023-09-20T11:46:25+08:00">2023-09-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -232,11 +238,17 @@
 <li>Pay 1 and climb one step to reach the top.<br>The total cost is 6.</li>
 </ul>
 <p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code>,<code>Easy</code></p>
-<h2 id="Solve-1"><a href="#Solve-1" class="headerlink" title="Solve 1"></a>Solve 1</h2><p>跟爬梯子題目變化版，題目為找到最小爬梯子所需要的成本，我們需要累加每一次的cost，因此需要加上cost[i]，那基本case為cost[0]、cost[1]先複製到dp array上，接著我們推論dp[2]，<br>dp[2]有可能接受來自step1的dp[2-1]或者step2的dp[2-2]，因此我們要比較他們的大小，這樣dp[i]就被推導出來。</p>
+<h2 id="Solve-1-Button-Up-DP-Memoization"><a href="#Solve-1-Button-Up-DP-Memoization" class="headerlink" title="Solve 1 Button Up DP (Memoization)"></a>Solve 1 Button Up DP (Memoization)</h2><p>跟爬梯子題目變化版，題目為找到最小爬梯子所需要的成本，我們需要累加每一次的cost，因此需要加上cost[i]，那基本case為cost[0]、cost[1]先複製到dp array上，接著我們推論dp[2]，<br>dp[2]有可能接受來自step1的dp[2-1]或者step2的dp[2-2]，因此我們要比較他們的大小，這樣dp[i]就被推導出來。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = cost.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(l, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; l; i++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">min</span>(dp[i<span class="number">-1</span>], dp[i<span class="number">-2</span>]) + cost[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dp[l<span class="number">-1</span>], dp[l<span class="number">-2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>Time complexity: $O(n)$ 需跑n次</li>
 <li>Space complexity: $O(n)$ 需要n的空間來儲存運算結果</li>
+</ul>
+<h2 id="Solve-2-Optimization-DP-Reduce-O-n-space-to-O-1"><a href="#Solve-2-Optimization-DP-Reduce-O-n-space-to-O-1" class="headerlink" title="Solve 2 Optimization DP - Reduce $O(n)$ space to $O(1)$"></a>Solve 2 Optimization DP - Reduce $O(n)$ space to $O(1)$</h2><p>Space complexity 優化版，從題目我們可以看出只需要去比較來自step1的cost或來自step2的cost，所以我們可以只使用兩個變數來儲存他們。</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> minCostClimbingStairs(vector&lt;<span class="built_in">int</span>&gt;&amp; cost) &#123;</span><br><span class="line">        <span class="built_in">int</span> n = cost.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">int</span> curr = cost[<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">int</span> prev = cost[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        for (<span class="built_in">int</span> i = <span class="number">2</span> ; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">int</span> temp = <span class="built_in">min</span>(curr, prev) + cost[i];</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(curr, prev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: $O(n)$ 需跑n次</li>
+<li>Space complexity: $O(1)$ 只需要兩個變數來儲存運算結果，不論n有多大</li>
 </ul>
 
     </div>
@@ -315,7 +327,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LeetCode-746-Min-Cost-Climbing-Stairs"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 746. Min Cost Climbing Stairs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solve-1"><span class="nav-number">1.3.</span> <span class="nav-text">Solve 1</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LeetCode-746-Min-Cost-Climbing-Stairs"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 746. Min Cost Climbing Stairs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solve-1-Button-Up-DP-Memoization"><span class="nav-number">1.3.</span> <span class="nav-text">Solve 1 Button Up DP (Memoization)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solve-2-Optimization-DP-Reduce-O-n-space-to-O-1"><span class="nav-number">1.4.</span> <span class="nav-text">Solve 2 Optimization DP - Reduce $O(n)$ space to $O(1)$</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
