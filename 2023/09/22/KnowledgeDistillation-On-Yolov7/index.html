@@ -20,22 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="客製化及交互注意力機制知識蒸餾於YOLOv7輕量化模型">
+  <meta name="description" content="使用知識蒸餾於YOLOv7輕量化模型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KnowledgeDistillation-On-Yolov7">
-<meta property="og:url" content="http://example.com/2023/09/22/KnowledgeDistillation-On-Yolov7/index.html">
+<meta property="og:title" content="KnowledgeDistillation-On-YOLOv7">
+<meta property="og:url" content="http://example.com/2023/09/22/KnowledgeDistillation-On-YOLOv7/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="客製化及交互注意力機制知識蒸餾於YOLOv7輕量化模型">
+<meta property="og:description" content="使用知識蒸餾於YOLOv7輕量化模型">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png">
 <meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/CAKD.png">
 <meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/CKD.png">
+<meta property="og:image" content="http://example.com/themes/next/source/images/KnowledgeDistillation-On-Yolov7/kd_arch.png">
 <meta property="article:published_time" content="2023-09-22T07:20:19.000Z">
-<meta property="article:modified_time" content="2023-09-22T07:48:54.196Z">
+<meta property="article:modified_time" content="2023-10-02T08:05:02.763Z">
 <meta property="article:author" content="YuMingChang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/CAKD.png">
+<meta name="twitter:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png">
 
-<link rel="canonical" href="http://example.com/2023/09/22/KnowledgeDistillation-On-Yolov7/">
+<link rel="canonical" href="http://example.com/2023/09/22/KnowledgeDistillation-On-YOLOv7/">
 
 
 <script id="page-configurations">
@@ -48,7 +51,7 @@
   };
 </script>
 
-  <title>KnowledgeDistillation-On-Yolov7 | Hexo - </title>
+  <title>KnowledgeDistillation-On-YOLOv7 | Hexo - </title>
   
 
 
@@ -168,7 +171,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/22/KnowledgeDistillation-On-Yolov7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/22/KnowledgeDistillation-On-YOLOv7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -181,7 +184,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          KnowledgeDistillation-On-Yolov7
+          KnowledgeDistillation-On-YOLOv7
         </h1>
 
         <div class="post-meta">
@@ -190,13 +193,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-09-22 15:20:19 / Modified: 15:48:54" itemprop="dateCreated datePublished" datetime="2023-09-22T15:20:19+08:00">2023-09-22</time>
+              <time title="Created: 2023-09-22 15:20:19" itemprop="dateCreated datePublished" datetime="2023-09-22T15:20:19+08:00">2023-09-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-10-02 16:05:02" itemprop="dateModified" datetime="2023-10-02T16:05:02+08:00">2023-10-02</time>
+              </span>
 
           
-            <div class="post-description">客製化及交互注意力機制知識蒸餾於YOLOv7輕量化模型</div>
+            <div class="post-description">使用知識蒸餾於YOLOv7輕量化模型</div>
 
         </div>
       </header>
@@ -207,9 +216,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="客製化及交互注意力機制知識蒸餾於YOLOv7輕量化模型"><a href="#客製化及交互注意力機制知識蒸餾於YOLOv7輕量化模型" class="headerlink" title="客製化及交互注意力機制知識蒸餾於YOLOv7輕量化模型"></a>客製化及交互注意力機制知識蒸餾於YOLOv7輕量化模型</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>我們透過設計交互式的注意力機制模組，並結合Customized KD技術，以提升YOLOv7輕量化模型的準確性。</p>
-<h2 id="網路架構"><a href="#網路架構" class="headerlink" title="網路架構"></a>網路架構</h2><h2 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h2><p><img src="/images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
+        <h1 id="使用知識蒸餾於YOLOv7輕量化模型"><a href="#使用知識蒸餾於YOLOv7輕量化模型" class="headerlink" title="使用知識蒸餾於YOLOv7輕量化模型"></a>使用知識蒸餾於YOLOv7輕量化模型</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized KD以及Cross Attention KD的方法來進行訓練。</p>
+<h2 id="網路架構"><a href="#網路架構" class="headerlink" title="網路架構"></a>網路架構</h2><p>以下為YOLOv7網路架構，包含了Backbone、Neck、Head三個部分。</p>
+<ul>
+<li>Backbone主要由MaxPool以及ELAN組成。</li>
+<li>Neck由ELAN-Eˇ並採用FPN以及PAN方式進行串接。</li>
+<li>Head由RepConv以及IK隱性知識架構組成。</li>
+</ul>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="img.png"></p>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="img.png"></p>
+<h2 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h2><p><img src="/images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
 <p><img src="/images/KnowledgeDistillation-On-Yolov7/CKD.png" alt="CKD.png"></p>
+<p><img src="/../../themes/next/source/images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="img.png"></p>
 <p>重作一張知識蒸餾圖片</p>
 <h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2>
     </div>
@@ -291,7 +309,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%A2%E8%A3%BD%E5%8C%96%E5%8F%8A%E4%BA%A4%E4%BA%92%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A9%9F%E5%88%B6%E7%9F%A5%E8%AD%98%E8%92%B8%E9%A4%BE%E6%96%BCYOLOv7%E8%BC%95%E9%87%8F%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">客製化及交互注意力機制知識蒸餾於YOLOv7輕量化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.2.</span> <span class="nav-text">網路架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%93%E7%B7%B4%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">訓練方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">結果</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%9F%A5%E8%AD%98%E8%92%B8%E9%A4%BE%E6%96%BCYOLOv7%E8%BC%95%E9%87%8F%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">使用知識蒸餾於YOLOv7輕量化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.2.</span> <span class="nav-text">網路架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%93%E7%B7%B4%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">訓練方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">結果</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
