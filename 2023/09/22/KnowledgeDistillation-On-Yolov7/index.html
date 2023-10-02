@@ -31,9 +31,9 @@
 <meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png">
 <meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/CAKD.png">
 <meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/CKD.png">
-<meta property="og:image" content="http://example.com/themes/next/source/images/KnowledgeDistillation-On-Yolov7/kd_arch.png">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/kd_arch.png">
 <meta property="article:published_time" content="2023-09-22T07:20:19.000Z">
-<meta property="article:modified_time" content="2023-10-02T08:05:02.763Z">
+<meta property="article:modified_time" content="2023-10-02T11:37:20.529Z">
 <meta property="article:author" content="YuMingChang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png">
@@ -201,7 +201,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-10-02 16:05:02" itemprop="dateModified" datetime="2023-10-02T16:05:02+08:00">2023-10-02</time>
+                <time title="Modified: 2023-10-02 19:37:20" itemprop="dateModified" datetime="2023-10-02T19:37:20+08:00">2023-10-02</time>
               </span>
 
           
@@ -221,13 +221,18 @@
 <ul>
 <li>Backbone主要由MaxPool以及ELAN組成。</li>
 <li>Neck由ELAN-Eˇ並採用FPN以及PAN方式進行串接。</li>
-<li>Head由RepConv以及IK隱性知識架構組成。</li>
+<li>Head由RepConv以及IK隱性知識組成。</li>
 </ul>
 <p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="img.png"></p>
+<p>以下為YOLOv7使用的小模組。</p>
+<ul>
+<li>CBS為convolution、Batchnorm以及SiLU的組合。</li>
+<li>ELAN為YOLOv7提出架構，藉由concate不同層級的Conv輸出的特徵層來進行訓練。</li>
+</ul>
 <p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="img.png"></p>
 <h2 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h2><p><img src="/images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
 <p><img src="/images/KnowledgeDistillation-On-Yolov7/CKD.png" alt="CKD.png"></p>
-<p><img src="/../../themes/next/source/images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="img.png"></p>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="img.png"></p>
 <p>重作一張知識蒸餾圖片</p>
 <h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2>
     </div>
