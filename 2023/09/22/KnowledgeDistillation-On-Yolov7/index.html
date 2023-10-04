@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/CKD.png">
 <meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png">
 <meta property="article:published_time" content="2023-09-22T07:20:19.000Z">
-<meta property="article:modified_time" content="2023-10-02T13:43:45.474Z">
+<meta property="article:modified_time" content="2023-10-04T02:21:32.828Z">
 <meta property="article:author" content="YuMingChang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png">
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-10-02 21:43:45" itemprop="dateModified" datetime="2023-10-02T21:43:45+08:00">2023-10-02</time>
+                <time title="Modified: 2023-10-04 10:21:32" itemprop="dateModified" datetime="2023-10-04T10:21:32+08:00">2023-10-04</time>
               </span>
 
           
@@ -224,13 +224,13 @@
 <li>Neck由ELAN-Eˇ並採用FPN以及PAN方式進行串接。</li>
 <li>Head由RepConv以及IK隱性知識組成。</li>
 </ul>
-<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="img.png"></p>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="yolov7_arch.png"></p>
 <p>以下為YOLOv7使用的小模組。</p>
 <ul>
 <li>CBS為convolution、Batchnorm以及SiLU的組合。</li>
 <li>ELAN為YOLOv7提出架構，藉由concate不同層級的Conv輸出的</li>
 </ul>
-<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="img.png"></p>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="yolov7_sub_arch.png"></p>
 <h2 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h2><p>我們所使用的知識蒸餾方法為Feature以及Logit KD，首先輸出一張影像進入到老師與學生網路，得到其中間層輸出的特徵層以及輸出，接著將中間輸出的特徵層通過CAKD Module，並計算CAKD Loss，接著將輸出計算KD Loss，以及學生的輸出計算Supervised Loss，最後將所有損失函數加總起來，並反向傳播到學生網路。</p>
 <p><img src="/images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="kd_arch.png"></p>
 <p>我們設計了一個簡單的交叉注意力機制，首先將老師與學生網路特徵層攤平，接著進行矩陣乘法後通過softmax，變得到了一張Attention map接著再將老師特徵圖再乘過去，這樣的設計目的為先得到一張老師對學生特徵圖的Attention map，接著將老師不同通道特徵透Attention map中的權重進行線性組合，再與學生特徵去進行損失函數的計算。<br><img src="/images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
