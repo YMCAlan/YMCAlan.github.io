@@ -185,7 +185,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-12-16 11:22:20 / Modified: 12:08:11" itemprop="dateCreated datePublished" datetime="2023-12-16T11:22:20+08:00">2023-12-16</time>
+              <time title="Created: 2023-12-16 11:22:20 / Modified: 15:38:07" itemprop="dateCreated datePublished" datetime="2023-12-16T11:22:20+08:00">2023-12-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -212,17 +212,17 @@
 <h2 id="Right-left-Rule"><a href="#Right-left-Rule" class="headerlink" title="Right-left Rule"></a>Right-left Rule</h2><p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
 <h3 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h3><p>以下有3個基本的運算子，</p>
 <ul>
-<li><code>*</code>讀為 “指標指向的是” “pointer to” 只會在 (辨識字) 左邊出現</li>
-<li><code>[]</code>讀為 “陣列元素為” “array of” 只會在 (辨識字) 右邊出現</li>
-<li><code>()</code>讀為 “函數回傳值” “function returning” 只會在 (辨識字) 右邊出現</li>
+<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
+<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
+<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
 </ul>
 <p>辨識子就是函數名稱或變數名稱喔</p>
 <h2 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h2><ol>
-<li>找到辨識字，解讀為 xxx是 或者 xxx is</li>
+<li>找到辨識字，解讀為 xxx是 或者 xxx is&#x2F; as</li>
 <li>往辨識字的右邊看，如果看到<ul>
 <li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
 <li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>直到遇到 單獨的 <code>)</code></li>
-<li>如果遇到<code>(</code>則代表中間有其他東西要解讀</li>
+<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
 </ul>
 </li>
 <li>接著往辨識字的左邊看<ul>
@@ -231,7 +231,19 @@
 </ul>
 </li>
 </ol>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2>
+<h2 id="以下為不合法的C語言宣告"><a href="#以下為不合法的C語言宣告" class="headerlink" title="以下為不合法的C語言宣告"></a>以下為不合法的C語言宣告</h2><ul>
+<li><code>[]()</code> 沒有陣列中的元素是函數</li>
+<li><code>()()</code> 沒有函數中回傳函數</li>
+<li><code>()[]</code> 沒有函數回傳陣列<br>但我們可以將其變成指標來使其合法</li>
+</ul>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><code>int *ptr</code><br>declare ptr as pointer to <code>int</code><br>宣告一個ptr指向整數型別的指標</p>
+<p><code>int (*compare)(void*, void*)</code><br>declare compare as pointer to function (pointer to void, pointer to void) returning int<br>宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
+<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
+<p><code>int ptr[]()</code><br>不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br><code>int (*ptr[])()</code><br>declare ptr as the array of pointer to function returning int</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br><a target="_blank" rel="noopener" href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br><a target="_blank" rel="noopener" href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
+</blockquote>
+
       
     </div>
 
