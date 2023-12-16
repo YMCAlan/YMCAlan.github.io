@@ -185,7 +185,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-12-16 11:22:20 / Modified: 15:40:35" itemprop="dateCreated datePublished" datetime="2023-12-16T11:22:20+08:00">2023-12-16</time>
+              <time title="Created: 2023-12-16 11:22:20 / Modified: 18:39:03" itemprop="dateCreated datePublished" datetime="2023-12-16T11:22:20+08:00">2023-12-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -341,7 +341,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-12-15 20:05:00" itemprop="dateModified" datetime="2023-12-15T20:05:00+08:00">2023-12-15</time>
+                <time title="Modified: 2023-12-16 18:39:30" itemprop="dateModified" datetime="2023-12-16T18:39:30+08:00">2023-12-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -364,17 +364,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Void為c&#x2F;c++中的內建類型功能有3種</p>
-<ul>
-<li>函數回傳void，表示不會會傳任何值</li>
-<li>用於函數參數，表示此函數不接受任何參數</li>
-<li>用於指標宣告時，表示此指標為通用</li>
-</ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>void*指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型</p>
-<p>void**指標的指標，如果今天要更改指標指向的對象，就可以使用，或者我們需要接受函數裡面變數的指標，就需要用到指標的指標來接受，永遠記得C只有call by vaule。</p>
-<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bool dequeue(QUEUE* queue, void** itemPtr)</span><br><span class="line">&#123;</span><br><span class="line">	QUEUE_NODE* deleteLoc;</span><br><span class="line">	<span class="keyword">if</span> (isEmptyQueue(queue)) &#123;</span><br><span class="line">		return <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	*<span class="function"><span class="title">itemPtr</span> = queue-&gt;</span><span class="function"><span class="title">front</span>-&gt;</span>dataPtr;</span><br><span class="line">	<span class="function"><span class="title">deleteLoc</span> = queue-&gt;</span>front;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (sizeOfQueue(queue) == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="function"><span class="title">queue</span>-&gt;</span><span class="function"><span class="title">front</span> = queue-&gt;</span>rear = NULL;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="function"><span class="title">queue</span>-&gt;</span><span class="function"><span class="title">front</span> = queue-&gt;</span><span class="function"><span class="title">front</span>-&gt;</span>next;</span><br><span class="line">	&#125;</span><br><span class="line">	(<span class="function"><span class="title">queue</span>-&gt;</span>size)--;</span><br><span class="line">	free(deleteLoc);</span><br><span class="line">	return <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面為實作dequeue方法，如果輸入為<em>void itemPtr，當指標輸入進來時為copy一份</em>void指標，即使我們對其取值，也無法修改函數外輸入的指標，因此要用指標的指標。</p>
-
+          <p>void & void* & void** in C</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/12/void-in-c/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
