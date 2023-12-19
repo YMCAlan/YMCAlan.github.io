@@ -20,15 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/categories/C/index.html">
+  <meta name="description" content="Array in c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="array-in-c">
+<meta property="og:url" content="http://example.com/2023/12/19/array-in-c/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Array in c">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-19T11:48:12.000Z">
+<meta property="article:modified_time" content="2023-12-19T14:05:34.225Z">
 <meta property="article:author" content="YuMingChang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/C/">
+<link rel="canonical" href="http://example.com/2023/12/19/array-in-c/">
 
 
 <script id="page-configurations">
@@ -36,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Category: C | Hexo - </title>
+  <title>array-in-c | Hexo - </title>
   
 
 
@@ -154,151 +158,101 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">C
-          <small>Category</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/19/array-in-c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="YuMingChang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          array-in-c
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-12-19 19:48:12 / Modified: 22:05:34" itemprop="dateCreated datePublished" datetime="2023-12-19T19:48:12+08:00">2023-12-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Array in c</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
-    </div>
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>陣列為一種在記憶體空間連續分布的資料型態，陣列中的東西我們稱作元素(element)，陣列能夠透過元素的索引(index)來取得資料。</p>
+<h1 id="Array-in-C"><a href="#Array-in-C" class="headerlink" title="Array in C"></a>Array in C</h1><p>以下為宣告陣列一個方式，arr宣告成有5個元素的矩陣，元素資料型態為int。<br>在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出 4 * 5 byte，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+<p>輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-12-19T19:48:12+08:00"
-              content="2023-12-19">
-          12-19
-        </time>
-      </div>
+<h1 id="arr-vs-arr"><a href="#arr-vs-arr" class="headerlink" title="arr vs &amp;arr"></a><code>arr</code> vs <code>&amp;arr</code></h1><p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/12/19/array-in-c/" itemprop="url">
-            <span itemprop="name">array-in-c</span>
-          </a>
-      </div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = 0061FF0C</span><br><span class="line">&amp;arr = 0061FF0C</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。<br>但是當對陣列使用<code>&amp;</code>，會回傳指標並且指向的是一個陣列並要有特定長度，所以其形態為<code>int(*)[5]</code>，很明顯的看到這兩個東西雖然有相同一樣的數值，但所表現出來的東西是完全不同的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* ptr = arr;</span><br><span class="line"><span class="type">int</span> (*ptr2arr)[<span class="number">5</span>] = &amp;arr;</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-12-18T14:42:04+08:00"
-              content="2023-12-18">
-          12-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/12/18/generics-in-c/" itemprop="url">
-            <span itemprop="name">generics-in-c</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-12-17T14:06:07+08:00"
-              content="2023-12-17">
-          12-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/12/17/stack-c/" itemprop="url">
-            <span itemprop="name">stack_c</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-12-16T11:22:20+08:00"
-              content="2023-12-16">
-          12-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/12/16/define-and-read-in-c/" itemprop="url">
-            <span itemprop="name">define-and-read-in-c</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-12-16T08:51:10+08:00"
-              content="2023-12-16">
-          12-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/12/16/char-in-c/" itemprop="url">
-            <span itemprop="name">char-in-c</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-12-12T13:50:53+08:00"
-              content="2023-12-12">
-          12-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/12/12/void-in-c/" itemprop="url">
-            <span itemprop="name">void in c</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/18/generics-in-c/" rel="prev" title="generics-in-c">
+      <i class="fa fa-chevron-left"></i> generics-in-c
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -351,6 +305,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array-in-C"><span class="nav-number">2.</span> <span class="nav-text">Array in C</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#arr-vs-arr"><span class="nav-number">3.</span> <span class="nav-text">arr vs &amp;arr</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
