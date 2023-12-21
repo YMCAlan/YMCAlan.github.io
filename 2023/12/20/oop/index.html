@@ -28,7 +28,7 @@
 <meta property="og:description" content="物件導向概念">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-20T03:09:59.000Z">
-<meta property="article:modified_time" content="2023-12-20T05:10:22.489Z">
+<meta property="article:modified_time" content="2023-12-21T04:52:35.153Z">
 <meta property="article:author" content="YuMingChang">
 <meta property="article:tag" content="OOP">
 <meta name="twitter:card" content="summary">
@@ -188,10 +188,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-12-20 11:09:59 / Modified: 13:10:22" itemprop="dateCreated datePublished" datetime="2023-12-20T11:09:59+08:00">2023-12-20</time>
+              <time title="Created: 2023-12-20 11:09:59" itemprop="dateCreated datePublished" datetime="2023-12-20T11:09:59+08:00">2023-12-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-12-21 12:52:35" itemprop="dateModified" datetime="2023-12-21T12:52:35+08:00">2023-12-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -215,24 +221,18 @@
 
       
         <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素是為一種物件，這些物件可以被賦予屬性，方法等等，此物件可以是抽象或現實中的實體概念。<br>例如: 車子具備汽油、座位等等屬性，而其方法包括向前、向後等等。</p>
-<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><pre><code>對資料或行為的一種封裝，封裝成一個基本的模塊，物件可以是實體或抽象概念
-</code></pre>
-<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><pre><code>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。
-</code></pre>
-<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><pre><code>類別內實體化時的名稱或者說宣告成立時，對於相同的class可以實例化不同的類別屬性，每一個實例的狀態都可以不一樣或相同，彼此獨立。
-</code></pre>
-<h1 id="3-Concept-in-OOP"><a href="#3-Concept-in-OOP" class="headerlink" title="3 Concept in OOP"></a>3 Concept in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><pre><code>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法，例如球，球有很多種籃球棒球橄欖球，但他們背後都有一個抽向概念，為形狀，因此可以定義一個類別為形狀，而這些球就是其擴展後的結果，我們稱作子類，而形狀我們就稱作父類
-</code></pre>
-<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><pre><code>將方法或屬性設置存取權限，在CPP中可以使用public/private/protected來控制權限
-</code></pre>
-<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><pre><code>對於一個方法，是不是有不同的結果，在射擊遊戲中，左鍵為射擊右鍵為開鏡，同一樣是滑鼠點擊的事件，但效果卻不一樣這就是多型
-
-* Function Overriding (覆寫)
-    允許子類重新覆蓋父類方法
-
-* Function Overloading (重載)
-    允許函數可以多個不同輸入
-</code></pre>
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊，物件可以是實體或抽象概念</p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
+<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱或者說宣告成立時，對於相同的class可以實例化不同的類別屬性，每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
+<h1 id="3-Concept-in-OOP"><a href="#3-Concept-in-OOP" class="headerlink" title="3 Concept in OOP"></a>3 Concept in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法，例如球，球有很多種籃球棒球橄欖球，但他們背後都有一個抽向概念，為形狀，因此可以定義一個類別為形狀，而這些球就是其擴展後的結果，我們稱作子類，而形狀我們就稱作父類</p>
+<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在CPP中可以使用public&#x2F;private&#x2F;protected來控制權限</p>
+<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是不是有不同的結果，在射擊遊戲中，左鍵為射擊右鍵為開鏡，同一樣是滑鼠點擊的事件，但效果卻不一樣這就是多型</p>
+<ul>
+<li><p>Function Overriding (覆寫)<br>  允許子類重新覆蓋父類方法</p>
+</li>
+<li><p>Function Overloading (重載)<br>  允許函數可以多個不同輸入</p>
+</li>
+</ul>
 
     </div>
 
