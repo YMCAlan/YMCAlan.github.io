@@ -28,7 +28,7 @@
 <meta property="og:description" content="物件導向概念筆記">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-20T03:09:59.000Z">
-<meta property="article:modified_time" content="2023-12-26T10:20:33.177Z">
+<meta property="article:modified_time" content="2023-12-27T06:04:24.180Z">
 <meta property="article:author" content="YuMingChang">
 <meta property="article:tag" content="OOP">
 <meta name="twitter:card" content="summary">
@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-12-26 18:20:33" itemprop="dateModified" datetime="2023-12-26T18:20:33+08:00">2023-12-26</time>
+                <time title="Modified: 2023-12-27 14:04:24" itemprop="dateModified" datetime="2023-12-27T14:04:24+08:00">2023-12-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -220,21 +220,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素是為一種物件，這些物件可以被賦予屬性，方法等等，此物件可以是抽象或現實中的實體概念。<br>例如: 車子具備汽油、座位等等屬性，而其方法包括向前、向後等等。</p>
-<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊，物件可以是實體或抽象概念</p>
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素視為一種物件，這些物件可以被賦予屬性、方法等等。此物件可以是抽象或現實中的實體概念。例如，車子具備汽油、座位等屬性，而其方法包括向前、向後等。</p>
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊。物件可以是實體或抽象概念。</p>
 <h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
-<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱或者說宣告成立時，對於相同的class可以實例化不同的類別屬性，每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
-<h1 id="3-Concept-in-OOP"><a href="#3-Concept-in-OOP" class="headerlink" title="3 Concept in OOP"></a>3 Concept in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法，例如球，球有很多種籃球棒球橄欖球，但他們背後都有一個抽向概念，為形狀，因此可以定義一個類別為形狀，而這些球就是其擴展後的結果，我們稱作子類，而形狀我們就稱作父類</p>
-<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在CPP中可以使用public&#x2F;private&#x2F;protected來控制權限</p>
-<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是不是有不同的結果，在射擊遊戲中，左鍵為射擊右鍵為開鏡，同一樣是滑鼠點擊的事件，但效果卻不一樣這就是多型</p>
+<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class 可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
+<h1 id="3-Concepts-in-OOP"><a href="#3-Concepts-in-OOP" class="headerlink" title="3 Concepts in OOP"></a>3 Concepts in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法。例如，球有很多種，如籃球、棒球、橄欖球，但它們背後都有一個抽象概念，即形狀。因此，可以定義一個類別為形狀，而這些球就是其擴展後的結果。我們稱作子類，而形狀我們就稱作父類。</p>
+<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在 C++ 中可以使用 public&#x2F;private&#x2F;protected 來控制權限。</p>
+<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是否有不同的結果。在射擊遊戲中，左鍵為射擊，右鍵為開鏡。同樣是滑鼠點擊的事件，但效果卻不一樣，這就是多型。</p>
 <ul>
-<li><p>Function Overriding (覆寫)<br>  允許子類重新覆蓋父類方法</p>
-</li>
-<li><p>Function Overloading (重載)<br>  允許函數可以多個不同輸入</p>
-</li>
+<li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
+<li>Function Overloading (重載): 允許函數可以有多個不同輸入。</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TD; </span><br><span class="line">    物件導向--&gt;繼承; </span><br><span class="line">    物件導向--&gt;封裝; </span><br><span class="line">    物件導向--&gt;多型;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    物件導向--基於--&gt;物件;</span><br><span class="line">    物件--原則--&gt;繼承; </span><br><span class="line">    物件--原則--&gt;封裝; </span><br><span class="line">    物件--原則--&gt;多型;</span><br><span class="line">    物件--被創建--&gt;類別;</span><br><span class="line">    類別--定義--&gt;方法;</span><br><span class="line">    類別--定義--&gt;屬性;</span><br><span class="line">    繼承--&gt;函數覆寫;</span><br><span class="line">    繼承--&gt;函數重載;</span><br><span class="line">    方法-.-函數覆寫;</span><br><span class="line">    方法-.-函數重載;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -252,8 +249,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/19/array-in-c/" rel="prev" title="array-in-c">
-      <i class="fa fa-chevron-left"></i> array-in-c
+    <a href="/2023/12/19/array-in-c/" rel="prev" title="矩陣概念與指標在C語言中">
+      <i class="fa fa-chevron-left"></i> 矩陣概念與指標在C語言中
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -314,7 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Definition"><span class="nav-number">2.</span> <span class="nav-text">Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object"><span class="nav-number">2.1.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class"><span class="nav-number">2.2.</span> <span class="nav-text">Class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instance"><span class="nav-number">2.3.</span> <span class="nav-text">Instance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Concept-in-OOP"><span class="nav-number">3.</span> <span class="nav-text">3 Concept in OOP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inheritance-%E7%B9%BC%E6%89%BF"><span class="nav-number">3.1.</span> <span class="nav-text">Inheritance 繼承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Encapsulation-%E5%B0%81%E8%A3%9D"><span class="nav-number">3.2.</span> <span class="nav-text">Encapsulation 封裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Polymorphism-%E5%A4%9A%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">Polymorphism 多型</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Definition"><span class="nav-number">2.</span> <span class="nav-text">Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object"><span class="nav-number">2.1.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class"><span class="nav-number">2.2.</span> <span class="nav-text">Class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instance"><span class="nav-number">2.3.</span> <span class="nav-text">Instance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Concepts-in-OOP"><span class="nav-number">3.</span> <span class="nav-text">3 Concepts in OOP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inheritance-%E7%B9%BC%E6%89%BF"><span class="nav-number">3.1.</span> <span class="nav-text">Inheritance 繼承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Encapsulation-%E5%B0%81%E8%A3%9D"><span class="nav-number">3.2.</span> <span class="nav-text">Encapsulation 封裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Polymorphism-%E5%A4%9A%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">Polymorphism 多型</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
