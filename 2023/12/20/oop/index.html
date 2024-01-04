@@ -227,7 +227,18 @@
 <li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
 <li>Function Overloading (重載): 允許函數可以有多個不同輸入。</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    物件導向--基於--&gt;物件;</span><br><span class="line">    物件--原則--&gt;繼承; </span><br><span class="line">    物件--原則--&gt;封裝; </span><br><span class="line">    物件--原則--&gt;多型;</span><br><span class="line">    物件--被創建--&gt;類別;</span><br><span class="line">    類別--定義--&gt;方法;</span><br><span class="line">    類別--定義--&gt;屬性;</span><br><span class="line">    繼承--&gt;函數覆寫;</span><br><span class="line">    繼承--&gt;函數重載;</span><br><span class="line">    方法-.-函數覆寫;</span><br><span class="line">    方法-.-函數重載;</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">graph TD;
+    物件導向--基於-->物件;
+    物件--原則-->繼承; 
+    物件--原則-->封裝; 
+    物件--原則-->多型;
+    物件--被創建-->類別;
+    類別--定義-->方法;
+    類別--定義-->屬性;
+    繼承-->函數覆寫;
+    繼承-->函數重載;
+    方法-.-函數覆寫;
+    方法-.-函數重載;</pre>
     </div>
 
     
@@ -326,7 +337,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -478,7 +489,7 @@
 
 <script>
 if (document.querySelectorAll('pre.mermaid').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js', () => {
     mermaid.initialize({
       theme    : 'forest',
       logLevel : 3,
