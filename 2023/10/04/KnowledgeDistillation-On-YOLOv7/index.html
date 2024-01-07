@@ -20,19 +20,27 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="LeetCode 198. House Robber">
+  <meta name="description" content="使用知識蒸餾於YOLOv7輕量化模型概述知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized KD以及Cross Attention KD的方法來進行訓練。 網路架構以下為YOLOv7網路架構，包含了Backbone、Neck、Head三個部分。  Backbone主要由MaxPool以及ELAN組成。 Neck由ELAN-Eˇ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 198. House Robber">
-<meta property="og:url" content="http://example.com/2023/09/13/LeetCode-198-House-Robber/index.html">
+<meta property="og:title" content="KnowledgeDistillation-On-YOLOv7">
+<meta property="og:url" content="http://example.com/2023/10/04/KnowledgeDistillation-On-YOLOv7/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="LeetCode 198. House Robber">
+<meta property="og:description" content="使用知識蒸餾於YOLOv7輕量化模型概述知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized KD以及Cross Attention KD的方法來進行訓練。 網路架構以下為YOLOv7網路架構，包含了Backbone、Neck、Head三個部分。  Backbone主要由MaxPool以及ELAN組成。 Neck由ELAN-Eˇ">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-13T07:26:21.000Z">
-<meta property="article:modified_time" content="2023-09-18T12:51:51.305Z">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/kd_arch.png">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/CAKD.png">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/CKD.png">
+<meta property="og:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png">
+<meta property="article:published_time" content="2023-10-04T02:40:25.000Z">
+<meta property="article:modified_time" content="2024-01-07T13:01:17.282Z">
 <meta property="article:author" content="YuMingChang">
+<meta property="article:tag" content="-YOLO -Knowledge Distillation">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png">
 
-<link rel="canonical" href="http://example.com/2023/09/13/LeetCode-198-House-Robber/">
+<link rel="canonical" href="http://example.com/2023/10/04/KnowledgeDistillation-On-YOLOv7/">
 
 
 <script id="page-configurations">
@@ -45,7 +53,7 @@
   };
 </script>
 
-  <title>LeetCode 198. House Robber | Hexo - </title>
+  <title>KnowledgeDistillation-On-YOLOv7 | Hexo - </title>
   
 
 
@@ -161,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/13/LeetCode-198-House-Robber/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/04/KnowledgeDistillation-On-YOLOv7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -174,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          LeetCode 198. House Robber
+          KnowledgeDistillation-On-YOLOv7
         </h1>
 
         <div class="post-meta">
@@ -184,14 +192,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-09-13 15:26:21" itemprop="dateCreated datePublished" datetime="2023-09-13T15:26:21+08:00">2023-09-13</time>
+              <time title="Created: 2023-10-04 10:40:25" itemprop="dateCreated datePublished" datetime="2023-10-04T10:40:25+08:00">2023-10-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-18 20:51:51" itemprop="dateModified" datetime="2023-09-18T20:51:51+08:00">2023-09-18</time>
+                <time title="Modified: 2024-01-07 21:01:17" itemprop="dateModified" datetime="2024-01-07T21:01:17+08:00">2024-01-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -199,12 +207,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                  <a href="/categories/Project/" itemprop="url" rel="index"><span itemprop="name">Project</span></a>
                 </span>
             </span>
 
           
-            <div class="post-description">LeetCode 198. House Robber</div>
 
         </div>
       </header>
@@ -215,21 +222,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="LeetCode-198-House-Robber"><a href="#LeetCode-198-House-Robber" class="headerlink" title="LeetCode 198. House Robber"></a>LeetCode 198. House Robber</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/house-robber/description/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
-<p>Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
-<p>Input: nums &#x3D; [1,2,3,1]<br>Output: 4<br>Explanation: Rob house 1 (money &#x3D; 1) and then rob house 3 (money &#x3D; 3).<br>Total amount you can rob &#x3D; 1 + 3 &#x3D; 4.<br>Example 2:</p>
-<p>Input: nums &#x3D; [2,7,9,3,1]<br>Output: 12<br>Explanation: Rob house 1 (money &#x3D; 2), rob house 3 (money &#x3D; 9) and rob house 5 (money &#x3D; 1).<br>Total amount you can rob &#x3D; 2 + 9 + 1 &#x3D; 12.</p>
-<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 100<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 400</p>
-<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
-<h2 id="Solve-1"><a href="#Solve-1" class="headerlink" title="Solve 1"></a>Solve 1</h2><p>題目基本上就是找一個陣列當中，隔行元素相加求最大值問題，從Example2觀察可以得知 2 + 9 + 1 這個情況是由 2 + 9 往後推導出來的，接著 2 + 9 是由 2 推導出來的，因此我們變可以將問題轉換成子問題，首先處理只有兩個元素的情況，就是去比較第一跟第二元素的大小，再來處理之後的情況，每次比較大小需要加上當前nums[i]的大小進去比較，這樣才可以有累加的效果出現。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// nums: [2, 7, 9, 3, 1]</span></span><br><span class="line">        <span class="comment">// Ex2:  [2, 0, 0, 0, 0]</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-2</span>] + nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+        <h1 id="使用知識蒸餾於YOLOv7輕量化模型"><a href="#使用知識蒸餾於YOLOv7輕量化模型" class="headerlink" title="使用知識蒸餾於YOLOv7輕量化模型"></a>使用知識蒸餾於YOLOv7輕量化模型</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized KD以及Cross Attention KD的方法來進行訓練。</p>
+<h2 id="網路架構"><a href="#網路架構" class="headerlink" title="網路架構"></a>網路架構</h2><p>以下為YOLOv7網路架構，包含了Backbone、Neck、Head三個部分。</p>
 <ul>
-<li>Time complexity: $O(n)$</li>
-<li>Space complexity: $O(n)$</li>
+<li>Backbone主要由MaxPool以及ELAN組成。</li>
+<li>Neck由ELAN-Eˇ並採用FPN以及PAN方式進行串接。</li>
+<li>Head由RepConv以及IK隱性知識組成。</li>
 </ul>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="yolov7_arch.png"></p>
+<p>以下為YOLOv7使用的小模組。</p>
+<ul>
+<li>CBS為convolution、Batchnorm以及SiLU的組合。</li>
+<li>ELAN為YOLOv7提出架構，藉由concate不同層級的Conv輸出的</li>
+</ul>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="yolov7_sub_arch.png"></p>
+<h2 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h2><p>我們所使用的知識蒸餾方法為Feature以及Logit KD，首先輸出一張影像進入到老師與學生網路，得到其中間層輸出的特徵層以及輸出，接著將中間輸出的特徵層通過CAKD Module，並計算CAKD Loss，接著將輸出計算KD Loss，以及學生的輸出計算Supervised Loss，最後將所有損失函數加總起來，並反向傳播到學生網路。</p>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="kd_arch.png"></p>
+<p>我們設計了一個簡單的交叉注意力機制，首先將老師與學生網路特徵層攤平，接著進行矩陣乘法後通過softmax，變得到了一張Attention map接著再將老師特徵圖再乘過去，這樣的設計目的為先得到一張老師對學生特徵圖的Attention map，接著將老師不同通道特徵透Attention map中的權重進行線性組合，再與學生特徵去進行損失函數的計算。<br><img src="/images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
+<p>接著我們使用Customized KD方法，基本概念就是在計算除了Supervised Loss以外了Loss，再更新前去計算其梯度的相似程度，由於監督式學習仰賴標籤來進行訓練，因此來額外的其他Loss函數的梯度與Supervised Loss梯度的相似度，如果其更新方向大於90度變代表加入這個Loss以後並沒有幫助到學習。<br><img src="/images/KnowledgeDistillation-On-Yolov7/CKD.png" alt="CKD.png"></p>
+<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>在我們的實現數據中，對比了只使用Supervised learning以及KD的結果，結果顯示使用Customized KD以及注意力機制KD可以將𝑚𝐴𝑃0.5和𝑚𝐴𝑃0.5:0.95分別提升2.78%和0.96%。<br><img src="/images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png" alt="YOLOv7_result.png"></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><blockquote>
+<p>Zhu, Yichen, and Yi Wang. “Student customized knowledge distillation: Bridging the gap between student and teacher.” Proceedings of the IEEE&#x2F;CVF International Conference on Computer Vision. 2021.</p>
+</blockquote>
+<blockquote>
+<p>Wang, Chien-Yao, Alexey Bochkovskiy, and Hong-Yuan Mark Liao. “YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors.” Proceedings of the IEEE&#x2F;CVF Conference on Computer Vision and Pattern Recognition. 2023.</p>
+</blockquote>
 
     </div>
 
@@ -238,6 +255,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/YOLO-Knowledge-Distillation/" rel="tag"># -YOLO -Knowledge Distillation</a>
+          </div>
 
         
 
@@ -245,12 +265,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/09/13/LeetCode-1137-N-th-Tribonacci-Number/" rel="prev" title="LeetCode 1137.N-th Tribonacci Number">
-      <i class="fa fa-chevron-left"></i> LeetCode 1137.N-th Tribonacci Number
+    <a href="/2023/09/21/LeetCode-221-Maximal-Square/" rel="prev" title="LeetCode-221-Maximal-Square">
+      <i class="fa fa-chevron-left"></i> LeetCode-221-Maximal-Square
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/09/18/LeetCode-746-Min-Cost-Climbing-Stairs/" rel="next" title="LeetCode-746-Min Cost Climbing Stairs">
-      LeetCode-746-Min Cost Climbing Stairs <i class="fa fa-chevron-right"></i>
+    <a href="/2023/11/10/Leetcode-Daily-1743/" rel="next" title="Leetcode-Daily-1743">
+      Leetcode-Daily-1743 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -310,7 +330,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LeetCode-198-House-Robber"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 198. House Robber</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solve-1"><span class="nav-number">1.3.</span> <span class="nav-text">Solve 1</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%9F%A5%E8%AD%98%E8%92%B8%E9%A4%BE%E6%96%BCYOLOv7%E8%BC%95%E9%87%8F%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">使用知識蒸餾於YOLOv7輕量化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.2.</span> <span class="nav-text">網路架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%93%E7%B7%B4%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">訓練方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">結果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">參考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
