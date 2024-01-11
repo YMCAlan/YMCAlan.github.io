@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>KnowledgeDistillation-On-YOLOv7</title>
-    <url>/2023/10/04/KnowledgeDistillation-On-YOLOv7/</url>
-    <content><![CDATA[<h1 id="使用知識蒸餾於YOLOv7輕量化模型"><a href="#使用知識蒸餾於YOLOv7輕量化模型" class="headerlink" title="使用知識蒸餾於YOLOv7輕量化模型"></a>使用知識蒸餾於YOLOv7輕量化模型</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized KD以及Cross Attention KD的方法來進行訓練。</p>
-<h2 id="網路架構"><a href="#網路架構" class="headerlink" title="網路架構"></a>網路架構</h2><p>以下為YOLOv7網路架構，包含了Backbone、Neck、Head三個部分。</p>
-<ul>
-<li>Backbone主要由MaxPool以及ELAN組成。</li>
-<li>Neck由ELAN-Eˇ並採用FPN以及PAN方式進行串接。</li>
-<li>Head由RepConv以及IK隱性知識組成。</li>
-</ul>
-<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="yolov7_arch.png"></p>
-<p>以下為YOLOv7使用的小模組。</p>
-<ul>
-<li>CBS為convolution、Batchnorm以及SiLU的組合。</li>
-<li>ELAN為YOLOv7提出架構，藉由concate不同層級的Conv輸出的</li>
-</ul>
-<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="yolov7_sub_arch.png"></p>
-<h2 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h2><p>我們所使用的知識蒸餾方法為Feature以及Logit KD，首先輸出一張影像進入到老師與學生網路，得到其中間層輸出的特徵層以及輸出，接著將中間輸出的特徵層通過CAKD Module，並計算CAKD Loss，接著將輸出計算KD Loss，以及學生的輸出計算Supervised Loss，最後將所有損失函數加總起來，並反向傳播到學生網路。</p>
-<p><img src="/images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="kd_arch.png"></p>
-<p>我們設計了一個簡單的交叉注意力機制，首先將老師與學生網路特徵層攤平，接著進行矩陣乘法後通過softmax，變得到了一張Attention map接著再將老師特徵圖再乘過去，這樣的設計目的為先得到一張老師對學生特徵圖的Attention map，接著將老師不同通道特徵透Attention map中的權重進行線性組合，再與學生特徵去進行損失函數的計算。<br><img src="/images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
-<p>接著我們使用Customized KD方法，基本概念就是在計算除了Supervised Loss以外了Loss，再更新前去計算其梯度的相似程度，由於監督式學習仰賴標籤來進行訓練，因此來額外的其他Loss函數的梯度與Supervised Loss梯度的相似度，如果其更新方向大於90度變代表加入這個Loss以後並沒有幫助到學習。<br><img src="/images/KnowledgeDistillation-On-Yolov7/CKD.png" alt="CKD.png"></p>
-<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>在我們的實現數據中，對比了只使用Supervised learning以及KD的結果，結果顯示使用Customized KD以及注意力機制KD可以將𝑚𝐴𝑃0.5和𝑚𝐴𝑃0.5:0.95分別提升2.78%和0.96%。<br><img src="/images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png" alt="YOLOv7_result.png"></p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><blockquote>
-<p>Zhu, Yichen, and Yi Wang. “Student customized knowledge distillation: Bridging the gap between student and teacher.” Proceedings of the IEEE&#x2F;CVF International Conference on Computer Vision. 2021.</p>
-</blockquote>
-<blockquote>
-<p>Wang, Chien-Yao, Alexey Bochkovskiy, and Hong-Yuan Mark Liao. “YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors.” Proceedings of the IEEE&#x2F;CVF Conference on Computer Vision and Pattern Recognition. 2023.</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Project</category>
-      </categories>
-      <tags>
-        <tag>-YOLO -Knowledge Distillation</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Apply Network augmentation on YOLOV8</title>
     <url>/2023/08/06/Apply-Network-Augmentation-On-YOLOv8&#39;/</url>
     <content><![CDATA[<h1 id="應用網路增強於YOLOv8輕量化模型"><a href="#應用網路增強於YOLOv8輕量化模型" class="headerlink" title="應用網路增強於YOLOv8輕量化模型"></a>應用網路增強於YOLOv8輕量化模型</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>網路增強為訓練輕量化模型的一種訓練方法，透過動態調整模型大小來訓練模型，解決輕量化模型在訓練時under-fitting的問題，我們嘗試將此方法使用用YOLOv8物件偵測輕量化模型上，並且設計出專用api來將網路增強的模型轉換至原生yolov8模型，實作上具有相容性。</p>
@@ -83,48 +47,6 @@
       <categories>
         <category>LeetCode</category>
       </categories>
-  </entry>
-  <entry>
-    <title>LeetCode-746-Min Cost Climbing Stairs</title>
-    <url>/2023/09/18/LeetCode-746-Min-Cost-Climbing-Stairs/</url>
-    <content><![CDATA[<h1 id="LeetCode-746-Min-Cost-Climbing-Stairs"><a href="#LeetCode-746-Min-Cost-Climbing-Stairs" class="headerlink" title="LeetCode 746. Min Cost Climbing Stairs"></a>LeetCode 746. Min Cost Climbing Stairs</h1><p><a href="https://leetcode.com/problems/min-cost-climbing-stairs/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.</p>
-<p>You can either start from the step with index 0, or the step with index 1.</p>
-<p>Return the minimum cost to reach the top of the floor.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
-<p>Input: cost &#x3D; [10,15,20]<br>Output: 15<br>Explanation: You will start at index 1.</p>
-<ul>
-<li>Pay 15 and climb two steps to reach the top.<br>The total cost is 15.<br>Example 2:</li>
-</ul>
-<p>Input: cost &#x3D; [1,100,1,1,1,100,1,1,100,1]<br>Output: 6<br>Explanation: You will start at index 0.</p>
-<ul>
-<li>Pay 1 and climb two steps to reach index 2.</li>
-<li>Pay 1 and climb two steps to reach index 4.</li>
-<li>Pay 1 and climb two steps to reach index 6.</li>
-<li>Pay 1 and climb one step to reach index 7.</li>
-<li>Pay 1 and climb two steps to reach index 9.</li>
-<li>Pay 1 and climb one step to reach the top.<br>The total cost is 6.</li>
-</ul>
-<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code>,<code>Easy</code></p>
-<h2 id="Solve-1-Button-Up-DP-Memoization"><a href="#Solve-1-Button-Up-DP-Memoization" class="headerlink" title="Solve 1 Button Up DP (Memoization)"></a>Solve 1 Button Up DP (Memoization)</h2><p>跟爬梯子題目變化版，題目為找到最小爬梯子所需要的成本，我們需要累加每一次的cost，因此需要加上cost[i]，那基本case為cost[0]、cost[1]先複製到dp array上，接著我們推論dp[2]，<br>dp[2]有可能接受來自step1的dp[2-1]或者step2的dp[2-2]，因此我們要比較他們的大小，這樣dp[i]就被推導出來。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = cost.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(l, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; l; i++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">min</span>(dp[i<span class="number">-1</span>], dp[i<span class="number">-2</span>]) + cost[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dp[l<span class="number">-1</span>], dp[l<span class="number">-2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: $O(n)$ 需跑n次</li>
-<li>Space complexity: $O(n)$ 需要n的空間來儲存運算結果</li>
-</ul>
-<h2 id="Solve-2-Optimization-DP-Reduce-O-n-space-to-O-1"><a href="#Solve-2-Optimization-DP-Reduce-O-n-space-to-O-1" class="headerlink" title="Solve 2 Optimization DP - Reduce $O(n)$ space to $O(1)$"></a>Solve 2 Optimization DP - Reduce $O(n)$ space to $O(1)$</h2><p>Space complexity 優化版，從題目我們可以看出只需要去比較來自step1的cost或來自step2的cost，所以我們可以只使用兩個變數來儲存他們。</p>
-<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> minCostClimbingStairs(vector&lt;<span class="built_in">int</span>&gt;&amp; cost) &#123;</span><br><span class="line">        <span class="built_in">int</span> n = cost.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">int</span> curr = cost[<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">int</span> prev = cost[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        for (<span class="built_in">int</span> i = <span class="number">2</span> ; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">int</span> temp = <span class="built_in">min</span>(curr, prev) + cost[i];</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(curr, prev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: $O(n)$ 需跑n次</li>
-<li>Space complexity: $O(1)$ 只需要兩個變數來儲存運算結果，不論n有多大</li>
-</ul>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>DP</tag>
-      </tags>
   </entry>
   <entry>
     <title>Cervical Lymph Node Classification</title>
@@ -211,6 +133,48 @@
       </categories>
   </entry>
   <entry>
+    <title>LeetCode-746-Min Cost Climbing Stairs</title>
+    <url>/2023/09/18/LeetCode-746-Min-Cost-Climbing-Stairs/</url>
+    <content><![CDATA[<h1 id="LeetCode-746-Min-Cost-Climbing-Stairs"><a href="#LeetCode-746-Min-Cost-Climbing-Stairs" class="headerlink" title="LeetCode 746. Min Cost Climbing Stairs"></a>LeetCode 746. Min Cost Climbing Stairs</h1><p><a href="https://leetcode.com/problems/min-cost-climbing-stairs/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.</p>
+<p>You can either start from the step with index 0, or the step with index 1.</p>
+<p>Return the minimum cost to reach the top of the floor.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
+<p>Input: cost &#x3D; [10,15,20]<br>Output: 15<br>Explanation: You will start at index 1.</p>
+<ul>
+<li>Pay 15 and climb two steps to reach the top.<br>The total cost is 15.<br>Example 2:</li>
+</ul>
+<p>Input: cost &#x3D; [1,100,1,1,1,100,1,1,100,1]<br>Output: 6<br>Explanation: You will start at index 0.</p>
+<ul>
+<li>Pay 1 and climb two steps to reach index 2.</li>
+<li>Pay 1 and climb two steps to reach index 4.</li>
+<li>Pay 1 and climb two steps to reach index 6.</li>
+<li>Pay 1 and climb one step to reach index 7.</li>
+<li>Pay 1 and climb two steps to reach index 9.</li>
+<li>Pay 1 and climb one step to reach the top.<br>The total cost is 6.</li>
+</ul>
+<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code>,<code>Easy</code></p>
+<h2 id="Solve-1-Button-Up-DP-Memoization"><a href="#Solve-1-Button-Up-DP-Memoization" class="headerlink" title="Solve 1 Button Up DP (Memoization)"></a>Solve 1 Button Up DP (Memoization)</h2><p>跟爬梯子題目變化版，題目為找到最小爬梯子所需要的成本，我們需要累加每一次的cost，因此需要加上cost[i]，那基本case為cost[0]、cost[1]先複製到dp array上，接著我們推論dp[2]，<br>dp[2]有可能接受來自step1的dp[2-1]或者step2的dp[2-2]，因此我們要比較他們的大小，這樣dp[i]就被推導出來。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = cost.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(l, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; l; i++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">min</span>(dp[i<span class="number">-1</span>], dp[i<span class="number">-2</span>]) + cost[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dp[l<span class="number">-1</span>], dp[l<span class="number">-2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: $O(n)$ 需跑n次</li>
+<li>Space complexity: $O(n)$ 需要n的空間來儲存運算結果</li>
+</ul>
+<h2 id="Solve-2-Optimization-DP-Reduce-O-n-space-to-O-1"><a href="#Solve-2-Optimization-DP-Reduce-O-n-space-to-O-1" class="headerlink" title="Solve 2 Optimization DP - Reduce $O(n)$ space to $O(1)$"></a>Solve 2 Optimization DP - Reduce $O(n)$ space to $O(1)$</h2><p>Space complexity 優化版，從題目我們可以看出只需要去比較來自step1的cost或來自step2的cost，所以我們可以只使用兩個變數來儲存他們。</p>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> minCostClimbingStairs(vector&lt;<span class="built_in">int</span>&gt;&amp; cost) &#123;</span><br><span class="line">        <span class="built_in">int</span> n = cost.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">int</span> curr = cost[<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">int</span> prev = cost[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        for (<span class="built_in">int</span> i = <span class="number">2</span> ; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">int</span> temp = <span class="built_in">min</span>(curr, prev) + cost[i];</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(curr, prev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: $O(n)$ 需跑n次</li>
+<li>Space complexity: $O(1)$ 只需要兩個變數來儲存運算結果，不論n有多大</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode-Daily-1743</title>
     <url>/2023/11/10/Leetcode-Daily-1743/</url>
     <content><![CDATA[<h1 id="LeetCode-1743-Restore-the-Array-From-Adjacent-Pairs"><a href="#LeetCode-1743-Restore-the-Array-From-Adjacent-Pairs" class="headerlink" title="LeetCode 1743. Restore the Array From Adjacent Pairs"></a>LeetCode 1743. Restore the Array From Adjacent Pairs</h1><p><a href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&envId=2023-11-10">Link</a></p>
@@ -230,33 +194,6 @@
       </categories>
       <tags>
         <tag>graph</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Leetcode-344</title>
-    <url>/2024/01/04/Leetcode-344/</url>
-    <content><![CDATA[<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><!-- Describe your first thoughts on how to solve this problem. -->
-<p>反轉字串為經典題目，題目要求只能以空間複雜度$$O(1)$$，也就是能in-place去操作字元。<br>首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>我們可以透過雙指標法來處理這個問題。</p>
-<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><!-- Describe your approach to solving the problem. -->
-<p><code>start</code>:表示指向第一個位置的指標<br><code>end</code>:表示指向最後一個位置的指標<br>邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code><br>每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。<br>&#96;&#96;</p>
-<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ul>
-<li><p>Time complexity: $$O(n)$$</p>
-<!-- Add your time complexity here, e.g. $$O(n)$$ -->
-</li>
-<li><p>Space complexity: $$O(1)$$</p>
-<!-- Add your space complexity here, e.g. $$O(n)$$ --></li>
-</ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--)&#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>LeetCode</category>
-        <category>String</category>
-      </categories>
-      <tags>
-        <tag>String</tag>
       </tags>
   </entry>
   <entry>
@@ -288,6 +225,75 @@
       </categories>
   </entry>
   <entry>
+    <title>Leetcode-344</title>
+    <url>/2024/01/04/Leetcode-344/</url>
+    <content><![CDATA[<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><!-- Describe your first thoughts on how to solve this problem. -->
+<p>反轉字串為經典題目，題目要求只能以空間複雜度$$O(1)$$，也就是能in-place去操作字元。<br>首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>我們可以透過雙指標法來處理這個問題。</p>
+<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><!-- Describe your approach to solving the problem. -->
+<p><code>start</code>:表示指向第一個位置的指標<br><code>end</code>:表示指向最後一個位置的指標<br>邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code><br>每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。<br>&#96;&#96;</p>
+<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ul>
+<li><p>Time complexity: $$O(n)$$</p>
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+</li>
+<li><p>Space complexity: $$O(1)$$</p>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--)&#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C語言中的變數宣告與解讀</title>
+    <url>/2023/12/16/define-and-read-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
+<h1 id="Right-left-Rule"><a href="#Right-left-Rule" class="headerlink" title="Right-left Rule"></a>Right-left Rule</h1><p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
+<h2 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h2><p>以下有3個基本的運算子，</p>
+<ul>
+<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
+<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
+<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
+</ul>
+<p>辨識子就是函數名稱或變數名稱喔</p>
+<h1 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h1><ol>
+<li>找到辨識字，解讀為 xxx是 或者 xxx is&#x2F; as</li>
+<li>往辨識字的右邊看，如果看到<ul>
+<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
+<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>直到遇到 單獨的 <code>)</code></li>
+<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
+</ul>
+</li>
+<li>接著往辨識字的左邊看<ul>
+<li><code>*</code>  解讀為 指向的是， pointer to</li>
+<li><code>datatype</code> 就照念就好。</li>
+</ul>
+</li>
+</ol>
+<h1 id="以下為不合法的C語言宣告"><a href="#以下為不合法的C語言宣告" class="headerlink" title="以下為不合法的C語言宣告"></a>以下為不合法的C語言宣告</h1><ul>
+<li><code>[]()</code> 沒有陣列中的元素是函數</li>
+<li><code>()()</code> 沒有函數中回傳函數</li>
+<li><code>()[]</code> 沒有函數回傳陣列<br>但我們可以將其變成指標來使其合法</li>
+</ul>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>int *ptr</code><br>declare ptr as pointer to <code>int</code><br>宣告一個ptr指向整數型別的指標</p>
+<p><code>int (*compare)(void*, void*)</code><br>declare compare as pointer to function (pointer to void, pointer to void) returning int<br>宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
+<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
+<p><code>int ptr[]()</code><br>不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br><code>int (*ptr[])()</code><br>declare ptr as the array of pointer to function returning int</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
+<p><a href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br><a href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br><a href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
     <title>字元概念在C語言中</title>
     <url>/2023/12/16/char-in-c/</url>
     <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>在C語言中，如果要宣告一個字串是需要透過矩陣進行宣告的，不能像C++那樣去宣告string</p>
@@ -309,6 +315,150 @@
       <categories>
         <category>C</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Const &amp; Static &amp; Extern 在C語言</title>
+    <url>/2023/12/28/const-static-c/</url>
+    <content><![CDATA[<h1 id="const-Introduction"><a href="#const-Introduction" class="headerlink" title="const Introduction"></a><code>const</code> Introduction</h1><p><code>const</code> 縮寫自 constant，代表 “恆定不變的”，是用來定義常量變數的關鍵字。</p>
+<ul>
+<li>被 <code>const</code> 修飾的變數不能更改，僅能進行讀取。</li>
+<li>被 <code>const</code> 修飾的函數參數在函數內不能被修改，這樣做作為一種保護機制，防止意外修改。不過，函數在使用時傳入的參數可以不是常量。</li>
+</ul>
+<p>備註:<br><code>const int *p;</code>解讀為<code>p</code>為指標指向常量int(指向常量的指標)，指標可更改，但指向物不行更改。<br><code>int* const p;</code>解讀為<code>p</code>為常量指標指向int，指標不可改，但指向內容物可以改。<br><code>const int* const p;</code>解讀為<code>p</code>為常量指標指向常量int，皆不可以改。<br>基本上解讀原則會在<code>*</code>左右兩邊<br>如果在星號左邊，表示某個靜態的資料型態，因此<code>const int *p;</code> &#x3D;&#x3D; <code>int const *p</code>;這個是特例，都在星號左邊因此解讀上是一樣的。<br>如果在星號右邊，則表示指標是常量。</p>
+<h1 id="static-Introduction"><a href="#static-Introduction" class="headerlink" title="static Introduction"></a><code>static</code> Introduction</h1><p>Static表示靜態，能夠修改變數的儲存區域和生命週期，</p>
+<ul>
+<li><p>靜態局部變數，在函數內被使用時只會初始化一次，可以維持某個函數中的狀態。</p>
+<ul>
+<li><strong>作用域</strong> : 僅限於宣告它的函數。</li>
+<li><strong>在函數外不可見</strong>：即便是在同一檔案的其他函數中也無法訪問。</li>
+</ul>
+</li>
+<li><p>靜態全局變數，限制其使用範圍，只能在其對應到的檔案使用，避免命名衝突。</p>
+<ul>
+<li><strong>作用域</strong>：限定在宣告它的檔案（編譯單位）。</li>
+<li><strong>檔案內可見</strong>：可以在檔案內的任何函數中訪問，但在其他檔案中不可見。</li>
+</ul>
+</li>
+<li><p>靜態函數，與靜態變數一樣，只能在定義的檔案中使用，避免命名衝突。</p>
+<ul>
+<li><strong>作用域</strong>：同樣也是限定在宣告它的檔案。</li>
+<li><strong>檔案內可見</strong>：只能在同一檔案中的其他函數中呼叫，無法在其他檔案中被呼叫。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Extern-Introduction"><a href="#Extern-Introduction" class="headerlink" title="Extern Introduction"></a><code>Extern</code> Introduction</h1><p><code>Extern</code>允許被修飾變數在不同的source file中被使用。</p>
+<p><code>extern &quot;C&quot;</code>讓在c++中也可以使用c的函示庫，不會造成命名衝突。</p>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>泛型程式設計在C語言中</title>
+    <url>/2023/12/18/generics-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成</p>
+<ul>
+<li>void* 指向void指標，使用強制轉型。</li>
+<li>macro(巨集) 使用字元替換方式操作。</li>
+<li>_Generic(C11)</li>
+</ul>
+<h1 id="Void"><a href="#Void" class="headerlink" title="Void*"></a>Void*</h1><p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked list中指向不同型別的資料。<br>使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
+<h1 id="Macro"><a href="#Macro" class="headerlink" title="Macro"></a>Macro</h1><p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
+<h1 id="Generic"><a href="#Generic" class="headerlink" title="_Generic"></a>_Generic</h1><p>C11才有的關鍵字，</p>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>void*指標以及 void**指標的介紹與用法</title>
+    <url>/2023/12/12/void-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><code>void</code>為C語言中關鍵字，<br><code>void</code>為c&#x2F;c++中的內建類型功能有3種</p>
+<ul>
+<li>函數回傳void，表示不會會傳任何值。</li>
+<li>用於函數參數，表示此函數不接受任何參數，Ex <code>void func(void);</code></li>
+<li>用於指標宣告時，表示此指標為通用的，可以進行強制轉型。</li>
+</ul>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>void*</code>指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型，能夠修改被指向的資料。<br><code>void**</code>指標的指標，如果今天要更改指標指向的對象，就可以使用或者我們需要接受函數裡面變數的指標，就需要用到指標的指標來接受。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">set</span><span class="params">(<span class="type">void</span>* x)</span>&#123;</span><br><span class="line">    *(<span class="type">int</span>*)x = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_ptr</span><span class="params">(<span class="type">void</span>** x)</span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">9</span>;</span><br><span class="line">    *x = &amp;a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>* p_x = &amp;x; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    <span class="built_in">set</span>(p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, x);</span><br><span class="line"></span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    set_ptr((<span class="type">void</span>**)&amp;p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, *p_x);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>物件導向概念</title>
+    <url>/2023/12/20/oop/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素視為一種物件，這些物件可以被賦予屬性、方法等等。此物件可以是抽象或現實中的實體概念。例如，車子具備汽油、座位等屬性，而其方法包括向前、向後等。</p>
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊。物件可以是實體或抽象概念。</p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
+<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class 可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
+<h1 id="3-Concepts-in-OOP"><a href="#3-Concepts-in-OOP" class="headerlink" title="3 Concepts in OOP"></a>3 Concepts in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法。例如，球有很多種，如籃球、棒球、橄欖球，但它們背後都有一個抽象概念，即形狀。因此，可以定義一個類別為形狀，而這些球就是其擴展後的結果。我們稱作子類，而形狀我們就稱作父類。</p>
+<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在 C++ 中可以使用 public&#x2F;private&#x2F;protected 來控制權限。</p>
+<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是否有不同的結果。在射擊遊戲中，左鍵為射擊，右鍵為開鏡。同樣是滑鼠點擊的事件，但效果卻不一樣，這就是多型。</p>
+<ul>
+<li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
+<li>Function Overloading (重載): 允許函數可以有多個不同輸入。</li>
+</ul>
+<pre class="mermaid">graph TD;
+    物件導向--基於-->物件;
+    物件--原則-->繼承; 
+    物件--原則-->封裝; 
+    物件--原則-->多型;
+    物件--被創建-->類別;
+    類別--定義-->方法;
+    類別--定義-->屬性;
+    繼承-->函數覆寫;
+    繼承-->函數重載;
+    方法-.-函數覆寫;
+    方法-.-函數重載;</pre>]]></content>
+      <categories>
+        <category>OOP</category>
+      </categories>
+      <tags>
+        <tag>OOP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KnowledgeDistillation-On-YOLOv7</title>
+    <url>/2023/10/04/KnowledgeDistillation-On-YOLOv7/</url>
+    <content><![CDATA[<h1 id="使用知識蒸餾於YOLOv7輕量化模型"><a href="#使用知識蒸餾於YOLOv7輕量化模型" class="headerlink" title="使用知識蒸餾於YOLOv7輕量化模型"></a>使用知識蒸餾於YOLOv7輕量化模型</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized KD以及Cross Attention KD的方法來進行訓練。</p>
+<h2 id="網路架構"><a href="#網路架構" class="headerlink" title="網路架構"></a>網路架構</h2><p>以下為YOLOv7網路架構，包含了Backbone、Neck、Head三個部分。</p>
+<ul>
+<li>Backbone主要由MaxPool以及ELAN組成。</li>
+<li>Neck由ELAN-Eˇ並採用FPN以及PAN方式進行串接。</li>
+<li>Head由RepConv以及IK隱性知識組成。</li>
+</ul>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="yolov7_arch.png"></p>
+<p>以下為YOLOv7使用的小模組。</p>
+<ul>
+<li>CBS為convolution、Batchnorm以及SiLU的組合。</li>
+<li>ELAN為YOLOv7提出架構，藉由concate不同層級的Conv輸出的</li>
+</ul>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="yolov7_sub_arch.png"></p>
+<h2 id="訓練方法"><a href="#訓練方法" class="headerlink" title="訓練方法"></a>訓練方法</h2><p>我們所使用的知識蒸餾方法為Feature以及Logit KD，首先輸出一張影像進入到老師與學生網路，得到其中間層輸出的特徵層以及輸出，接著將中間輸出的特徵層通過CAKD Module，並計算CAKD Loss，接著將輸出計算KD Loss，以及學生的輸出計算Supervised Loss，最後將所有損失函數加總起來，並反向傳播到學生網路。</p>
+<p><img src="/images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="kd_arch.png"></p>
+<p>我們設計了一個簡單的交叉注意力機制，首先將老師與學生網路特徵層攤平，接著進行矩陣乘法後通過softmax，變得到了一張Attention map接著再將老師特徵圖再乘過去，這樣的設計目的為先得到一張老師對學生特徵圖的Attention map，接著將老師不同通道特徵透Attention map中的權重進行線性組合，再與學生特徵去進行損失函數的計算。<br><img src="/images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
+<p>接著我們使用Customized KD方法，基本概念就是在計算除了Supervised Loss以外了Loss，再更新前去計算其梯度的相似程度，由於監督式學習仰賴標籤來進行訓練，因此來額外的其他Loss函數的梯度與Supervised Loss梯度的相似度，如果其更新方向大於90度變代表加入這個Loss以後並沒有幫助到學習。<br><img src="/images/KnowledgeDistillation-On-Yolov7/CKD.png" alt="CKD.png"></p>
+<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>在我們的實現數據中，對比了只使用Supervised learning以及KD的結果，結果顯示使用Customized KD以及注意力機制KD可以將𝑚𝐴𝑃0.5和𝑚𝐴𝑃0.5:0.95分別提升2.78%和0.96%。<br><img src="/images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png" alt="YOLOv7_result.png"></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><blockquote>
+<p>Zhu, Yichen, and Yi Wang. “Student customized knowledge distillation: Bridging the gap between student and teacher.” Proceedings of the IEEE&#x2F;CVF International Conference on Computer Vision. 2021.</p>
+</blockquote>
+<blockquote>
+<p>Wang, Chien-Yao, Alexey Bochkovskiy, and Hong-Yuan Mark Liao. “YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors.” Proceedings of the IEEE&#x2F;CVF Conference on Computer Vision and Pattern Recognition. 2023.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Project</category>
+      </categories>
+      <tags>
+        <tag>-YOLO -Knowledge Distillation</tag>
+      </tags>
   </entry>
   <entry>
     <title>實作Stack堆疊使用C語言</title>
@@ -464,156 +614,5 @@ int sizeOfStack(Stack* stack)
       <tags>
         <tag>Stack</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>C語言中的變數宣告與解讀</title>
-    <url>/2023/12/16/define-and-read-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
-<h1 id="Right-left-Rule"><a href="#Right-left-Rule" class="headerlink" title="Right-left Rule"></a>Right-left Rule</h1><p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
-<h2 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h2><p>以下有3個基本的運算子，</p>
-<ul>
-<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
-<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
-<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
-</ul>
-<p>辨識子就是函數名稱或變數名稱喔</p>
-<h1 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h1><ol>
-<li>找到辨識字，解讀為 xxx是 或者 xxx is&#x2F; as</li>
-<li>往辨識字的右邊看，如果看到<ul>
-<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
-<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>直到遇到 單獨的 <code>)</code></li>
-<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
-</ul>
-</li>
-<li>接著往辨識字的左邊看<ul>
-<li><code>*</code>  解讀為 指向的是， pointer to</li>
-<li><code>datatype</code> 就照念就好。</li>
-</ul>
-</li>
-</ol>
-<h1 id="以下為不合法的C語言宣告"><a href="#以下為不合法的C語言宣告" class="headerlink" title="以下為不合法的C語言宣告"></a>以下為不合法的C語言宣告</h1><ul>
-<li><code>[]()</code> 沒有陣列中的元素是函數</li>
-<li><code>()()</code> 沒有函數中回傳函數</li>
-<li><code>()[]</code> 沒有函數回傳陣列<br>但我們可以將其變成指標來使其合法</li>
-</ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>int *ptr</code><br>declare ptr as pointer to <code>int</code><br>宣告一個ptr指向整數型別的指標</p>
-<p><code>int (*compare)(void*, void*)</code><br>declare compare as pointer to function (pointer to void, pointer to void) returning int<br>宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
-<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
-<p><code>int ptr[]()</code><br>不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br><code>int (*ptr[])()</code><br>declare ptr as the array of pointer to function returning int</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
-<p><a href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br><a href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br><a href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>void*指標以及 void**指標的介紹與用法</title>
-    <url>/2023/12/12/void-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><code>void</code>為C語言中關鍵字，<br><code>void</code>為c&#x2F;c++中的內建類型功能有3種</p>
-<ul>
-<li>函數回傳void，表示不會會傳任何值。</li>
-<li>用於函數參數，表示此函數不接受任何參數，Ex <code>void func(void);</code></li>
-<li>用於指標宣告時，表示此指標為通用的，可以進行強制轉型。</li>
-</ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>void*</code>指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型，能夠修改被指向的資料。<br><code>void**</code>指標的指標，如果今天要更改指標指向的對象，就可以使用或者我們需要接受函數裡面變數的指標，就需要用到指標的指標來接受。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">set</span><span class="params">(<span class="type">void</span>* x)</span>&#123;</span><br><span class="line">    *(<span class="type">int</span>*)x = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_ptr</span><span class="params">(<span class="type">void</span>** x)</span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">9</span>;</span><br><span class="line">    *x = &amp;a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>* p_x = &amp;x; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    <span class="built_in">set</span>(p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, x);</span><br><span class="line"></span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    set_ptr((<span class="type">void</span>**)&amp;p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, *p_x);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-      <tags>
-        <tag>C</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>物件導向概念</title>
-    <url>/2023/12/20/oop/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素視為一種物件，這些物件可以被賦予屬性、方法等等。此物件可以是抽象或現實中的實體概念。例如，車子具備汽油、座位等屬性，而其方法包括向前、向後等。</p>
-<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊。物件可以是實體或抽象概念。</p>
-<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
-<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class 可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
-<h1 id="3-Concepts-in-OOP"><a href="#3-Concepts-in-OOP" class="headerlink" title="3 Concepts in OOP"></a>3 Concepts in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法。例如，球有很多種，如籃球、棒球、橄欖球，但它們背後都有一個抽象概念，即形狀。因此，可以定義一個類別為形狀，而這些球就是其擴展後的結果。我們稱作子類，而形狀我們就稱作父類。</p>
-<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在 C++ 中可以使用 public&#x2F;private&#x2F;protected 來控制權限。</p>
-<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是否有不同的結果。在射擊遊戲中，左鍵為射擊，右鍵為開鏡。同樣是滑鼠點擊的事件，但效果卻不一樣，這就是多型。</p>
-<ul>
-<li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
-<li>Function Overloading (重載): 允許函數可以有多個不同輸入。</li>
-</ul>
-<pre class="mermaid">graph TD;
-    物件導向--基於-->物件;
-    物件--原則-->繼承; 
-    物件--原則-->封裝; 
-    物件--原則-->多型;
-    物件--被創建-->類別;
-    類別--定義-->方法;
-    類別--定義-->屬性;
-    繼承-->函數覆寫;
-    繼承-->函數重載;
-    方法-.-函數覆寫;
-    方法-.-函數重載;</pre>]]></content>
-      <categories>
-        <category>OOP</category>
-      </categories>
-      <tags>
-        <tag>OOP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Const &amp; Static &amp; Extern 在C語言</title>
-    <url>/2023/12/28/const-static-c/</url>
-    <content><![CDATA[<h1 id="const-Introduction"><a href="#const-Introduction" class="headerlink" title="const Introduction"></a><code>const</code> Introduction</h1><p><code>const</code> 縮寫自 constant，代表 “恆定不變的”，是用來定義常量變數的關鍵字。</p>
-<ul>
-<li>被 <code>const</code> 修飾的變數不能更改，僅能進行讀取。</li>
-<li>被 <code>const</code> 修飾的函數參數在函數內不能被修改，這樣做作為一種保護機制，防止意外修改。不過，函數在使用時傳入的參數可以不是常量。</li>
-</ul>
-<p>備註:<br><code>const int *p;</code>解讀為<code>p</code>為指標指向常量int(指向常量的指標)，指標可更改，但指向物不行更改。<br><code>int* const p;</code>解讀為<code>p</code>為常量指標指向int，指標不可改，但指向內容物可以改。<br><code>const int* const p;</code>解讀為<code>p</code>為常量指標指向常量int，皆不可以改。<br>基本上解讀原則會在<code>*</code>左右兩邊<br>如果在星號左邊，表示某個靜態的資料型態，因此<code>const int *p;</code> &#x3D;&#x3D; <code>int const *p</code>;這個是特例，都在星號左邊因此解讀上是一樣的。<br>如果在星號右邊，則表示指標是常量。</p>
-<h1 id="static-Introduction"><a href="#static-Introduction" class="headerlink" title="static Introduction"></a><code>static</code> Introduction</h1><p>Static表示靜態，能夠修改變數的儲存區域和生命週期，</p>
-<ul>
-<li><p>靜態局部變數，在函數內被使用時只會初始化一次，可以維持某個函數中的狀態。</p>
-<ul>
-<li><strong>作用域</strong> : 僅限於宣告它的函數。</li>
-<li><strong>在函數外不可見</strong>：即便是在同一檔案的其他函數中也無法訪問。</li>
-</ul>
-</li>
-<li><p>靜態全局變數，限制其使用範圍，只能在其對應到的檔案使用，避免命名衝突。</p>
-<ul>
-<li><strong>作用域</strong>：限定在宣告它的檔案（編譯單位）。</li>
-<li><strong>檔案內可見</strong>：可以在檔案內的任何函數中訪問，但在其他檔案中不可見。</li>
-</ul>
-</li>
-<li><p>靜態函數，與靜態變數一樣，只能在定義的檔案中使用，避免命名衝突。</p>
-<ul>
-<li><strong>作用域</strong>：同樣也是限定在宣告它的檔案。</li>
-<li><strong>檔案內可見</strong>：只能在同一檔案中的其他函數中呼叫，無法在其他檔案中被呼叫。</li>
-</ul>
-</li>
-</ul>
-<h1 id="Extern-Introduction"><a href="#Extern-Introduction" class="headerlink" title="Extern Introduction"></a><code>Extern</code> Introduction</h1><p><code>Extern</code>允許被修飾變數在不同的source file中被使用。</p>
-<p><code>extern &quot;C&quot;</code>讓在c++中也可以使用c的函示庫，不會造成命名衝突。</p>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>泛型程式設計在C語言中</title>
-    <url>/2023/12/18/generics-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成</p>
-<ul>
-<li>void* 指向void指標，使用強制轉型。</li>
-<li>macro(巨集) 使用字元替換方式操作。</li>
-<li>_Generic(C11)</li>
-</ul>
-<h1 id="Void"><a href="#Void" class="headerlink" title="Void*"></a>Void*</h1><p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked list中指向不同型別的資料。<br>使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
-<h1 id="Macro"><a href="#Macro" class="headerlink" title="Macro"></a>Macro</h1><p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
-<h1 id="Generic"><a href="#Generic" class="headerlink" title="_Generic"></a>_Generic</h1><p>C11才有的關鍵字，</p>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
   </entry>
 </search>
