@@ -48,40 +48,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode 1137.N-th Tribonacci Number</title>
-    <url>/2023/09/13/LeetCode-1137-N-th-Tribonacci-Number/</url>
-    <content><![CDATA[<h1 id="LeetCode-1137-N-th-Tribonacci-Number"><a href="#LeetCode-1137-N-th-Tribonacci-Number" class="headerlink" title="LeetCode 1137. N-th Tribonacci Number"></a>LeetCode 1137. N-th Tribonacci Number</h1><p><a href="https://leetcode.com/problems/n-th-tribonacci-number/">Link</a></p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>The Tribonacci sequence Tn is defined as follows:<br>T0 &#x3D; 0, T1 &#x3D; 1, T2 &#x3D; 1, and Tn+3 &#x3D; Tn + Tn+1 + Tn+2 for n &gt;&#x3D; 0.<br>Given n, return the value of Tn.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
-<p>Input: n &#x3D; 4<br>Output: 4<br>Explanation:<br>T_3 &#x3D; 0 + 1 + 1 &#x3D; 2<br>T_4 &#x3D; 1 + 1 + 2 &#x3D; 4<br>Example 2:</p>
-<p>Input: n &#x3D; 25<br>Output: 1389537</p>
-<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code></p>
-<h2 id="Solve-1"><a href="#Solve-1" class="headerlink" title="Solve 1"></a>Solve 1</h2><p>此題跟費波那契數列解題方式基本一樣，使用Recursive方式解題。</p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta">## Code C++</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tribonacci(n<span class="number">-1</span>) + tribonacci(n<span class="number">-2</span>) + tribonacci(n<span class="number">-3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>不過這段程式碼在測資是不過的，時間複雜度超過了。</p>
-<ul>
-<li>Time complexity: $O(3^n)$ 每個項下面都會分成3個項目，以Tree方式看其每一個子運算都會以指數量級增長</li>
-<li>Space complexity: $O(n)$ 需要n層來儲存調用Function的狀態.</li>
-</ul>
-<h2 id="Solve-2"><a href="#Solve-2" class="headerlink" title="Solve 2"></a>Solve 2</h2><p>先初始化基本條件，藉由陣列索引的方式來做DP。</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        vector&lt;<span class="built_in">int</span>&gt; arr&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                arr.push<span class="constructor">_back(<span class="params">arr</span>[<span class="params">i</span>-1] + <span class="params">arr</span>[<span class="params">i</span>-2] + <span class="params">arr</span>[<span class="params">i</span>-3])</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Time complexity: $O(n)$ 一個迴圈就搞定了。</li>
-<li>Space complexity: $O(n)$ 需要長度為n+1的陣列來儲存運算好的數值。</li>
-</ul>
-<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在實作上都不要使用Recursive避免時間複雜度爆炸影響效率。</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度 —遞迴(上)</a></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>DP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode 198. House Robber</title>
     <url>/2023/09/13/LeetCode-198-House-Robber/</url>
     <content><![CDATA[<h1 id="LeetCode-198-House-Robber"><a href="#LeetCode-198-House-Robber" class="headerlink" title="LeetCode 198. House Robber"></a>LeetCode 198. House Robber</h1><p><a href="https://leetcode.com/problems/house-robber/description/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
@@ -139,62 +105,6 @@
       <tags>
         <tag>-YOLO -Knowledge Distillation</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>LeetCode-221-Maximal-Square</title>
-    <url>/2023/09/21/LeetCode-221-Maximal-Square/</url>
-    <content><![CDATA[<h1 id="LeetCode-221-Maximal-Square"><a href="#LeetCode-221-Maximal-Square" class="headerlink" title="LeetCode 221. Maximal Square"></a>LeetCode 221. Maximal Square</h1><p><a href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an m x n binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.</p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg"></p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
-<p>Input: matrix &#x3D; [[“1”,”0”,”1”,”0”,”0”],[“1”,”0”,”1”,”1”,”1”],[“1”,”1”,”1”,”1”,”1”],[“1”,”0”,”0”,”1”,”0”]]<br>Output: 4</p>
-<p>Example 2:</p>
-<p>Input: matrix &#x3D; [[“0”,”1”],[“1”,”0”]]<br>Output: 1</p>
-<p>Example 3:</p>
-<p>Input: matrix &#x3D; [[“0”]]<br>Output: 0</p>
-<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
-<h2 id="Solve-1-Button-Up-DP-Memoization"><a href="#Solve-1-Button-Up-DP-Memoization" class="headerlink" title="Solve 1 Button Up DP (Memoization)"></a>Solve 1 Button Up DP (Memoization)</h2><p>題目要求找出最大的方塊的面積，首先我們需要推導出通式，對於i,j索引，我們要檢查3個位置分別為</p>
-<ul>
-<li>[i-1][j]，[i][j-1]，[i-1][j-1]<br>這3個位置必須都為1才能形成一個方形，因此我們可以使用兩次min操作來檢查這3個位置是否都為1，我們就是記住對角線的元素是否為1且上下area是否為1，因此我們會將dp[i][j]的結果與size做比較，最後取平方。</li>
-</ul>
-<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="keyword">int</span> maximalSquare(<span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;char&gt;&gt;&amp; <span class="keyword">matrix</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="keyword">matrix</span>.<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="keyword">matrix</span>[<span class="number">0</span>].<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;dp(m, <span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">size</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">// row, col, init</span></span><br><span class="line">                <span class="keyword">if</span> ( !i || !j || <span class="keyword">matrix</span>[i][j] == <span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">matrix</span>[i][j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">min</span>(<span class="keyword">min</span>(dp[i][j<span class="number">-1</span>], dp[i<span class="number">-1</span>][j]), dp[i<span class="number">-1</span>][j<span class="number">-1</span>]) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">size</span> = <span class="keyword">max</span>(<span class="keyword">size</span>, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">size</span> * <span class="keyword">size</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Time complexity: $O(mn)$ 巡過整個矩陣需要的次數</li>
-<li>Space complexity: $O(mn)$ 需要m * n的空間來儲存運算結果</li>
-</ul>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>矩陣概念與指標在C語言中</title>
-    <url>/2023/12/19/array-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>陣列為一種在記憶體空間連續分布的資料型態，陣列中的東西我們稱作元素(element)，陣列能夠透過元素的索引(index)來取得資料。</p>
-<h1 id="Array-in-C"><a href="#Array-in-C" class="headerlink" title="Array in C"></a>Array in C</h1><p>以下為宣告陣列一個方式，arr宣告成有5個元素的矩陣，元素資料型態為int。<br>在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出 4 * 5 byte，</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
-<p>輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="arr-vs-arr"><a href="#arr-vs-arr" class="headerlink" title="arr vs &amp;arr"></a><code>arr</code> vs <code>&amp;arr</code></h1><p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">arr = <span class="number">0061F</span>F0C</span><br><span class="line">&amp;arr = <span class="number">0061F</span>F0C</span><br></pre></td></tr></table></figure>
-
-<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。<br>但是當對陣列使用<code>&amp;</code>，會回傳指標並且指向的是一個陣列並且需要特定的長度，所以其形態為<code>int(*)[5]</code>，很明顯的看到這兩個東西雖然有相同一樣的數值，但所表現出來的東西是完全不同的。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* ptr = arr;</span><br><span class="line"><span class="type">int</span> (*ptr2arr)[<span class="number">5</span>] = &amp;arr;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr      is %p\n&quot;</span>, (<span class="type">void</span>*)arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr     is %p\n&quot;</span>, (<span class="type">void</span>*)&amp;arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr + 1  is %p\n&quot;</span>, (<span class="type">void</span>*)(arr + <span class="number">1</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr + 1 is %p\n&quot;</span>, (<span class="type">void</span>*)(&amp;arr + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<p><code>ptr + 1</code> 代表從 arr[0] -&gt; arr[1]<br>而 <code>&amp;arr + 1</code> 代表從 int(<em>)[5] -&gt; int (</em>)[5]<br><code>&amp;arr + 1</code> 位移了一整個陣列的大小。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure>
-
-<h1 id="arr-1"><a href="#arr-1" class="headerlink" title="*(&amp;arr + 1)"></a><code>*(&amp;arr + 1)</code></h1><p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值<br>，<code>&amp;arr</code>為指標指向一個陣列，所以裡面存放的是一個陣列的地址，所以取值後我們會得到是指標，陣列會隱性轉型成指向第一個陣列的指標喔。</p>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
   </entry>
   <entry>
     <title>LeetCode-746-Min Cost Climbing Stairs</title>
@@ -265,87 +175,38 @@
       </tags>
   </entry>
   <entry>
-    <title>字元概念在C語言中</title>
-    <url>/2023/12/16/char-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>在C語言中，如果要宣告一個字串是需要透過矩陣進行宣告的，不能像C++那樣去宣告string</p>
+    <title>LeetCode 1137.N-th Tribonacci Number</title>
+    <url>/2023/09/13/LeetCode-1137-N-th-Tribonacci-Number/</url>
+    <content><![CDATA[<h1 id="LeetCode-1137-N-th-Tribonacci-Number"><a href="#LeetCode-1137-N-th-Tribonacci-Number" class="headerlink" title="LeetCode 1137. N-th Tribonacci Number"></a>LeetCode 1137. N-th Tribonacci Number</h1><p><a href="https://leetcode.com/problems/n-th-tribonacci-number/">Link</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>The Tribonacci sequence Tn is defined as follows:<br>T0 &#x3D; 0, T1 &#x3D; 1, T2 &#x3D; 1, and Tn+3 &#x3D; Tn + Tn+1 + Tn+2 for n &gt;&#x3D; 0.<br>Given n, return the value of Tn.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
+<p>Input: n &#x3D; 4<br>Output: 4<br>Explanation:<br>T_3 &#x3D; 0 + 1 + 1 &#x3D; 2<br>T_4 &#x3D; 1 + 1 + 2 &#x3D; 4<br>Example 2:</p>
+<p>Input: n &#x3D; 25<br>Output: 1389537</p>
+<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code></p>
+<h2 id="Solve-1"><a href="#Solve-1" class="headerlink" title="Solve 1"></a>Solve 1</h2><p>此題跟費波那契數列解題方式基本一樣，使用Recursive方式解題。</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta">## Code C++</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tribonacci(n<span class="number">-1</span>) + tribonacci(n<span class="number">-2</span>) + tribonacci(n<span class="number">-3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>不過這段程式碼在測資是不過的，時間複雜度超過了。</p>
 <ul>
-<li>宣告字串陣列，不給定長度情況下, 結尾可能出現亂碼，由於沒有結束字符。</li>
+<li>Time complexity: $O(3^n)$ 每個項下面都會分成3個項目，以Tree方式看其每一個子運算都會以指數量級增長</li>
+<li>Space complexity: $O(n)$ 需要n層來儲存調用Function的狀態.</li>
 </ul>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c1[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Solve-2"><a href="#Solve-2" class="headerlink" title="Solve 2"></a>Solve 2</h2><p>先初始化基本條件，藉由陣列索引的方式來做DP。</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        vector&lt;<span class="built_in">int</span>&gt; arr&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                arr.push<span class="constructor">_back(<span class="params">arr</span>[<span class="params">i</span>-1] + <span class="params">arr</span>[<span class="params">i</span>-2] + <span class="params">arr</span>[<span class="params">i</span>-3])</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>宣告字串陣列, 不給定長度形況下, 這樣才是安全的宣告方式</li>
+<li>Time complexity: $O(n)$ 一個迴圈就搞定了。</li>
+<li>Space complexity: $O(n)$ 需要長度為n+1的陣列來儲存運算好的數值。</li>
 </ul>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c2[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>宣告字串陣列, 使用兩個引號, 編譯器會自動加上’\0’, 非常安全以及好用<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">char c3[] <span class="operator">=</span> <span class="string">&quot;abc&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
-<li>宣告字串陣列,給定長度以及初始化的值<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">char c4<span class="selector-attr">[50]</span>;</span><br><span class="line"><span class="built_in">memset</span>(&amp;c4, &#x27;*&#x27;, sizeof(c4));</span><br></pre></td></tr></table></figure></li>
-</ul>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在實作上都不要使用Recursive避免時間複雜度爆炸影響效率。</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度 —遞迴(上)</a></p>
 ]]></content>
       <categories>
-        <category>C</category>
+        <category>LeetCode</category>
       </categories>
-  </entry>
-  <entry>
-    <title>C語言中的變數宣告與解讀</title>
-    <url>/2023/12/16/define-and-read-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
-<h1 id="Right-left-Rule"><a href="#Right-left-Rule" class="headerlink" title="Right-left Rule"></a>Right-left Rule</h1><p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
-<h2 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h2><p>以下有3個基本的運算子，</p>
-<ul>
-<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
-<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
-<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
-</ul>
-<p>辨識子就是函數名稱或變數名稱喔</p>
-<h1 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h1><ol>
-<li>找到辨識字，解讀為 xxx是 或者 xxx is&#x2F; as</li>
-<li>往辨識字的右邊看，如果看到<ul>
-<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
-<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>直到遇到 單獨的 <code>)</code></li>
-<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
-</ul>
-</li>
-<li>接著往辨識字的左邊看<ul>
-<li><code>*</code>  解讀為 指向的是， pointer to</li>
-<li><code>datatype</code> 就照念就好。</li>
-</ul>
-</li>
-</ol>
-<h1 id="以下為不合法的C語言宣告"><a href="#以下為不合法的C語言宣告" class="headerlink" title="以下為不合法的C語言宣告"></a>以下為不合法的C語言宣告</h1><ul>
-<li><code>[]()</code> 沒有陣列中的元素是函數</li>
-<li><code>()()</code> 沒有函數中回傳函數</li>
-<li><code>()[]</code> 沒有函數回傳陣列<br>但我們可以將其變成指標來使其合法</li>
-</ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>int *ptr</code><br>declare ptr as pointer to <code>int</code><br>宣告一個ptr指向整數型別的指標</p>
-<p><code>int (*compare)(void*, void*)</code><br>declare compare as pointer to function (pointer to void, pointer to void) returning int<br>宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
-<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
-<p><code>int ptr[]()</code><br>不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br><code>int (*ptr[])()</code><br>declare ptr as the array of pointer to function returning int</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
-<p><a href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br><a href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br><a href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>泛型程式設計在C語言中</title>
-    <url>/2023/12/18/generics-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成</p>
-<ul>
-<li>void* 指向void指標，使用強制轉型。</li>
-<li>macro(巨集) 使用字元替換方式操作。</li>
-<li>_Generic(C11)</li>
-</ul>
-<h1 id="Void"><a href="#Void" class="headerlink" title="Void*"></a>Void*</h1><p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked list中指向不同型別的資料。<br>使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
-<h1 id="Macro"><a href="#Macro" class="headerlink" title="Macro"></a>Macro</h1><p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
-<h1 id="Generic"><a href="#Generic" class="headerlink" title="_Generic"></a>_Generic</h1><p>C11才有的關鍵字，</p>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
+      <tags>
+        <tag>DP</tag>
+      </tags>
   </entry>
   <entry>
     <title>Leetcode-Daily-1743</title>
@@ -370,37 +231,60 @@
       </tags>
   </entry>
   <entry>
-    <title>物件導向概念</title>
-    <url>/2023/12/20/oop/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素視為一種物件，這些物件可以被賦予屬性、方法等等。此物件可以是抽象或現實中的實體概念。例如，車子具備汽油、座位等屬性，而其方法包括向前、向後等。</p>
-<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊。物件可以是實體或抽象概念。</p>
-<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
-<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class 可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
-<h1 id="3-Concepts-in-OOP"><a href="#3-Concepts-in-OOP" class="headerlink" title="3 Concepts in OOP"></a>3 Concepts in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法。例如，球有很多種，如籃球、棒球、橄欖球，但它們背後都有一個抽象概念，即形狀。因此，可以定義一個類別為形狀，而這些球就是其擴展後的結果。我們稱作子類，而形狀我們就稱作父類。</p>
-<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在 C++ 中可以使用 public&#x2F;private&#x2F;protected 來控制權限。</p>
-<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是否有不同的結果。在射擊遊戲中，左鍵為射擊，右鍵為開鏡。同樣是滑鼠點擊的事件，但效果卻不一樣，這就是多型。</p>
+    <title>LeetCode-221-Maximal-Square</title>
+    <url>/2023/09/21/LeetCode-221-Maximal-Square/</url>
+    <content><![CDATA[<h1 id="LeetCode-221-Maximal-Square"><a href="#LeetCode-221-Maximal-Square" class="headerlink" title="LeetCode 221. Maximal Square"></a>LeetCode 221. Maximal Square</h1><p><a href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an m x n binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg"></p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
+<p>Input: matrix &#x3D; [[“1”,”0”,”1”,”0”,”0”],[“1”,”0”,”1”,”1”,”1”],[“1”,”1”,”1”,”1”,”1”],[“1”,”0”,”0”,”1”,”0”]]<br>Output: 4</p>
+<p>Example 2:</p>
+<p>Input: matrix &#x3D; [[“0”,”1”],[“1”,”0”]]<br>Output: 1</p>
+<p>Example 3:</p>
+<p>Input: matrix &#x3D; [[“0”]]<br>Output: 0</p>
+<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
+<h2 id="Solve-1-Button-Up-DP-Memoization"><a href="#Solve-1-Button-Up-DP-Memoization" class="headerlink" title="Solve 1 Button Up DP (Memoization)"></a>Solve 1 Button Up DP (Memoization)</h2><p>題目要求找出最大的方塊的面積，首先我們需要推導出通式，對於i,j索引，我們要檢查3個位置分別為</p>
 <ul>
-<li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
-<li>Function Overloading (重載): 允許函數可以有多個不同輸入。</li>
+<li>[i-1][j]，[i][j-1]，[i-1][j-1]<br>這3個位置必須都為1才能形成一個方形，因此我們可以使用兩次min操作來檢查這3個位置是否都為1，我們就是記住對角線的元素是否為1且上下area是否為1，因此我們會將dp[i][j]的結果與size做比較，最後取平方。</li>
 </ul>
-<pre class="mermaid">graph TD;
-    物件導向--基於-->物件;
-    物件--原則-->繼承; 
-    物件--原則-->封裝; 
-    物件--原則-->多型;
-    物件--被創建-->類別;
-    類別--定義-->方法;
-    類別--定義-->屬性;
-    繼承-->函數覆寫;
-    繼承-->函數重載;
-    方法-.-函數覆寫;
-    方法-.-函數重載;</pre>]]></content>
+<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="keyword">int</span> maximalSquare(<span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;char&gt;&gt;&amp; <span class="keyword">matrix</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="keyword">matrix</span>.<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="keyword">matrix</span>[<span class="number">0</span>].<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;dp(m, <span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">size</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">// row, col, init</span></span><br><span class="line">                <span class="keyword">if</span> ( !i || !j || <span class="keyword">matrix</span>[i][j] == <span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">matrix</span>[i][j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">min</span>(<span class="keyword">min</span>(dp[i][j<span class="number">-1</span>], dp[i<span class="number">-1</span>][j]), dp[i<span class="number">-1</span>][j<span class="number">-1</span>]) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">size</span> = <span class="keyword">max</span>(<span class="keyword">size</span>, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">size</span> * <span class="keyword">size</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Time complexity: $O(mn)$ 巡過整個矩陣需要的次數</li>
+<li>Space complexity: $O(mn)$ 需要m * n的空間來儲存運算結果</li>
+</ul>
+]]></content>
       <categories>
-        <category>OOP</category>
+        <category>LeetCode</category>
       </categories>
-      <tags>
-        <tag>OOP</tag>
-      </tags>
+  </entry>
+  <entry>
+    <title>矩陣概念與指標在C語言中</title>
+    <url>/2023/12/19/array-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>陣列為一種在記憶體空間連續分布的資料型態，陣列中的東西我們稱作元素(element)，陣列能夠透過元素的索引(index)來取得資料。</p>
+<h1 id="Array-in-C"><a href="#Array-in-C" class="headerlink" title="Array in C"></a>Array in C</h1><p>以下為宣告陣列一個方式，arr宣告成有5個元素的矩陣，元素資料型態為int。<br>在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出 4 * 5 byte，</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+<p>輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="arr-vs-arr"><a href="#arr-vs-arr" class="headerlink" title="arr vs &amp;arr"></a><code>arr</code> vs <code>&amp;arr</code></h1><p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">arr = <span class="number">0061F</span>F0C</span><br><span class="line">&amp;arr = <span class="number">0061F</span>F0C</span><br></pre></td></tr></table></figure>
+
+<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。<br>但是當對陣列使用<code>&amp;</code>，會回傳指標並且指向的是一個陣列並且需要特定的長度，所以其形態為<code>int(*)[5]</code>，很明顯的看到這兩個東西雖然有相同一樣的數值，但所表現出來的東西是完全不同的。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* ptr = arr;</span><br><span class="line"><span class="type">int</span> (*ptr2arr)[<span class="number">5</span>] = &amp;arr;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr      is %p\n&quot;</span>, (<span class="type">void</span>*)arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr     is %p\n&quot;</span>, (<span class="type">void</span>*)&amp;arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr + 1  is %p\n&quot;</span>, (<span class="type">void</span>*)(arr + <span class="number">1</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr + 1 is %p\n&quot;</span>, (<span class="type">void</span>*)(&amp;arr + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+<p><code>ptr + 1</code> 代表從 arr[0] -&gt; arr[1]<br>而 <code>&amp;arr + 1</code> 代表從 int(<em>)[5] -&gt; int (</em>)[5]<br><code>&amp;arr + 1</code> 位移了一整個陣列的大小。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure>
+
+<h1 id="arr-1"><a href="#arr-1" class="headerlink" title="*(&amp;arr + 1)"></a><code>*(&amp;arr + 1)</code></h1><p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值<br>，<code>&amp;arr</code>為指標指向一個陣列，所以裡面存放的是一個陣列的地址，所以取值後我們會得到是指標，陣列會隱性轉型成指向第一個陣列的指標喔。</p>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
   </entry>
   <entry>
     <title>Const &amp; Static &amp; Extern 在C語言</title>
@@ -440,25 +324,44 @@
       </categories>
   </entry>
   <entry>
-    <title>void*指標以及 void**指標的介紹與用法</title>
-    <url>/2023/12/12/void-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><code>void</code>為C語言中關鍵字，<br><code>void</code>為c&#x2F;c++中的內建類型功能有3種</p>
+    <title>字元概念在C語言中</title>
+    <url>/2023/12/16/char-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>在C語言中，如果要宣告一個字串是需要透過矩陣進行宣告的，不能像C++那樣去宣告string</p>
 <ul>
-<li>函數回傳void，表示不會會傳任何值。</li>
-<li>用於函數參數，表示此函數不接受任何參數，Ex <code>void func(void);</code></li>
-<li>用於指標宣告時，表示此指標為通用的，可以進行強制轉型。</li>
+<li>宣告字串陣列，不給定長度情況下, 結尾可能出現亂碼，由於沒有結束字符。</li>
 </ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>void*</code>指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型，能夠修改被指向的資料。<br><code>void**</code>指標的指標，如果今天要更改指標指向的對象，就可以使用或者我們需要接受函數裡面變數的指標，就需要用到指標的指標來接受。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">set</span><span class="params">(<span class="type">void</span>* x)</span>&#123;</span><br><span class="line">    *(<span class="type">int</span>*)x = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_ptr</span><span class="params">(<span class="type">void</span>** x)</span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">9</span>;</span><br><span class="line">    *x = &amp;a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>* p_x = &amp;x; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    <span class="built_in">set</span>(p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, x);</span><br><span class="line"></span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    set_ptr((<span class="type">void</span>**)&amp;p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, *p_x);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c1[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>宣告字串陣列, 不給定長度形況下, 這樣才是安全的宣告方式</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c2[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>宣告字串陣列, 使用兩個引號, 編譯器會自動加上’\0’, 非常安全以及好用<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">char c3[] <span class="operator">=</span> <span class="string">&quot;abc&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li>宣告字串陣列,給定長度以及初始化的值<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">char c4<span class="selector-attr">[50]</span>;</span><br><span class="line"><span class="built_in">memset</span>(&amp;c4, &#x27;*&#x27;, sizeof(c4));</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>C</category>
       </categories>
-      <tags>
-        <tag>C</tag>
-        <tag>C++</tag>
-      </tags>
+  </entry>
+  <entry>
+    <title>泛型程式設計在C語言中</title>
+    <url>/2023/12/18/generics-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成</p>
+<ul>
+<li>void* 指向void指標，使用強制轉型。</li>
+<li>macro(巨集) 使用字元替換方式操作。</li>
+<li>_Generic(C11)</li>
+</ul>
+<h1 id="Void"><a href="#Void" class="headerlink" title="Void*"></a>Void*</h1><p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked list中指向不同型別的資料。<br>使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
+<h1 id="Macro"><a href="#Macro" class="headerlink" title="Macro"></a>Macro</h1><p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
+<h1 id="Generic"><a href="#Generic" class="headerlink" title="_Generic"></a>_Generic</h1><p>C11才有的關鍵字，</p>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
   </entry>
   <entry>
     <title>實作Stack堆疊使用C語言</title>
@@ -613,6 +516,103 @@ int sizeOfStack(Stack* stack)
       </categories>
       <tags>
         <tag>Stack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>物件導向概念</title>
+    <url>/2023/12/20/oop/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素視為一種物件，這些物件可以被賦予屬性、方法等等。此物件可以是抽象或現實中的實體概念。例如，車子具備汽油、座位等屬性，而其方法包括向前、向後等。</p>
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊。物件可以是實體或抽象概念。</p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
+<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class 可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
+<h1 id="3-Concepts-in-OOP"><a href="#3-Concepts-in-OOP" class="headerlink" title="3 Concepts in OOP"></a>3 Concepts in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法。例如，球有很多種，如籃球、棒球、橄欖球，但它們背後都有一個抽象概念，即形狀。因此，可以定義一個類別為形狀，而這些球就是其擴展後的結果。我們稱作子類，而形狀我們就稱作父類。</p>
+<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在 C++ 中可以使用 public&#x2F;private&#x2F;protected 來控制權限。</p>
+<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是否有不同的結果。在射擊遊戲中，左鍵為射擊，右鍵為開鏡。同樣是滑鼠點擊的事件，但效果卻不一樣，這就是多型。</p>
+<ul>
+<li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
+<li>Function Overloading (重載): 允許函數可以有多個不同輸入。</li>
+</ul>
+<pre class="mermaid">graph TD;
+    物件導向--基於-->物件;
+    物件--原則-->繼承; 
+    物件--原則-->封裝; 
+    物件--原則-->多型;
+    物件--被創建-->類別;
+    類別--定義-->方法;
+    類別--定義-->屬性;
+    繼承-->函數覆寫;
+    繼承-->函數重載;
+    方法-.-函數覆寫;
+    方法-.-函數重載;</pre>]]></content>
+      <categories>
+        <category>OOP</category>
+      </categories>
+      <tags>
+        <tag>OOP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C語言中的變數宣告與解讀</title>
+    <url>/2023/12/16/define-and-read-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
+<h1 id="Right-left-Rule"><a href="#Right-left-Rule" class="headerlink" title="Right-left Rule"></a>Right-left Rule</h1><p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
+<h2 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h2><p>以下有3個基本的運算子，</p>
+<ul>
+<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
+<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
+<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
+</ul>
+<p>辨識子就是函數名稱或變數名稱喔</p>
+<h1 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h1><ol>
+<li>找到辨識字，解讀為 xxx是 或者 xxx is&#x2F; as</li>
+<li>往辨識字的右邊看，如果看到<ul>
+<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
+<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>直到遇到 單獨的 <code>)</code></li>
+<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
+</ul>
+</li>
+<li>接著往辨識字的左邊看<ul>
+<li><code>*</code>  解讀為 指向的是， pointer to</li>
+<li><code>datatype</code> 就照念就好。</li>
+</ul>
+</li>
+</ol>
+<h1 id="以下為不合法的C語言宣告"><a href="#以下為不合法的C語言宣告" class="headerlink" title="以下為不合法的C語言宣告"></a>以下為不合法的C語言宣告</h1><ul>
+<li><code>[]()</code> 沒有陣列中的元素是函數</li>
+<li><code>()()</code> 沒有函數中回傳函數</li>
+<li><code>()[]</code> 沒有函數回傳陣列<br>但我們可以將其變成指標來使其合法</li>
+</ul>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>int *ptr</code><br>declare ptr as pointer to <code>int</code><br>宣告一個ptr指向整數型別的指標</p>
+<p><code>int (*compare)(void*, void*)</code><br>declare compare as pointer to function (pointer to void, pointer to void) returning int<br>宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
+<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
+<p><code>int ptr[]()</code><br>不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br><code>int (*ptr[])()</code><br>declare ptr as the array of pointer to function returning int</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
+<p><a href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br><a href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br><a href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>void*指標以及 void**指標的介紹與用法</title>
+    <url>/2023/12/12/void-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><code>void</code>為C語言中關鍵字，<br><code>void</code>為c&#x2F;c++中的內建類型功能有3種</p>
+<ul>
+<li>函數回傳void，表示不會會傳任何值。</li>
+<li>用於函數參數，表示此函數不接受任何參數，Ex <code>void func(void);</code></li>
+<li>用於指標宣告時，表示此指標為通用的，可以進行強制轉型。</li>
+</ul>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>void*</code>指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型，能夠修改被指向的資料。<br><code>void**</code>指標的指標，如果今天要更改指標指向的對象，就可以使用或者我們需要接受函數裡面變數的指標，就需要用到指標的指標來接受。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">set</span><span class="params">(<span class="type">void</span>* x)</span>&#123;</span><br><span class="line">    *(<span class="type">int</span>*)x = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_ptr</span><span class="params">(<span class="type">void</span>** x)</span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">9</span>;</span><br><span class="line">    *x = &amp;a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>* p_x = &amp;x; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    <span class="built_in">set</span>(p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, x);</span><br><span class="line"></span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    set_ptr((<span class="type">void</span>**)&amp;p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, *p_x);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
 </search>
