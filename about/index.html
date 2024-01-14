@@ -19,7 +19,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="InformationHi 👋, I&#39;m Alan A new graduate from taiwan.   元智大學電機工程學系學士畢業 (2018-2022) 元智大學電機工程學系碩士畢業 (2022-2023)  Languages and Tools:">
@@ -173,6 +173,7 @@
     </header>
 
     
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -255,7 +256,7 @@
 </div>
 
 
-<h1 id="Contact-Information"><a href="#Contact-Information" class="headerlink" title="Contact Information"></a>Contact Information</h1><p>📫<strong><a href="mailto:&#121;&#x75;&#x6d;&#x69;&#x6e;&#103;&#x63;&#104;&#x61;&#x6e;&#103;&#x39;&#x35;&#x32;&#55;&#64;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#109;">&#121;&#x75;&#x6d;&#x69;&#x6e;&#103;&#x63;&#104;&#x61;&#x6e;&#103;&#x39;&#x35;&#x32;&#55;&#64;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#109;</a></strong></p>
+<h1 id="Contact-Information"><a href="#Contact-Information" class="headerlink" title="Contact Information"></a>Contact Information</h1><p>📫<strong><a href="mailto:&#121;&#117;&#x6d;&#105;&#x6e;&#103;&#x63;&#x68;&#x61;&#x6e;&#x67;&#x39;&#53;&#x32;&#x37;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#x6d;">&#121;&#117;&#x6d;&#105;&#x6e;&#103;&#x63;&#x68;&#x61;&#x6e;&#x67;&#x39;&#53;&#x32;&#x37;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#x6d;</a></strong></p>
 <p align="left">
 <a href="https://www.linkedin.com/in/chang-yuming-04b47b291/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="chang yuming" height="30" width="40"></a>
 <a href="https://leetcode.com/yumingchang9527/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="yumingchang" height="30" width="40"></a></p>
@@ -273,6 +274,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -399,13 +401,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">مُجمل عدد الحروف: </span>
-    <span title="مُجمل عدد الحروف">8k</span>
+    <span title="مُجمل عدد الحروف">24k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">مُجمل زمن القراءة &asymp;</span>
-    <span title="مُجمل زمن القراءة">28 دقائق.</span>
+    <span title="مُجمل زمن القراءة">22 دقائق.</span>
 </div><div>
   <span id="sitetime"></span>
   <script language=javascript>
@@ -540,6 +542,26 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'd882ea4493591852a3fc',
+      clientSecret: '397b130e2c4064dac0316266047531425dda39d1',
+      repo        : 'YMCAlan',
+      owner       : 'YMCAlan',
+      admin       : ['YMCAlan'],
+      id          : '3be7aa98d992907175cbd79c194399f2',
+        language: 'zh-TW',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
