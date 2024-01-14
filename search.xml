@@ -26,37 +26,25 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode 1137.N-th Tribonacci Number</title>
-    <url>/2023/09/13/LeetCode-1137-N-th-Tribonacci-Number/</url>
-    <content><![CDATA[<h1 id="LeetCode-1137-N-th-Tribonacci-Number"><a href="#LeetCode-1137-N-th-Tribonacci-Number" class="headerlink" title="LeetCode 1137. N-th Tribonacci Number"></a>LeetCode 1137. N-th Tribonacci Number</h1><p><a href="https://leetcode.com/problems/n-th-tribonacci-number/">Link</a></p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>The Tribonacci sequence Tn is defined as follows:<br>T0 &#x3D; 0, T1 &#x3D; 1, T2 &#x3D; 1, and Tn+3 &#x3D; Tn + Tn+1 + Tn+2 for n &gt;&#x3D; 0.<br>Given n, return the value of Tn.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
-<p>Input: n &#x3D; 4<br>Output: 4<br>Explanation:<br>T_3 &#x3D; 0 + 1 + 1 &#x3D; 2<br>T_4 &#x3D; 1 + 1 + 2 &#x3D; 4<br>Example 2:</p>
-<p>Input: n &#x3D; 25<br>Output: 1389537</p>
-<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code></p>
-<h2 id="Solve-1"><a href="#Solve-1" class="headerlink" title="Solve 1"></a>Solve 1</h2><p>此題跟費波那契數列解題方式基本一樣，使用Recursive方式解題。</p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta">## Code C++</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tribonacci(n<span class="number">-1</span>) + tribonacci(n<span class="number">-2</span>) + tribonacci(n<span class="number">-3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>不過這段程式碼在測資是不過的，時間複雜度超過了。</p>
-<ul>
-<li>Time complexity: $O(3^n)$ 每個項下面都會分成3個項目，以Tree方式看其每一個子運算都會以指數量級增長</li>
-<li>Space complexity: $O(n)$ 需要n層來儲存調用Function的狀態.</li>
-</ul>
-<h2 id="Solve-2"><a href="#Solve-2" class="headerlink" title="Solve 2"></a>Solve 2</h2><p>先初始化基本條件，藉由陣列索引的方式來做DP。</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        vector&lt;<span class="built_in">int</span>&gt; arr&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                arr.push<span class="constructor">_back(<span class="params">arr</span>[<span class="params">i</span>-1] + <span class="params">arr</span>[<span class="params">i</span>-2] + <span class="params">arr</span>[<span class="params">i</span>-3])</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Time complexity: $O(n)$ 一個迴圈就搞定了。</li>
-<li>Space complexity: $O(n)$ 需要長度為n+1的陣列來儲存運算好的數值。</li>
-</ul>
-<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在實作上都不要使用Recursive避免時間複雜度爆炸影響效率。</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度 —遞迴(上)</a></p>
+    <title>Cervical Lymph Node Classification</title>
+    <url>/2023/08/06/Cervical-Lymph-Node-Classification/</url>
+    <content><![CDATA[<h1 id="論文標題"><a href="#論文標題" class="headerlink" title="論文標題"></a>論文標題</h1><p>基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類</p>
+<p>RBKD: Relational-Based Knowledge Distillation with Cross-Attention for Multi-Layer Distillation in Ultrasound Elastography Cervical Lymph Node Image Classification</p>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預訓練，並透過知識蒸餾提高模型的準確性。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>我們使用自蒸餾(self-distillation)訓練方法來訓練模型，並透過交互注意力的方式來將知識傳遞給學生模型，我們的訓練方式稱為RBKD，全名為<br>Relational-Based Knowledge Distillation with Cross-Attention for Multi-Layer Distillation，架構如下圖所示<br><img src="/images/Cervical-Lymph-Node-Classification/rbkd.png" alt="rbkd.png"></p>
+<p>以上圖為例，首先輸入兩張經過資料增強的影像進入到老師與學生網路，接著我們提取出中間的特徵，通過我們所設計的CLCA模塊來將特徵進行轉換並計算損失函數。</p>
+<p>接著我們介紹CLCA模塊。</p>
+<p>CLCA為Cross-layer Cross-attention module，主要用於將前後兩層大小不同的特徵進行萃取，並進行交互注意力機制的作用。<br><img src="/images/Cervical-Lymph-Node-Classification/clca.png" alt="clca.png"></p>
+<p>以上圖為例，我們將兩張不同大小的特徵圖經過Sample來進行上下採樣的動作，接著輸入進Projection，來將特徵轉換至更高維特徵空間進行學習，這邊要注意到經過採樣的特徵圖會與其原本的特徵圖經過相同的Projection，接著輸入進Cross-Attetion Module來進行交互注意力機制的作用，最後得到輸出來計算損失函數。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在我們的實驗當中，我們比較了監督式學習以及相關自監督式方法[47]進行比較，由結果看出，在不使用自監督式訓練的情況下，模型無法有效地判斷惡性腫瘤資料，但使用自監督式學習後在Sensitivity部分上升了許多，接著與我們提出的RBKD的方法，在F1-Score部分，與監督式學習提升了2.97%，與自監督式方法提升了0.62%，在Sensitivity則分別提高15.8%，以及2.97%。實驗結果證明我們所提出的方法可以有效地提取惡性腫瘤的特徵並辨識出來。<br><img src="/images/Cervical-Lymph-Node-Classification/result.png" alt="result.png"></p>
+<p>[47]	M. Caron et al., “Emerging properties in self-supervised vision transformers,” in Proceedings of the IEEE&#x2F;CVF international conference on computer vision, 2021, pp. 9650-9660.</p>
 ]]></content>
       <categories>
-        <category>LeetCode</category>
+        <category>Project</category>
       </categories>
       <tags>
-        <tag>DP</tag>
+        <tag>Python</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -96,6 +84,63 @@
       </tags>
   </entry>
   <entry>
+    <title>LeetCode 198. House Robber</title>
+    <url>/2023/09/13/LeetCode-198-House-Robber/</url>
+    <content><![CDATA[<h1 id="LeetCode-198-House-Robber"><a href="#LeetCode-198-House-Robber" class="headerlink" title="LeetCode 198. House Robber"></a>LeetCode 198. House Robber</h1><p><a href="https://leetcode.com/problems/house-robber/description/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
+<p>Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
+<p>Input: nums &#x3D; [1,2,3,1]<br>Output: 4<br>Explanation: Rob house 1 (money &#x3D; 1) and then rob house 3 (money &#x3D; 3).<br>Total amount you can rob &#x3D; 1 + 3 &#x3D; 4.<br>Example 2:</p>
+<p>Input: nums &#x3D; [2,7,9,3,1]<br>Output: 12<br>Explanation: Rob house 1 (money &#x3D; 2), rob house 3 (money &#x3D; 9) and rob house 5 (money &#x3D; 1).<br>Total amount you can rob &#x3D; 2 + 9 + 1 &#x3D; 12.</p>
+<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 100<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 400</p>
+<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
+<h2 id="Solve-1"><a href="#Solve-1" class="headerlink" title="Solve 1"></a>Solve 1</h2><p>題目基本上就是找一個陣列當中，隔行元素相加求最大值問題，從Example2觀察可以得知 2 + 9 + 1 這個情況是由 2 + 9 往後推導出來的，接著 2 + 9 是由 2 推導出來的，因此我們變可以將問題轉換成子問題，首先處理只有兩個元素的情況，就是去比較第一跟第二元素的大小，再來處理之後的情況，每次比較大小需要加上當前nums[i]的大小進去比較，這樣才可以有累加的效果出現。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// nums: [2, 7, 9, 3, 1]</span></span><br><span class="line">        <span class="comment">// Ex2:  [2, 0, 0, 0, 0]</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-2</span>] + nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Time complexity: $O(n)$</li>
+<li>Space complexity: $O(n)$</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>LeetCode 1137.N-th Tribonacci Number</title>
+    <url>/2023/09/13/LeetCode-1137-N-th-Tribonacci-Number/</url>
+    <content><![CDATA[<h1 id="LeetCode-1137-N-th-Tribonacci-Number"><a href="#LeetCode-1137-N-th-Tribonacci-Number" class="headerlink" title="LeetCode 1137. N-th Tribonacci Number"></a>LeetCode 1137. N-th Tribonacci Number</h1><p><a href="https://leetcode.com/problems/n-th-tribonacci-number/">Link</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>The Tribonacci sequence Tn is defined as follows:<br>T0 &#x3D; 0, T1 &#x3D; 1, T2 &#x3D; 1, and Tn+3 &#x3D; Tn + Tn+1 + Tn+2 for n &gt;&#x3D; 0.<br>Given n, return the value of Tn.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
+<p>Input: n &#x3D; 4<br>Output: 4<br>Explanation:<br>T_3 &#x3D; 0 + 1 + 1 &#x3D; 2<br>T_4 &#x3D; 1 + 1 + 2 &#x3D; 4<br>Example 2:</p>
+<p>Input: n &#x3D; 25<br>Output: 1389537</p>
+<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code></p>
+<h2 id="Solve-1"><a href="#Solve-1" class="headerlink" title="Solve 1"></a>Solve 1</h2><p>此題跟費波那契數列解題方式基本一樣，使用Recursive方式解題。</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta">## Code C++</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tribonacci(n<span class="number">-1</span>) + tribonacci(n<span class="number">-2</span>) + tribonacci(n<span class="number">-3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>不過這段程式碼在測資是不過的，時間複雜度超過了。</p>
+<ul>
+<li>Time complexity: $O(3^n)$ 每個項下面都會分成3個項目，以Tree方式看其每一個子運算都會以指數量級增長</li>
+<li>Space complexity: $O(n)$ 需要n層來儲存調用Function的狀態.</li>
+</ul>
+<h2 id="Solve-2"><a href="#Solve-2" class="headerlink" title="Solve 2"></a>Solve 2</h2><p>先初始化基本條件，藉由陣列索引的方式來做DP。</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        vector&lt;<span class="built_in">int</span>&gt; arr&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                arr.push<span class="constructor">_back(<span class="params">arr</span>[<span class="params">i</span>-1] + <span class="params">arr</span>[<span class="params">i</span>-2] + <span class="params">arr</span>[<span class="params">i</span>-3])</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Time complexity: $O(n)$ 一個迴圈就搞定了。</li>
+<li>Space complexity: $O(n)$ 需要長度為n+1的陣列來儲存運算好的數值。</li>
+</ul>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在實作上都不要使用Recursive避免時間複雜度爆炸影響效率。</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度 —遞迴(上)</a></p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LeetCode-221-Maximal-Square</title>
     <url>/2023/09/21/LeetCode-221-Maximal-Square/</url>
     <content><![CDATA[<h1 id="LeetCode-221-Maximal-Square"><a href="#LeetCode-221-Maximal-Square" class="headerlink" title="LeetCode 221. Maximal Square"></a>LeetCode 221. Maximal Square</h1><p><a href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
@@ -122,32 +167,6 @@
       <categories>
         <category>LeetCode</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Leetcode-344</title>
-    <url>/2024/01/04/Leetcode-344/</url>
-    <content><![CDATA[<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><!-- Describe your first thoughts on how to solve this problem. -->
-<p>反轉字串為經典題目，題目要求只能以空間複雜度$$O(1)$$，也就是能in-place去操作字元。<br>首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>我們可以透過雙指標法來處理這個問題。</p>
-<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><!-- Describe your approach to solving the problem. -->
-<p><code>start</code>:表示指向第一個位置的指標<br><code>end</code>:表示指向最後一個位置的指標<br>邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code><br>每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。<br>&#96;&#96;</p>
-<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ul>
-<li><p>Time complexity: $$O(n)$$</p>
-<!-- Add your time complexity here, e.g. $$O(n)$$ -->
-</li>
-<li><p>Space complexity: $$O(1)$$</p>
-<!-- Add your space complexity here, e.g. $$O(n)$$ --></li>
-</ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--)&#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>String</tag>
-      </tags>
   </entry>
   <entry>
     <title>LeetCode-746-Min Cost Climbing Stairs</title>
@@ -192,6 +211,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Leetcode-344</title>
+    <url>/2024/01/04/Leetcode-344/</url>
+    <content><![CDATA[<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><!-- Describe your first thoughts on how to solve this problem. -->
+<p>反轉字串為經典題目，題目要求只能以空間複雜度$$O(1)$$，也就是能in-place去操作字元。<br>首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>我們可以透過雙指標法來處理這個問題。</p>
+<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><!-- Describe your approach to solving the problem. -->
+<p><code>start</code>:表示指向第一個位置的指標<br><code>end</code>:表示指向最後一個位置的指標<br>邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code><br>每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。<br>&#96;&#96;</p>
+<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ul>
+<li><p>Time complexity: $$O(n)$$</p>
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+</li>
+<li><p>Space complexity: $$O(1)$$</p>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--)&#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode-Daily-1743</title>
     <url>/2023/11/10/Leetcode-Daily-1743/</url>
     <content><![CDATA[<h1 id="LeetCode-1743-Restore-the-Array-From-Adjacent-Pairs"><a href="#LeetCode-1743-Restore-the-Array-From-Adjacent-Pairs" class="headerlink" title="LeetCode 1743. Restore the Array From Adjacent Pairs"></a>LeetCode 1743. Restore the Array From Adjacent Pairs</h1><p><a href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&envId=2023-11-10">Link</a></p>
@@ -212,74 +257,6 @@
       <tags>
         <tag>graph</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Cervical Lymph Node Classification</title>
-    <url>/2023/08/06/Cervical-Lymph-Node-Classification/</url>
-    <content><![CDATA[<h1 id="論文標題"><a href="#論文標題" class="headerlink" title="論文標題"></a>論文標題</h1><p>基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類</p>
-<p>RBKD: Relational-Based Knowledge Distillation with Cross-Attention for Multi-Layer Distillation in Ultrasound Elastography Cervical Lymph Node Image Classification</p>
-<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預訓練，並透過知識蒸餾提高模型的準確性。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>我們使用自蒸餾(self-distillation)訓練方法來訓練模型，並透過交互注意力的方式來將知識傳遞給學生模型，我們的訓練方式稱為RBKD，全名為<br>Relational-Based Knowledge Distillation with Cross-Attention for Multi-Layer Distillation，架構如下圖所示<br><img src="/images/Cervical-Lymph-Node-Classification/rbkd.png" alt="rbkd.png"></p>
-<p>以上圖為例，首先輸入兩張經過資料增強的影像進入到老師與學生網路，接著我們提取出中間的特徵，通過我們所設計的CLCA模塊來將特徵進行轉換並計算損失函數。</p>
-<p>接著我們介紹CLCA模塊。</p>
-<p>CLCA為Cross-layer Cross-attention module，主要用於將前後兩層大小不同的特徵進行萃取，並進行交互注意力機制的作用。<br><img src="/images/Cervical-Lymph-Node-Classification/clca.png" alt="clca.png"></p>
-<p>以上圖為例，我們將兩張不同大小的特徵圖經過Sample來進行上下採樣的動作，接著輸入進Projection，來將特徵轉換至更高維特徵空間進行學習，這邊要注意到經過採樣的特徵圖會與其原本的特徵圖經過相同的Projection，接著輸入進Cross-Attetion Module來進行交互注意力機制的作用，最後得到輸出來計算損失函數。</p>
-<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在我們的實驗當中，我們比較了監督式學習以及相關自監督式方法[47]進行比較，由結果看出，在不使用自監督式訓練的情況下，模型無法有效地判斷惡性腫瘤資料，但使用自監督式學習後在Sensitivity部分上升了許多，接著與我們提出的RBKD的方法，在F1-Score部分，與監督式學習提升了2.97%，與自監督式方法提升了0.62%，在Sensitivity則分別提高15.8%，以及2.97%。實驗結果證明我們所提出的方法可以有效地提取惡性腫瘤的特徵並辨識出來。<br><img src="/images/Cervical-Lymph-Node-Classification/result.png" alt="result.png"></p>
-<p>[47]	M. Caron et al., “Emerging properties in self-supervised vision transformers,” in Proceedings of the IEEE&#x2F;CVF international conference on computer vision, 2021, pp. 9650-9660.</p>
-]]></content>
-      <categories>
-        <category>Project</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode 198. House Robber</title>
-    <url>/2023/09/13/LeetCode-198-House-Robber/</url>
-    <content><![CDATA[<h1 id="LeetCode-198-House-Robber"><a href="#LeetCode-198-House-Robber" class="headerlink" title="LeetCode 198. House Robber"></a>LeetCode 198. House Robber</h1><p><a href="https://leetcode.com/problems/house-robber/description/?envType=study-plan-v2&envId=dynamic-programming">Link</a></p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
-<p>Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.</p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Example 1:</p>
-<p>Input: nums &#x3D; [1,2,3,1]<br>Output: 4<br>Explanation: Rob house 1 (money &#x3D; 1) and then rob house 3 (money &#x3D; 3).<br>Total amount you can rob &#x3D; 1 + 3 &#x3D; 4.<br>Example 2:</p>
-<p>Input: nums &#x3D; [2,7,9,3,1]<br>Output: 12<br>Explanation: Rob house 1 (money &#x3D; 2), rob house 3 (money &#x3D; 9) and rob house 5 (money &#x3D; 1).<br>Total amount you can rob &#x3D; 2 + 9 + 1 &#x3D; 12.</p>
-<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 100<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 400</p>
-<p><strong>Tags:</strong><br><code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
-<h2 id="Solve-1"><a href="#Solve-1" class="headerlink" title="Solve 1"></a>Solve 1</h2><p>題目基本上就是找一個陣列當中，隔行元素相加求最大值問題，從Example2觀察可以得知 2 + 9 + 1 這個情況是由 2 + 9 往後推導出來的，接著 2 + 9 是由 2 推導出來的，因此我們變可以將問題轉換成子問題，首先處理只有兩個元素的情況，就是去比較第一跟第二元素的大小，再來處理之後的情況，每次比較大小需要加上當前nums[i]的大小進去比較，這樣才可以有累加的效果出現。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// nums: [2, 7, 9, 3, 1]</span></span><br><span class="line">        <span class="comment">// Ex2:  [2, 0, 0, 0, 0]</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-2</span>] + nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Time complexity: $O(n)$</li>
-<li>Space complexity: $O(n)$</li>
-</ul>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>字元概念在C語言中</title>
-    <url>/2023/12/16/char-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>在C語言中，如果要宣告一個字串是需要透過矩陣進行宣告的，不能像C++那樣去宣告string</p>
-<ul>
-<li>宣告字串陣列，不給定長度情況下, 結尾可能出現亂碼，由於沒有結束字符。</li>
-</ul>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c1[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>宣告字串陣列, 不給定長度形況下, 這樣才是安全的宣告方式</li>
-</ul>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c2[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>宣告字串陣列, 使用兩個引號, 編譯器會自動加上’\0’, 非常安全以及好用<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">char c3[] <span class="operator">=</span> <span class="string">&quot;abc&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
-<li>宣告字串陣列,給定長度以及初始化的值<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">char c4<span class="selector-attr">[50]</span>;</span><br><span class="line"><span class="built_in">memset</span>(&amp;c4, &#x27;*&#x27;, sizeof(c4));</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
   </entry>
   <entry>
     <title>矩陣概念與指標在C語言中</title>
@@ -304,6 +281,29 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure>
 
 <h1 id="arr-1"><a href="#arr-1" class="headerlink" title="*(&amp;arr + 1)"></a><code>*(&amp;arr + 1)</code></h1><p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值<br>，<code>&amp;arr</code>為指標指向一個陣列，所以裡面存放的是一個陣列的地址，所以取值後我們會得到是指標，陣列會隱性轉型成指向第一個陣列的指標喔。</p>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>字元概念在C語言中</title>
+    <url>/2023/12/16/char-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>在C語言中，如果要宣告一個字串是需要透過矩陣進行宣告的，不能像C++那樣去宣告string</p>
+<ul>
+<li>宣告字串陣列，不給定長度情況下, 結尾可能出現亂碼，由於沒有結束字符。</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c1[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>宣告字串陣列, 不給定長度形況下, 這樣才是安全的宣告方式</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c2[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>宣告字串陣列, 使用兩個引號, 編譯器會自動加上’\0’, 非常安全以及好用<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">char c3[] <span class="operator">=</span> <span class="string">&quot;abc&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li>宣告字串陣列,給定長度以及初始化的值<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">char c4<span class="selector-attr">[50]</span>;</span><br><span class="line"><span class="built_in">memset</span>(&amp;c4, &#x27;*&#x27;, sizeof(c4));</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>C</category>
@@ -347,6 +347,49 @@
       </categories>
   </entry>
   <entry>
+    <title>C語言中的變數宣告與解讀</title>
+    <url>/2023/12/16/define-and-read-in-c/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
+<h1 id="Right-left-Rule"><a href="#Right-left-Rule" class="headerlink" title="Right-left Rule"></a>Right-left Rule</h1><p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
+<h2 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h2><p>以下有3個基本的運算子，</p>
+<ul>
+<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
+<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
+<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
+</ul>
+<p>辨識子就是函數名稱或變數名稱喔</p>
+<h1 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h1><ol>
+<li>找到辨識字，解讀為 xxx是 或者 xxx is&#x2F; as</li>
+<li>往辨識字的右邊看，如果看到<ul>
+<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
+<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>直到遇到 單獨的 <code>)</code></li>
+<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
+</ul>
+</li>
+<li>接著往辨識字的左邊看<ul>
+<li><code>*</code>  解讀為 指向的是， pointer to</li>
+<li><code>datatype</code> 就照念就好。</li>
+</ul>
+</li>
+</ol>
+<h1 id="以下為不合法的C語言宣告"><a href="#以下為不合法的C語言宣告" class="headerlink" title="以下為不合法的C語言宣告"></a>以下為不合法的C語言宣告</h1><ul>
+<li><code>[]()</code> 沒有陣列中的元素是函數</li>
+<li><code>()()</code> 沒有函數中回傳函數</li>
+<li><code>()[]</code> 沒有函數回傳陣列<br>但我們可以將其變成指標來使其合法</li>
+</ul>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>int *ptr</code><br>declare ptr as pointer to <code>int</code><br>宣告一個ptr指向整數型別的指標</p>
+<p><code>int (*compare)(void*, void*)</code><br>declare compare as pointer to function (pointer to void, pointer to void) returning int<br>宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
+<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
+<p><code>int ptr[]()</code><br>不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br><code>int (*ptr[])()</code><br>declare ptr as the array of pointer to function returning int</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
+<p><a href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br><a href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br><a href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
     <title>泛型程式設計在C語言中</title>
     <url>/2023/12/18/generics-in-c/</url>
     <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成</p>
@@ -362,6 +405,39 @@
       <categories>
         <category>C</category>
       </categories>
+  </entry>
+  <entry>
+    <title>物件導向概念</title>
+    <url>/2023/12/20/oop/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素視為一種物件，這些物件可以被賦予屬性、方法等等。此物件可以是抽象或現實中的實體概念。例如，車子具備汽油、座位等屬性，而其方法包括向前、向後等。</p>
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊。物件可以是實體或抽象概念。</p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
+<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class 可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
+<h1 id="3-Concepts-in-OOP"><a href="#3-Concepts-in-OOP" class="headerlink" title="3 Concepts in OOP"></a>3 Concepts in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法。例如，球有很多種，如籃球、棒球、橄欖球，但它們背後都有一個抽象概念，即形狀。因此，可以定義一個類別為形狀，而這些球就是其擴展後的結果。我們稱作子類，而形狀我們就稱作父類。</p>
+<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在 C++ 中可以使用 public&#x2F;private&#x2F;protected 來控制權限。</p>
+<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是否有不同的結果。在射擊遊戲中，左鍵為射擊，右鍵為開鏡。同樣是滑鼠點擊的事件，但效果卻不一樣，這就是多型。</p>
+<ul>
+<li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
+<li>Function Overloading (重載): 允許函數可以有多個不同輸入。</li>
+</ul>
+<pre class="mermaid">graph TD;
+    物件導向--基於-->物件;
+    物件--原則-->繼承; 
+    物件--原則-->封裝; 
+    物件--原則-->多型;
+    物件--被創建-->類別;
+    類別--定義-->方法;
+    類別--定義-->屬性;
+    繼承-->函數覆寫;
+    繼承-->函數重載;
+    方法-.-函數覆寫;
+    方法-.-函數重載;</pre>]]></content>
+      <categories>
+        <category>OOP</category>
+      </categories>
+      <tags>
+        <tag>OOP</tag>
+      </tags>
   </entry>
   <entry>
     <title>實作Stack堆疊使用C語言</title>
@@ -519,39 +595,6 @@ int sizeOfStack(Stack* stack)
       </tags>
   </entry>
   <entry>
-    <title>物件導向概念</title>
-    <url>/2023/12/20/oop/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>物件導向是程式設計中的一種概念，將程式中的元素視為一種物件，這些物件可以被賦予屬性、方法等等。此物件可以是抽象或現實中的實體概念。例如，車子具備汽油、座位等屬性，而其方法包括向前、向後等。</p>
-<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>對資料或行為的一種封裝，封裝成一個基本的模塊。物件可以是實體或抽象概念。</p>
-<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
-<h2 id="Instance"><a href="#Instance" class="headerlink" title="Instance"></a>Instance</h2><p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class 可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
-<h1 id="3-Concepts-in-OOP"><a href="#3-Concepts-in-OOP" class="headerlink" title="3 Concepts in OOP"></a>3 Concepts in OOP</h1><h2 id="Inheritance-繼承"><a href="#Inheritance-繼承" class="headerlink" title="Inheritance 繼承"></a>Inheritance 繼承</h2><p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法。例如，球有很多種，如籃球、棒球、橄欖球，但它們背後都有一個抽象概念，即形狀。因此，可以定義一個類別為形狀，而這些球就是其擴展後的結果。我們稱作子類，而形狀我們就稱作父類。</p>
-<h2 id="Encapsulation-封裝"><a href="#Encapsulation-封裝" class="headerlink" title="Encapsulation 封裝"></a>Encapsulation 封裝</h2><p>將方法或屬性設置存取權限，在 C++ 中可以使用 public&#x2F;private&#x2F;protected 來控制權限。</p>
-<h2 id="Polymorphism-多型"><a href="#Polymorphism-多型" class="headerlink" title="Polymorphism 多型"></a>Polymorphism 多型</h2><p>對於一個方法，是否有不同的結果。在射擊遊戲中，左鍵為射擊，右鍵為開鏡。同樣是滑鼠點擊的事件，但效果卻不一樣，這就是多型。</p>
-<ul>
-<li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
-<li>Function Overloading (重載): 允許函數可以有多個不同輸入。</li>
-</ul>
-<pre class="mermaid">graph TD;
-    物件導向--基於-->物件;
-    物件--原則-->繼承; 
-    物件--原則-->封裝; 
-    物件--原則-->多型;
-    物件--被創建-->類別;
-    類別--定義-->方法;
-    類別--定義-->屬性;
-    繼承-->函數覆寫;
-    繼承-->函數重載;
-    方法-.-函數覆寫;
-    方法-.-函數重載;</pre>]]></content>
-      <categories>
-        <category>OOP</category>
-      </categories>
-      <tags>
-        <tag>OOP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>void*指標以及 void**指標的介紹與用法</title>
     <url>/2023/12/12/void-in-c/</url>
     <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><code>void</code>為C語言中關鍵字，<br><code>void</code>為c&#x2F;c++中的內建類型功能有3種</p>
@@ -571,48 +614,5 @@ int sizeOfStack(Stack* stack)
         <tag>C</tag>
         <tag>C++</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>C語言中的變數宣告與解讀</title>
-    <url>/2023/12/16/define-and-read-in-c/</url>
-    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
-<h1 id="Right-left-Rule"><a href="#Right-left-Rule" class="headerlink" title="Right-left Rule"></a>Right-left Rule</h1><p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
-<h2 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h2><p>以下有3個基本的運算子，</p>
-<ul>
-<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
-<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
-<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
-</ul>
-<p>辨識子就是函數名稱或變數名稱喔</p>
-<h1 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h1><ol>
-<li>找到辨識字，解讀為 xxx是 或者 xxx is&#x2F; as</li>
-<li>往辨識字的右邊看，如果看到<ul>
-<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
-<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>直到遇到 單獨的 <code>)</code></li>
-<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
-</ul>
-</li>
-<li>接著往辨識字的左邊看<ul>
-<li><code>*</code>  解讀為 指向的是， pointer to</li>
-<li><code>datatype</code> 就照念就好。</li>
-</ul>
-</li>
-</ol>
-<h1 id="以下為不合法的C語言宣告"><a href="#以下為不合法的C語言宣告" class="headerlink" title="以下為不合法的C語言宣告"></a>以下為不合法的C語言宣告</h1><ul>
-<li><code>[]()</code> 沒有陣列中的元素是函數</li>
-<li><code>()()</code> 沒有函數中回傳函數</li>
-<li><code>()[]</code> 沒有函數回傳陣列<br>但我們可以將其變成指標來使其合法</li>
-</ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>int *ptr</code><br>declare ptr as pointer to <code>int</code><br>宣告一個ptr指向整數型別的指標</p>
-<p><code>int (*compare)(void*, void*)</code><br>declare compare as pointer to function (pointer to void, pointer to void) returning int<br>宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
-<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
-<p><code>int ptr[]()</code><br>不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br><code>int (*ptr[])()</code><br>declare ptr as the array of pointer to function returning int</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
-<p><a href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br><a href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br><a href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
   </entry>
 </search>
