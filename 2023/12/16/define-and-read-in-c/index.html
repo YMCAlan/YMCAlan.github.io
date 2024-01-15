@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw,en,default">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -26,9 +26,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="C語言中的變數宣告與解讀">
 <meta property="og:url" content="https://ymcalan.github.io/2023/12/16/define-and-read-in-c/index.html">
-<meta property="og:site_name" content="玉米的人生之路">
+<meta property="og:site_name" content="Coding Life">
 <meta property="og:description" content="C語言變數定義與解讀概念筆記">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-12-16T03:22:20.000Z">
 <meta property="article:modified_time" content="2024-01-08T06:22:18.629Z">
 <meta property="article:author" content="YuMingChang">
@@ -43,14 +43,14 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-tw'
   };
 </script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2557320840896902"
      crossorigin="anonymous"></script>
 
-  <title>C語言中的變數宣告與解讀 | 玉米的人生之路 - Hello World!</title>
+  <title>C語言中的變數宣告與解讀 | Coding Life - Hello World!</title>
   
 
 
@@ -104,7 +104,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">玉米的人生之路</h1>
+      <h1 class="site-title">Coding Life</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">Hello World!</p>
@@ -134,17 +134,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">18</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -198,7 +198,7 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
     <link itemprop="mainEntityOfPage" href="https://ymcalan.github.io/2023/12/16/define-and-read-in-c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -208,7 +208,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="玉米的人生之路">
+      <meta itemprop="name" content="Coding Life">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -274,40 +274,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
-<h1 id="Right-left-Rule"><a href="#Right-left-Rule" class="headerlink" title="Right-left Rule"></a>Right-left Rule</h1><p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
-<h2 id="符號"><a href="#符號" class="headerlink" title="符號"></a>符號</h2><p>以下有3個基本的運算子，</p>
+        <h1 id="introduction">Introduction</h1>
+<p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
+<h1 id="right-left-rule">Right-left Rule</h1>
+<p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
+<h2 id="符號">符號</h2>
+<p>以下有3個基本的運算子，</p>
 <ul>
-<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
-<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
-<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
+<li><code>*</code>讀為 "指標指向的是" "as pointer to ..." 只會在
+(辨識字) 左邊出現</li>
+<li><code>[]</code>讀為 "陣列元素為" "array of ..." 只會在 (辨識字)
+右邊出現</li>
+<li><code>()</code>讀為 "函數回傳值" "function (parameter) returning"
+只會在 (辨識字) 右邊出現</li>
 </ul>
 <p>辨識子就是函數名稱或變數名稱喔</p>
-<h1 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h1><ol>
-<li>找到辨識字，解讀為 xxx是 或者 xxx is&#x2F; as</li>
-<li>往辨識字的右邊看，如果看到<ul>
-<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
-<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>直到遇到 單獨的 <code>)</code></li>
+<h1 id="步驟">步驟</h1>
+<ol type="1">
+<li>找到辨識字，解讀為 xxx是 或者 xxx is/ as</li>
+<li>往辨識字的右邊看，如果看到
+<ul>
+<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of
+...</li>
+<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function
+returning ... 直到遇到 單獨的 <code>)</code></li>
 <li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
-</ul>
-</li>
-<li>接著往辨識字的左邊看<ul>
-<li><code>*</code>  解讀為 指向的是， pointer to</li>
+</ul></li>
+<li>接著往辨識字的左邊看
+<ul>
+<li><code>*</code> 解讀為 指向的是， pointer to</li>
 <li><code>datatype</code> 就照念就好。</li>
-</ul>
-</li>
+</ul></li>
 </ol>
-<h1 id="以下為不合法的C語言宣告"><a href="#以下為不合法的C語言宣告" class="headerlink" title="以下為不合法的C語言宣告"></a>以下為不合法的C語言宣告</h1><ul>
+<h1 id="以下為不合法的c語言宣告">以下為不合法的C語言宣告</h1>
+<ul>
 <li><code>[]()</code> 沒有陣列中的元素是函數</li>
 <li><code>()()</code> 沒有函數中回傳函數</li>
-<li><code>()[]</code> 沒有函數回傳陣列<br>但我們可以將其變成指標來使其合法</li>
+<li><code>()[]</code> 沒有函數回傳陣列
+但我們可以將其變成指標來使其合法</li>
 </ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><code>int *ptr</code><br>declare ptr as pointer to <code>int</code><br>宣告一個ptr指向整數型別的指標</p>
-<p><code>int (*compare)(void*, void*)</code><br>declare compare as pointer to function (pointer to void, pointer to void) returning int<br>宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
-<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
-<p><code>int ptr[]()</code><br>不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br><code>int (*ptr[])()</code><br>declare ptr as the array of pointer to function returning int</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br><a target="_blank" rel="noopener" href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br><a target="_blank" rel="noopener" href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
+<h1 id="example">Example</h1>
+<p><code>int *ptr</code> declare ptr as pointer to <code>int</code>
+宣告一個ptr指向整數型別的指標</p>
+<p><code>int (*compare)(void*, void*)</code> declare compare as pointer
+to function (pointer to void, pointer to void) returning int
+宣告一個compare的指標函數，其參數為(<em>void,
+</em>void),其回傳值為<code>int</code></p>
+<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code>
+declare d as pointer to function(ref to int, pointer to function (char*,
+char**) returning pointer to pointer to char) returning pointer to
+pointer to void.</p>
+<p><code>int ptr[]()</code>
+不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。
+<code>int (*ptr[])()</code> declare ptr as the array of pointer to
+function returning int</p>
+<h1 id="reference">Reference</h1>
+<blockquote>
+<p>https://magicjackting.pixnet.net/blog/post/60889356#note4
+https://hackmd.io/<span class="citation" data-cites="sysprog/c-pointer">@sysprog/c-pointer</span>
+https://cdecl.org/ 幫你翻譯宣告的網站</p>
 </blockquote>
 
     </div>
@@ -390,7 +415,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Right-left-Rule"><span class="nav-number">2.</span> <span class="nav-text">Right-left Rule</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A6%E8%99%9F"><span class="nav-number">2.1.</span> <span class="nav-text">符號</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%A9%9F"><span class="nav-number">3.</span> <span class="nav-text">步驟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8B%E7%82%BA%E4%B8%8D%E5%90%88%E6%B3%95%E7%9A%84C%E8%AA%9E%E8%A8%80%E5%AE%A3%E5%91%8A"><span class="nav-number">4.</span> <span class="nav-text">以下為不合法的C語言宣告</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example"><span class="nav-number">5.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#right-left-rule"><span class="nav-number">2.</span> <span class="nav-text">Right-left Rule</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%A6%E8%99%9F"><span class="nav-number">2.1.</span> <span class="nav-text">符號</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%A9%9F"><span class="nav-number">3.</span> <span class="nav-text">步驟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8B%E7%82%BA%E4%B8%8D%E5%90%88%E6%B3%95%E7%9A%84c%E8%AA%9E%E8%A8%80%E5%AE%A3%E5%91%8A"><span class="nav-number">4.</span> <span class="nav-text">以下為不合法的C語言宣告</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#example"><span class="nav-number">5.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -406,7 +431,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -424,10 +449,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/YMCAlan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YMCAlan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/YMCAlan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YMCAlan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/yumingchang9527@gmail.com" title="E-Mail → yumingchang9527@gmail.com"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:yumingchang9527@gmail.com" title="E-Mail → mailto:yumingchang9527@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -611,6 +636,8 @@ if (document.querySelectorAll('pre.mermaid').length) {
 }
 </script>
 
+
+  
 
   
 

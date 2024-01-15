@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw,en,default">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -26,9 +26,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="矩陣概念與指標在C語言中">
 <meta property="og:url" content="https://ymcalan.github.io/2023/12/19/array-in-c/index.html">
-<meta property="og:site_name" content="玉米的人生之路">
+<meta property="og:site_name" content="Coding Life">
 <meta property="og:description" content="矩陣概念與指標筆記">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-12-19T11:48:12.000Z">
 <meta property="article:modified_time" content="2024-01-08T06:22:18.622Z">
 <meta property="article:author" content="YuMingChang">
@@ -43,14 +43,14 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-tw'
   };
 </script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2557320840896902"
      crossorigin="anonymous"></script>
 
-  <title>矩陣概念與指標在C語言中 | 玉米的人生之路 - Hello World!</title>
+  <title>矩陣概念與指標在C語言中 | Coding Life - Hello World!</title>
   
 
 
@@ -104,7 +104,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">玉米的人生之路</h1>
+      <h1 class="site-title">Coding Life</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">Hello World!</p>
@@ -134,17 +134,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">18</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -198,7 +198,7 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
     <link itemprop="mainEntityOfPage" href="https://ymcalan.github.io/2023/12/19/array-in-c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -208,7 +208,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="玉米的人生之路">
+      <meta itemprop="name" content="Coding Life">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -274,26 +274,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>陣列為一種在記憶體空間連續分布的資料型態，陣列中的東西我們稱作元素(element)，陣列能夠透過元素的索引(index)來取得資料。</p>
-<h1 id="Array-in-C"><a href="#Array-in-C" class="headerlink" title="Array in C"></a>Array in C</h1><p>以下為宣告陣列一個方式，arr宣告成有5個元素的矩陣，元素資料型態為int。<br>在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出 4 * 5 byte，</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
-<p>輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="arr-vs-arr"><a href="#arr-vs-arr" class="headerlink" title="arr vs &amp;arr"></a><code>arr</code> vs <code>&amp;arr</code></h1><p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure>
-
+        <h1 id="introduction">Introduction</h1>
+<p>陣列為一種在記憶體空間連續分布的資料型態，陣列中的東西我們稱作元素(element)，陣列能夠透過元素的索引(index)來取得資料。</p>
+<h1 id="array-in-c">Array in C</h1>
+<p>以下為宣告陣列一個方式，arr宣告成有5個元素的矩陣，元素資料型態為int。
+在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出
+4 * 5 byte， <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure></p>
+<h1 id="arr-vs-arr"><code>arr</code> vs <code>&amp;arr</code></h1>
+<p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = <span class="number">0061F</span>F0C</span><br><span class="line">&amp;arr = <span class="number">0061F</span>F0C</span><br></pre></td></tr></table></figure>
-
-<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。<br>但是當對陣列使用<code>&amp;</code>，會回傳指標並且指向的是一個陣列並且需要特定的長度，所以其形態為<code>int(*)[5]</code>，很明顯的看到這兩個東西雖然有相同一樣的數值，但所表現出來的東西是完全不同的。</p>
+<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。
+但是當對陣列使用<code>&amp;</code>，會回傳指標並且指向的是一個陣列並且需要特定的長度，所以其形態為<code>int(*)[5]</code>，很明顯的看到這兩個東西雖然有相同一樣的數值，但所表現出來的東西是完全不同的。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* ptr = arr;</span><br><span class="line"><span class="type">int</span> (*ptr2arr)[<span class="number">5</span>] = &amp;arr;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr      is %p\n&quot;</span>, (<span class="type">void</span>*)arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr     is %p\n&quot;</span>, (<span class="type">void</span>*)&amp;arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr + 1  is %p\n&quot;</span>, (<span class="type">void</span>*)(arr + <span class="number">1</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr + 1 is %p\n&quot;</span>, (<span class="type">void</span>*)(&amp;arr + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<p><code>ptr + 1</code> 代表從 arr[0] -&gt; arr[1]<br>而 <code>&amp;arr + 1</code> 代表從 int(<em>)[5] -&gt; int (</em>)[5]<br><code>&amp;arr + 1</code> 位移了一整個陣列的大小。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure>
-
-<h1 id="arr-1"><a href="#arr-1" class="headerlink" title="*(&amp;arr + 1)"></a><code>*(&amp;arr + 1)</code></h1><p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值<br>，<code>&amp;arr</code>為指標指向一個陣列，所以裡面存放的是一個陣列的地址，所以取值後我們會得到是指標，陣列會隱性轉型成指向第一個陣列的指標喔。</p>
+<p><code>ptr + 1</code> 代表從 arr[0] -&gt; arr[1] 而
+<code>&amp;arr + 1</code> 代表從 int(<em>)[5] -&gt; int (</em>)[5]
+<code>&amp;arr + 1</code> 位移了一整個陣列的大小。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure></p>
+<h1 id="arr-1"><code>*(&amp;arr + 1)</code></h1>
+<p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值
+，<code>&amp;arr</code>為指標指向一個陣列，所以裡面存放的是一個陣列的地址，所以取值後我們會得到是指標，陣列會隱性轉型成指向第一個陣列的指標喔。</p>
 
     </div>
 
@@ -375,7 +377,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array-in-C"><span class="nav-number">2.</span> <span class="nav-text">Array in C</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#arr-vs-arr"><span class="nav-number">3.</span> <span class="nav-text">arr vs &amp;arr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#arr-1"><span class="nav-number">4.</span> <span class="nav-text">*(&amp;arr + 1)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#array-in-c"><span class="nav-number">2.</span> <span class="nav-text">Array in C</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#arr-vs-arr"><span class="nav-number">3.</span> <span class="nav-text">arr vs &amp;arr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#arr-1"><span class="nav-number">4.</span> <span class="nav-text">*(&amp;arr + 1)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -391,7 +393,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -409,10 +411,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/YMCAlan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YMCAlan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/YMCAlan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YMCAlan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/yumingchang9527@gmail.com" title="E-Mail → yumingchang9527@gmail.com"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:yumingchang9527@gmail.com" title="E-Mail → mailto:yumingchang9527@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -596,6 +598,8 @@ if (document.querySelectorAll('pre.mermaid').length) {
 }
 </script>
 
+
+  
 
   
 

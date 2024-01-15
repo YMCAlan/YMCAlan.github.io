@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw,en,default">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -26,9 +26,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode-Daily-1743">
 <meta property="og:url" content="https://ymcalan.github.io/2023/11/10/Leetcode-Daily-1743/index.html">
-<meta property="og:site_name" content="玉米的人生之路">
+<meta property="og:site_name" content="Coding Life">
 <meta property="og:description" content="LeetCode 1743 Restore the Array From Adjacent Pairs">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-11-10T07:16:53.000Z">
 <meta property="article:modified_time" content="2024-01-07T13:07:21.687Z">
 <meta property="article:author" content="YuMingChang">
@@ -44,14 +44,14 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-tw'
   };
 </script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2557320840896902"
      crossorigin="anonymous"></script>
 
-  <title>Leetcode-Daily-1743 | 玉米的人生之路 - Hello World!</title>
+  <title>Leetcode-Daily-1743 | Coding Life - Hello World!</title>
   
 
 
@@ -105,7 +105,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">玉米的人生之路</h1>
+      <h1 class="site-title">Coding Life</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">Hello World!</p>
@@ -135,17 +135,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">18</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -199,7 +199,7 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
     <link itemprop="mainEntityOfPage" href="https://ymcalan.github.io/2023/11/10/Leetcode-Daily-1743/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -209,7 +209,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="玉米的人生之路">
+      <meta itemprop="name" content="Coding Life">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -275,18 +275,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="LeetCode-1743-Restore-the-Array-From-Adjacent-Pairs"><a href="#LeetCode-1743-Restore-the-Array-From-Adjacent-Pairs" class="headerlink" title="LeetCode 1743. Restore the Array From Adjacent Pairs"></a>LeetCode 1743. Restore the Array From Adjacent Pairs</h1><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&envId=2023-11-10">Link</a></p>
-<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>雖然題目為給定相鄰矩陣來回推本來陣列是甚麼，但將圖畫出來其實就可以看出這題是一個關於無向圖的traversal，那麼我們會遇到的問題就是如何找到起始位置，因此我們透過map STL中資料型態先建構一張圖，<br>map中第一個元素為節點數值，第二元素則為其連接的節點數值，由於有多個連接點的可能，我們宣告其為vector<int>，接著我們檢查連接點數量是否為1來決定是否為圖中的根結點，找到節點後我們只要透過DFS來尋過整張圖就好，由於這張圖其實就是linked List，<br>因此我們不需要任何的資料結構來儲存節點是否已經尋訪，我們只要使用prev變數來記住前一次節點是否尋過。</int></p>
-<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><!-- Describe your approach to solving the problem. -->
-
-<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ul>
-<li><p>Time complexity: $O(n)$</p>
-<!-- Add your time complexity here, e.g. $$O(n)$$ -->
-</li>
-<li><p>Space complexity: $O(n)$</p>
-<!-- Add your space complexity here, e.g. $$O(n)$$ --></li>
+        <h1 id="leetcode-1743.-restore-the-array-from-adjacent-pairs">LeetCode
+1743. Restore the Array From Adjacent Pairs</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&amp;envId=2023-11-10">Link</a></p>
+<h1 id="intuition">Intuition</h1>
+<p>雖然題目為給定相鄰矩陣來回推本來陣列是甚麼，但將圖畫出來其實就可以看出這題是一個關於無向圖的traversal，那麼我們會遇到的問題就是如何找到起始位置，因此我們透過map
+STL中資料型態先建構一張圖，
+map中第一個元素為節點數值，第二元素則為其連接的節點數值，由於有多個連接點的可能，我們宣告其為vector<int>，接著我們檢查連接點數量是否為1來決定是否為圖中的根結點，找到節點後我們只要透過DFS來尋過整張圖就好，由於這張圖其實就是linked
+List，
+因此我們不需要任何的資料結構來儲存節點是否已經尋訪，我們只要使用prev變數來記住前一次節點是否尋過。</int></p>
+<h1 id="approach">Approach</h1>
+<!-- Describe your approach to solving the problem. -->
+<h1 id="complexity">Complexity</h1>
+<ul>
+<li><p>Time complexity: <span class="math inline">\(O(n)\)</span>
+<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
+<li><p>Space complexity: <span class="math inline">\(O(n)\)</span>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
 </ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">restoreArray</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; adjacentPairs)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = adjacentPairs.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : adjacentPairs)&#123;</span><br><span class="line">            mp[p[<span class="number">0</span>]].<span class="built_in">push_back</span>(p[<span class="number">1</span>]);</span><br><span class="line">            mp[p[<span class="number">1</span>]].<span class="built_in">push_back</span>(p[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> root = <span class="built_in">find_root</span>(mp);</span><br><span class="line">        <span class="built_in">dfs</span>(root, INT_MAX, mp, nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> prev, unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp,vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        nums.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> neigbor : mp[root])&#123;</span><br><span class="line">            <span class="keyword">if</span> (neigbor != prev)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(neigbor, root, mp, nums);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_root</span><span class="params">(unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: mp)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p.second.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">                root = p.first;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="code">Code</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">restoreArray</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; adjacentPairs)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = adjacentPairs.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : adjacentPairs)&#123;</span><br><span class="line">            mp[p[<span class="number">0</span>]].<span class="built_in">push_back</span>(p[<span class="number">1</span>]);</span><br><span class="line">            mp[p[<span class="number">1</span>]].<span class="built_in">push_back</span>(p[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> root = <span class="built_in">find_root</span>(mp);</span><br><span class="line">        <span class="built_in">dfs</span>(root, INT_MAX, mp, nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> prev, unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp,vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        nums.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> neigbor : mp[root])&#123;</span><br><span class="line">            <span class="keyword">if</span> (neigbor != prev)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(neigbor, root, mp, nums);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_root</span><span class="params">(unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: mp)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p.second.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">                root = p.first;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -370,7 +379,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LeetCode-1743-Restore-the-Array-From-Adjacent-Pairs"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 1743. Restore the Array From Adjacent Pairs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intuition"><span class="nav-number">2.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Approach"><span class="nav-number">3.</span> <span class="nav-text">Approach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Complexity"><span class="nav-number">4.</span> <span class="nav-text">Complexity</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">5.</span> <span class="nav-text">Code</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#leetcode-1743.-restore-the-array-from-adjacent-pairs"><span class="nav-number">1.</span> <span class="nav-text">LeetCode
+1743. Restore the Array From Adjacent Pairs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#intuition"><span class="nav-number">2.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approach"><span class="nav-number">3.</span> <span class="nav-text">Approach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#complexity"><span class="nav-number">4.</span> <span class="nav-text">Complexity</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">5.</span> <span class="nav-text">Code</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -386,7 +396,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -404,10 +414,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/YMCAlan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YMCAlan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/YMCAlan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YMCAlan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/yumingchang9527@gmail.com" title="E-Mail → yumingchang9527@gmail.com"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:yumingchang9527@gmail.com" title="E-Mail → mailto:yumingchang9527@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -591,6 +601,8 @@ if (document.querySelectorAll('pre.mermaid').length) {
 }
 </script>
 
+
+  
 
   
 
