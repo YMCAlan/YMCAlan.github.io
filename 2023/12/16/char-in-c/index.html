@@ -144,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">18</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">17</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -254,7 +254,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>159</span>
+              <span>417</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -274,11 +274,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="introduction">Introduction</h1>
+        <h1>Introduction</h1>
 <p>在C語言中，如果要宣告一個字串是需要透過矩陣進行宣告的，不能像C++那樣去宣告string</p>
 <ul>
-<li>宣告字串陣列，不給定長度情況下,
-結尾可能出現亂碼，由於沒有結束字符。</li>
+<li>宣告字串陣列，不給定長度情況下, 結尾可能出現亂碼，由於沒有結束字符。</li>
 </ul>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c1[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
@@ -286,10 +285,13 @@
 </ul>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c2[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>宣告字串陣列, 使用兩個引號, 編譯器會自動加上'\0', 非常安全以及好用
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char c3[] <span class="operator">=</span> <span class="string">&quot;abc&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
-<li>宣告字串陣列,給定長度以及初始化的值 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char c4<span class="selector-attr">[50]</span>;</span><br><span class="line"><span class="built_in">memset</span>(&amp;c4, &#x27;*&#x27;, sizeof(c4));</span><br></pre></td></tr></table></figure></li>
+<li>宣告字串陣列, 使用兩個引號, 編譯器會自動加上’\0’, 非常安全以及好用</li>
 </ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char c3[] <span class="operator">=</span> <span class="string">&quot;abc&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>宣告字串陣列,給定長度以及初始化的值</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char c4<span class="selector-attr">[50]</span>;</span><br><span class="line"><span class="built_in">memset</span>(&amp;c4, &#x27;*&#x27;, sizeof(c4));</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -371,7 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -387,7 +389,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -451,13 +453,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">8k</span>
+    <span title="Symbols count total">23k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">28 mins.</span>
+    <span title="Reading time total">21 mins.</span>
 </div><div>
   <span id="sitetime"></span>
   <script language=javascript>

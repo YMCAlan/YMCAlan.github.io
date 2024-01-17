@@ -152,7 +152,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">18</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">17</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -262,14 +262,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>465</span>
+              <span>791</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
+              <span>1 mins.</span>
             </span>
             <div class="post-description">應用網路增強於YOLOv8物件偵測模型</div>
 
@@ -282,35 +282,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="應用網路增強於yolov8輕量化模型">應用網路增強於YOLOv8輕量化模型</h1>
+        <h1>應用網路增強於YOLOv8輕量化模型</h1>
 <h2 id="概述">概述</h2>
 <p>網路增強為訓練輕量化模型的一種訓練方法，透過動態調整模型大小來訓練模型，解決輕量化模型在訓練時under-fitting的問題，我們嘗試將此方法使用用YOLOv8物件偵測輕量化模型上，並且設計出專用api來將網路增強的模型轉換至原生yolov8模型，實作上具有相容性。</p>
 <h2 id="網路架構">網路架構</h2>
 <p>以下為yolov8模型架構圖以及子架構圖。</p>
 <ul>
 <li>Bootlenck為yolov8中主要組成的module，Bottleneck能夠靈活地調整輸入維度的特徵，同時又可以減少計算量。</li>
-<li>c2f(Faster Implementation of CSP Bottleneck with 2 convolutions)
-為Yolov8中重要的module，c2f借鑒了在yolov7當中的E-ELAN的方法，讓模型訓練時可以保留豐富且多樣化梯度流資訊。
-<img src="images/Yolov8/module.png" alt="module.png"> <img src="images/Yolov8/arch.png" alt="arch.png"></li>
+<li>c2f(Faster Implementation of CSP Bottleneck with 2 convolutions)<br>
+為Yolov8中重要的module，c2f借鑒了在yolov7當中的E-ELAN的方法，讓模型訓練時可以保留豐富且多樣化梯度流資訊。<br>
+<img src="images/Yolov8/module.png" alt="module.png"><br>
+<img src="images/Yolov8/arch.png" alt="arch.png"></li>
 </ul>
 <h2 id="訓練過程">訓練過程</h2>
-<p>下圖為Network
-Augmentation訓練示意圖，每一個step，我們會將圖片輸入進兩個模型，一個為Base
-Model， 另一個為Aug
-Model，這兩個模型差異為模型寬度不同且大模型的部分權重來自小模型，接著我們將模型輸出與真實標籤計算損失函數，並進行反向傳播的動作，
-這樣的方法可以變相地幫助小模型進行學習。 <img src="images/Yolov8/train_process.png" alt="arch_aug.png"></p>
-<p>以下為網路增強後網路的示意圖。 <img src="images/Yolov8/arch_aug.png" alt="arch_aug.png"></p>
+<p>下圖為Network Augmentation訓練示意圖，每一個step，我們會將圖片輸入進兩個模型，一個為Base Model，<br>
+另一個為Aug Model，這兩個模型差異為模型寬度不同且大模型的部分權重來自小模型，接著我們將模型輸出與真實標籤計算損失函數，並進行反向傳播的動作，<br>
+這樣的方法可以變相地幫助小模型進行學習。<br>
+<img src="images/Yolov8/train_process.png" alt="arch_aug.png"></p>
+<p>以下為網路增強後網路的示意圖。<br>
+<img src="images/Yolov8/arch_aug.png" alt="arch_aug.png"></p>
 <h2 id="總結">總結</h2>
-<p>在使用網路增強後，對比於原本監督式學習方法，mAP0.50:
+<p>在使用網路增強後，對比於原本監督式學習方法，mAP0.50:<br>
 0.95提升了0.07，由於我們使用網路架構對比原始paper更加複雜，任務也不一樣，所需要的特徵也不一樣，因此NetAug可能會傷害到物件偵測模型的效果。</p>
-<figure>
-<img src="images/Yolov8/result.png" alt="result.png">
-<figcaption aria-hidden="true">result.png</figcaption>
-</figure>
+<p><img src="images/Yolov8/result.png" alt="result.png"></p>
 <h2 id="參考">參考</h2>
 <blockquote>
-<p>Cai, H., Gan, C., Lin, J., &amp; Han, S. (2021). Network augmentation
-for tiny deep learning. <em>arXiv preprint arXiv: 2110.08890</em>.</p>
+<p>Cai, H., Gan, C., Lin, J., &amp; Han, S. (2021). Network augmentation for tiny deep learning. <em>arXiv preprint arXiv:<br>
+2110.08890</em>.</p>
 </blockquote>
 
     </div>
@@ -394,7 +392,7 @@ for tiny deep learning. <em>arXiv preprint arXiv: 2110.08890</em>.</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%87%89%E7%94%A8%E7%B6%B2%E8%B7%AF%E5%A2%9E%E5%BC%B7%E6%96%BCyolov8%E8%BC%95%E9%87%8F%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">應用網路增強於YOLOv8輕量化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.2.</span> <span class="nav-text">網路架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%93%E7%B7%B4%E9%81%8E%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">訓練過程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">1.4.</span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">參考</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">應用網路增強於YOLOv8輕量化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.2.</span> <span class="nav-text">網路架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%93%E7%B7%B4%E9%81%8E%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">訓練過程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">1.4.</span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">參考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -410,7 +408,7 @@ for tiny deep learning. <em>arXiv preprint arXiv: 2110.08890</em>.</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -474,13 +472,13 @@ for tiny deep learning. <em>arXiv preprint arXiv: 2110.08890</em>.</p>
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">8k</span>
+    <span title="Symbols count total">23k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">28 mins.</span>
+    <span title="Reading time total">21 mins.</span>
 </div><div>
   <span id="sitetime"></span>
   <script language=javascript>
