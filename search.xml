@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Cervical Lymph Node Classification</title>
-    <url>/2023/08/06/Cervical-Lymph-Node-Classification/</url>
-    <content><![CDATA[<h1 id="論文標題">論文標題</h1>
-<p>基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類</p>
-<p>RBKD: Relational-Based Knowledge Distillation with Cross-Attention
-for Multi-Layer Distillation in Ultrasound Elastography Cervical Lymph
-Node Image Classification</p>
-<h2 id="簡介">簡介</h2>
-<p>淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預訓練，並透過知識蒸餾提高模型的準確性。</p>
-<h2 id="方法">方法</h2>
-<p>我們使用自蒸餾(self-distillation)訓練方法來訓練模型，並透過交互注意力的方式來將知識傳遞給學生模型，我們的訓練方式稱為RBKD，全名為
-Relational-Based Knowledge Distillation with Cross-Attention for
-Multi-Layer Distillation，架構如下圖所示 <img src="images/Cervical-Lymph-Node-Classification/rbkd.png" alt="rbkd.png"></p>
-<p>以上圖為例，首先輸入兩張經過資料增強的影像進入到老師與學生網路，接著我們提取出中間的特徵，通過我們所設計的CLCA模塊來將特徵進行轉換並計算損失函數。</p>
-<p>接著我們介紹CLCA模塊。</p>
-<p>CLCA為Cross-layer Cross-attention
-module，主要用於將前後兩層大小不同的特徵進行萃取，並進行交互注意力機制的作用。
-<img src="images/Cervical-Lymph-Node-Classification/clca.png" alt="clca.png"></p>
-<p>以上圖為例，我們將兩張不同大小的特徵圖經過Sample來進行上下採樣的動作，接著輸入進Projection，來將特徵轉換至更高維特徵空間進行學習，這邊要注意到經過採樣的特徵圖會與其原本的特徵圖經過相同的Projection，接著輸入進Cross-Attetion
-Module來進行交互注意力機制的作用，最後得到輸出來計算損失函數。</p>
-<h2 id="結論">結論</h2>
-<p>在我們的實驗當中，我們比較了監督式學習以及相關自監督式方法[47]進行比較，由結果看出，在不使用自監督式訓練的情況下，模型無法有效地判斷惡性腫瘤資料，但使用自監督式學習後在Sensitivity部分上升了許多，接著與我們提出的RBKD的方法，在F1-Score部分，與監督式學習提升了2.97%，與自監督式方法提升了0.62%，在Sensitivity則分別提高15.8%，以及2.97%。實驗結果證明我們所提出的方法可以有效地提取惡性腫瘤的特徵並辨識出來。
-<img src="images/Cervical-Lymph-Node-Classification/result.png" alt="result.png"></p>
-<p>[47] M. Caron et al., "Emerging properties in self-supervised vision
-transformers," in Proceedings of the IEEE/CVF international conference
-on computer vision, 2021, pp. 9650-9660.</p>
-]]></content>
-      <categories>
-        <category>Project</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Apply Network augmentation on YOLOV8</title>
     <url>/2023/08/06/Apply-Network-Augmentation-On-YOLOv8&#39;/</url>
     <content><![CDATA[<h1 id="應用網路增強於yolov8輕量化模型">應用網路增強於YOLOv8輕量化模型</h1>
@@ -194,61 +158,39 @@ value of Tn.</p>
       </tags>
   </entry>
   <entry>
-    <title>LeetCode-746-Min Cost Climbing Stairs</title>
-    <url>/2023/09/18/LeetCode-746-Min-Cost-Climbing-Stairs/</url>
-    <content><![CDATA[<h1 id="leetcode-746.-min-cost-climbing-stairs">LeetCode 746. Min Cost
-Climbing Stairs</h1>
-<p><a href="https://leetcode.com/problems/min-cost-climbing-stairs/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
-<h2 id="description">Description</h2>
-<p>You are given an integer array cost where cost[i] is the cost of ith
-step on a staircase. Once you pay the cost, you can either climb one or
-two steps.</p>
-<p>You can either start from the step with index 0, or the step with
-index 1.</p>
-<p>Return the minimum cost to reach the top of the floor.</p>
-<h2 id="example">Example</h2>
-<p>Example 1:</p>
-<p>Input: cost = [10,15,20] Output: 15 Explanation: You will start at
-index 1. - Pay 15 and climb two steps to reach the top. The total cost
-is 15. Example 2:</p>
-<p>Input: cost = [1,100,1,1,1,100,1,1,100,1] Output: 6 Explanation: You
-will start at index 0. - Pay 1 and climb two steps to reach index 2. -
-Pay 1 and climb two steps to reach index 4. - Pay 1 and climb two steps
-to reach index 6. - Pay 1 and climb one step to reach index 7. - Pay 1
-and climb two steps to reach index 9. - Pay 1 and climb one step to
-reach the top. The total cost is 6.</p>
-<p><strong>Tags:</strong>
-<code>Dynamic Programming(DP)</code>,<code>Easy</code></p>
-<h2 id="solve-1-button-up-dp-memoization">Solve 1 Button Up DP
-(Memoization)</h2>
-<p>跟爬梯子題目變化版，題目為找到最小爬梯子所需要的成本，我們需要累加每一次的cost，因此需要加上cost[i]，那基本case為cost[0]、cost[1]先複製到dp
-array上，接著我們推論dp[2]，
-dp[2]有可能接受來自step1的dp[2-1]或者step2的dp[2-2]，因此我們要比較他們的大小，這樣dp[i]就被推導出來。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = cost.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(l, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; l; i++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">min</span>(dp[i<span class="number">-1</span>], dp[i<span class="number">-2</span>]) + cost[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dp[l<span class="number">-1</span>], dp[l<span class="number">-2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: <span class="math inline">\(O(n)\)</span>
-需跑n次</li>
-<li>Space complexity: <span class="math inline">\(O(n)\)</span>
-需要n的空間來儲存運算結果</li>
-</ul>
-<h2 id="solve-2-optimization-dp---reduce-on-space-to-o1">Solve 2
-Optimization DP - Reduce <span class="math inline">\(O(n)\)</span> space
-to <span class="math inline">\(O(1)\)</span></h2>
-<p>Space complexity
-優化版，從題目我們可以看出只需要去比較來自step1的cost或來自step2的cost，所以我們可以只使用兩個變數來儲存他們。</p>
-<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> minCostClimbingStairs(vector&lt;<span class="built_in">int</span>&gt;&amp; cost) &#123;</span><br><span class="line">        <span class="built_in">int</span> n = cost.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">int</span> curr = cost[<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">int</span> prev = cost[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        for (<span class="built_in">int</span> i = <span class="number">2</span> ; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">int</span> temp = <span class="built_in">min</span>(curr, prev) + cost[i];</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(curr, prev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: <span class="math inline">\(O(n)\)</span>
-需跑n次</li>
-<li>Space complexity: <span class="math inline">\(O(1)\)</span>
-只需要兩個變數來儲存運算結果，不論n有多大</li>
-</ul>
+    <title>Cervical Lymph Node Classification</title>
+    <url>/2023/08/06/Cervical-Lymph-Node-Classification/</url>
+    <content><![CDATA[<h1 id="論文標題">論文標題</h1>
+<p>基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類</p>
+<p>RBKD: Relational-Based Knowledge Distillation with Cross-Attention
+for Multi-Layer Distillation in Ultrasound Elastography Cervical Lymph
+Node Image Classification</p>
+<h2 id="簡介">簡介</h2>
+<p>淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預訓練，並透過知識蒸餾提高模型的準確性。</p>
+<h2 id="方法">方法</h2>
+<p>我們使用自蒸餾(self-distillation)訓練方法來訓練模型，並透過交互注意力的方式來將知識傳遞給學生模型，我們的訓練方式稱為RBKD，全名為
+Relational-Based Knowledge Distillation with Cross-Attention for
+Multi-Layer Distillation，架構如下圖所示 <img src="images/Cervical-Lymph-Node-Classification/rbkd.png" alt="rbkd.png"></p>
+<p>以上圖為例，首先輸入兩張經過資料增強的影像進入到老師與學生網路，接著我們提取出中間的特徵，通過我們所設計的CLCA模塊來將特徵進行轉換並計算損失函數。</p>
+<p>接著我們介紹CLCA模塊。</p>
+<p>CLCA為Cross-layer Cross-attention
+module，主要用於將前後兩層大小不同的特徵進行萃取，並進行交互注意力機制的作用。
+<img src="images/Cervical-Lymph-Node-Classification/clca.png" alt="clca.png"></p>
+<p>以上圖為例，我們將兩張不同大小的特徵圖經過Sample來進行上下採樣的動作，接著輸入進Projection，來將特徵轉換至更高維特徵空間進行學習，這邊要注意到經過採樣的特徵圖會與其原本的特徵圖經過相同的Projection，接著輸入進Cross-Attetion
+Module來進行交互注意力機制的作用，最後得到輸出來計算損失函數。</p>
+<h2 id="結論">結論</h2>
+<p>在我們的實驗當中，我們比較了監督式學習以及相關自監督式方法[47]進行比較，由結果看出，在不使用自監督式訓練的情況下，模型無法有效地判斷惡性腫瘤資料，但使用自監督式學習後在Sensitivity部分上升了許多，接著與我們提出的RBKD的方法，在F1-Score部分，與監督式學習提升了2.97%，與自監督式方法提升了0.62%，在Sensitivity則分別提高15.8%，以及2.97%。實驗結果證明我們所提出的方法可以有效地提取惡性腫瘤的特徵並辨識出來。
+<img src="images/Cervical-Lymph-Node-Classification/result.png" alt="result.png"></p>
+<p>[47] M. Caron et al., "Emerging properties in self-supervised vision
+transformers," in Proceedings of the IEEE/CVF international conference
+on computer vision, 2021, pp. 9650-9660.</p>
 ]]></content>
       <categories>
-        <category>LeetCode</category>
+        <category>Project</category>
       </categories>
       <tags>
-        <tag>DP</tag>
+        <tag>Python</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -333,39 +275,34 @@ you can rob = 2 + 9 + 1 = 12.</p>
       </tags>
   </entry>
   <entry>
-    <title>Leetcode-344 Reverse String</title>
-    <url>/2024/01/04/Leetcode-344/</url>
-    <content><![CDATA[<h1 id="intuition">Intuition</h1>
-<!-- Describe your first thoughts on how to solve this problem. -->
-<p>反轉字串為經典題目，題目要求只能以空間複雜度 <span class="math display">\[o(n)\]</span>，也就是能in-place去操作字元。<br>
-首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>
-從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?<br>
-就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>
-我們可以透過雙指標法來處理這個問題。</p>
+    <title>Leetcode-Daily-1743</title>
+    <url>/2023/11/10/Leetcode-Daily-1743/</url>
+    <content><![CDATA[<h1 id="leetcode-1743.-restore-the-array-from-adjacent-pairs">LeetCode
+1743. Restore the Array From Adjacent Pairs</h1>
+<p><a href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&amp;envId=2023-11-10">Link</a></p>
+<h1 id="intuition">Intuition</h1>
+<p>雖然題目為給定相鄰矩陣來回推本來陣列是甚麼，但將圖畫出來其實就可以看出這題是一個關於無向圖的traversal，那麼我們會遇到的問題就是如何找到起始位置，因此我們透過map
+STL中資料型態先建構一張圖，
+map中第一個元素為節點數值，第二元素則為其連接的節點數值，由於有多個連接點的可能，我們宣告其為vector<int>，接著我們檢查連接點數量是否為1來決定是否為圖中的根結點，找到節點後我們只要透過DFS來尋過整張圖就好，由於這張圖其實就是linked
+List，
+因此我們不需要任何的資料結構來儲存節點是否已經尋訪，我們只要使用prev變數來記住前一次節點是否尋過。</int></p>
 <h1 id="approach">Approach</h1>
-<p><code>start</code>:表示指向第一個位置的指標。<br>
-<code>end</code>:表示指向最後一個位置的指標。<br>
-邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code>。<br>
-每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。</p>
+<!-- Describe your approach to solving the problem. -->
 <h1 id="complexity">Complexity</h1>
 <ul>
-<li><p>Time complexity: <span class="math display">\[O(n)\]</span>
+<li><p>Time complexity: <span class="math inline">\(O(n)\)</span>
 <!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
-<li><p>Space complexity: <span class="math display">\[O(1)\]</span>
+<li><p>Space complexity: <span class="math inline">\(O(n)\)</span>
 <!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
 </ul>
 <h1 id="code">Code</h1>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--)&#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="code-1">Code</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="code-2">Code</h1>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">restoreArray</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; adjacentPairs)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = adjacentPairs.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : adjacentPairs)&#123;</span><br><span class="line">            mp[p[<span class="number">0</span>]].<span class="built_in">push_back</span>(p[<span class="number">1</span>]);</span><br><span class="line">            mp[p[<span class="number">1</span>]].<span class="built_in">push_back</span>(p[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> root = <span class="built_in">find_root</span>(mp);</span><br><span class="line">        <span class="built_in">dfs</span>(root, INT_MAX, mp, nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> prev, unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp,vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        nums.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> neigbor : mp[root])&#123;</span><br><span class="line">            <span class="keyword">if</span> (neigbor != prev)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(neigbor, root, mp, nums);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_root</span><span class="params">(unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: mp)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p.second.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">                root = p.first;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>String</tag>
+        <tag>graph</tag>
       </tags>
   </entry>
   <entry>
@@ -399,34 +336,61 @@ you can rob = 2 + 9 + 1 = 12.</p>
       </categories>
   </entry>
   <entry>
-    <title>Leetcode-Daily-1743</title>
-    <url>/2023/11/10/Leetcode-Daily-1743/</url>
-    <content><![CDATA[<h1 id="leetcode-1743.-restore-the-array-from-adjacent-pairs">LeetCode
-1743. Restore the Array From Adjacent Pairs</h1>
-<p><a href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&amp;envId=2023-11-10">Link</a></p>
-<h1 id="intuition">Intuition</h1>
-<p>雖然題目為給定相鄰矩陣來回推本來陣列是甚麼，但將圖畫出來其實就可以看出這題是一個關於無向圖的traversal，那麼我們會遇到的問題就是如何找到起始位置，因此我們透過map
-STL中資料型態先建構一張圖，
-map中第一個元素為節點數值，第二元素則為其連接的節點數值，由於有多個連接點的可能，我們宣告其為vector<int>，接著我們檢查連接點數量是否為1來決定是否為圖中的根結點，找到節點後我們只要透過DFS來尋過整張圖就好，由於這張圖其實就是linked
-List，
-因此我們不需要任何的資料結構來儲存節點是否已經尋訪，我們只要使用prev變數來記住前一次節點是否尋過。</int></p>
-<h1 id="approach">Approach</h1>
-<!-- Describe your approach to solving the problem. -->
-<h1 id="complexity">Complexity</h1>
+    <title>LeetCode-746-Min Cost Climbing Stairs</title>
+    <url>/2023/09/18/LeetCode-746-Min-Cost-Climbing-Stairs/</url>
+    <content><![CDATA[<h1 id="leetcode-746.-min-cost-climbing-stairs">LeetCode 746. Min Cost
+Climbing Stairs</h1>
+<p><a href="https://leetcode.com/problems/min-cost-climbing-stairs/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
+<h2 id="description">Description</h2>
+<p>You are given an integer array cost where cost[i] is the cost of ith
+step on a staircase. Once you pay the cost, you can either climb one or
+two steps.</p>
+<p>You can either start from the step with index 0, or the step with
+index 1.</p>
+<p>Return the minimum cost to reach the top of the floor.</p>
+<h2 id="example">Example</h2>
+<p>Example 1:</p>
+<p>Input: cost = [10,15,20] Output: 15 Explanation: You will start at
+index 1. - Pay 15 and climb two steps to reach the top. The total cost
+is 15. Example 2:</p>
+<p>Input: cost = [1,100,1,1,1,100,1,1,100,1] Output: 6 Explanation: You
+will start at index 0. - Pay 1 and climb two steps to reach index 2. -
+Pay 1 and climb two steps to reach index 4. - Pay 1 and climb two steps
+to reach index 6. - Pay 1 and climb one step to reach index 7. - Pay 1
+and climb two steps to reach index 9. - Pay 1 and climb one step to
+reach the top. The total cost is 6.</p>
+<p><strong>Tags:</strong>
+<code>Dynamic Programming(DP)</code>,<code>Easy</code></p>
+<h2 id="solve-1-button-up-dp-memoization">Solve 1 Button Up DP
+(Memoization)</h2>
+<p>跟爬梯子題目變化版，題目為找到最小爬梯子所需要的成本，我們需要累加每一次的cost，因此需要加上cost[i]，那基本case為cost[0]、cost[1]先複製到dp
+array上，接著我們推論dp[2]，
+dp[2]有可能接受來自step1的dp[2-1]或者step2的dp[2-2]，因此我們要比較他們的大小，這樣dp[i]就被推導出來。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = cost.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(l, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; l; i++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">min</span>(dp[i<span class="number">-1</span>], dp[i<span class="number">-2</span>]) + cost[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dp[l<span class="number">-1</span>], dp[l<span class="number">-2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>Time complexity: <span class="math inline">\(O(n)\)</span>
-<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
-<li><p>Space complexity: <span class="math inline">\(O(n)\)</span>
-<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
+<li>Time complexity: <span class="math inline">\(O(n)\)</span>
+需跑n次</li>
+<li>Space complexity: <span class="math inline">\(O(n)\)</span>
+需要n的空間來儲存運算結果</li>
 </ul>
-<h1 id="code">Code</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">restoreArray</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; adjacentPairs)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = adjacentPairs.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : adjacentPairs)&#123;</span><br><span class="line">            mp[p[<span class="number">0</span>]].<span class="built_in">push_back</span>(p[<span class="number">1</span>]);</span><br><span class="line">            mp[p[<span class="number">1</span>]].<span class="built_in">push_back</span>(p[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> root = <span class="built_in">find_root</span>(mp);</span><br><span class="line">        <span class="built_in">dfs</span>(root, INT_MAX, mp, nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> prev, unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp,vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        nums.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> neigbor : mp[root])&#123;</span><br><span class="line">            <span class="keyword">if</span> (neigbor != prev)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(neigbor, root, mp, nums);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_root</span><span class="params">(unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: mp)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p.second.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">                root = p.first;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="solve-2-optimization-dp---reduce-on-space-to-o1">Solve 2
+Optimization DP - Reduce <span class="math inline">\(O(n)\)</span> space
+to <span class="math inline">\(O(1)\)</span></h2>
+<p>Space complexity
+優化版，從題目我們可以看出只需要去比較來自step1的cost或來自step2的cost，所以我們可以只使用兩個變數來儲存他們。</p>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> minCostClimbingStairs(vector&lt;<span class="built_in">int</span>&gt;&amp; cost) &#123;</span><br><span class="line">        <span class="built_in">int</span> n = cost.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">int</span> curr = cost[<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">int</span> prev = cost[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        for (<span class="built_in">int</span> i = <span class="number">2</span> ; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">int</span> temp = <span class="built_in">min</span>(curr, prev) + cost[i];</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(curr, prev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: <span class="math inline">\(O(n)\)</span>
+需跑n次</li>
+<li>Space complexity: <span class="math inline">\(O(1)\)</span>
+只需要兩個變數來儲存運算結果，不論n有多大</li>
+</ul>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>graph</tag>
+        <tag>DP</tag>
       </tags>
   </entry>
   <entry>
@@ -502,6 +466,26 @@ List，
       </categories>
   </entry>
   <entry>
+    <title>泛型程式設計在C語言中</title>
+    <url>/2023/12/18/generics-in-c/</url>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成
+* void* 指向void指標，使用強制轉型。 * macro(巨集)
+使用字元替換方式操作。 * _Generic(C11)</p>
+<h1 id="void">Void*</h1>
+<p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked
+list中指向不同型別的資料。
+使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
+<h1 id="macro">Macro</h1>
+<p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
+<h1 id="generic">_Generic</h1>
+<p>C11才有的關鍵字，</p>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C語言中的變數宣告與解讀</title>
     <url>/2023/12/16/define-and-read-in-c/</url>
     <content><![CDATA[<h1 id="introduction">Introduction</h1>
@@ -564,26 +548,6 @@ function returning int</p>
 https://hackmd.io/<span class="citation" data-cites="sysprog/c-pointer">@sysprog/c-pointer</span><br>
 https://cdecl.org/ 幫你翻譯宣告的網站</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>泛型程式設計在C語言中</title>
-    <url>/2023/12/18/generics-in-c/</url>
-    <content><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成
-* void* 指向void指標，使用強制轉型。 * macro(巨集)
-使用字元替換方式操作。 * _Generic(C11)</p>
-<h1 id="void">Void*</h1>
-<p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked
-list中指向不同型別的資料。
-使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
-<h1 id="macro">Macro</h1>
-<p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
-<h1 id="generic">_Generic</h1>
-<p>C11才有的關鍵字，</p>
 ]]></content>
       <categories>
         <category>C</category>
@@ -665,6 +629,42 @@ list中指向不同型別的資料。
       </categories>
       <tags>
         <tag>Stack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode-344 Reverse String</title>
+    <url>/2024/01/04/Leetcode-344/</url>
+    <content><![CDATA[<h1 id="intuition">Intuition</h1>
+<!-- Describe your first thoughts on how to solve this problem. -->
+<p>反轉字串為經典題目，題目要求只能以空間複雜度 <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.215ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 1863 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"/></g><g data-mml-node="mo" transform="translate(485,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(874,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1474,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>，也就是能in-place去操作字元。<br>
+首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>
+從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?<br>
+就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>
+我們可以透過雙指標法來處理這個問題。</p>
+<h1 id="approach">Approach</h1>
+<p><code>start</code>:表示指向第一個位置的指標。<br>
+<code>end</code>:表示指向最後一個位置的指標。<br>
+邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code>。<br>
+每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。</p>
+<h1 id="complexity">Complexity</h1>
+<ul>
+<li><p>Time complexity: <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
+<li><p>Space complexity: <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
+</ul>
+<h1 id="code">Code</h1>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--){</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="code-1">Code</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++){</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<h1 id="code-2">Code</h1>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
       </tags>
   </entry>
   <entry>
