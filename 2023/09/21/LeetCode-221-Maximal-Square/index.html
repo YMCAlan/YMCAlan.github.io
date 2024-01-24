@@ -256,7 +256,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.6k</span>
+              <span>354</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -276,33 +276,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>LeetCode 221. Maximal Square</h1>
+        <h1 id="leetcode-221.-maximal-square">LeetCode 221. Maximal Square</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
-<h2 id="Description">Description</h2>
-<p>Given an m x n binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.</p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg" alt></p>
-<h2 id="Example">Example</h2>
+<h2 id="description">Description</h2>
+<p>Given an m x n binary matrix filled with 0's and 1's, find the
+largest square containing only 1's and return its area.</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg"></p>
+<h2 id="example">Example</h2>
 <p>Example 1:</p>
-<p>Input: matrix = [[“1”,“0”,“1”,“0”,“0”],[“1”,“0”,“1”,“1”,“1”],[“1”,“1”,“1”,“1”,“1”],[“1”,“0”,“0”,“1”,“0”]]<br>
+<p>Input: matrix =
+[["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
 Output: 4</p>
 <p>Example 2:</p>
-<p>Input: matrix = [[“0”,“1”],[“1”,“0”]]<br>
-Output: 1</p>
+<p>Input: matrix = [["0","1"],["1","0"]] Output: 1</p>
 <p>Example 3:</p>
-<p>Input: matrix = [[“0”]]<br>
-Output: 0</p>
-<p><strong>Tags:</strong><br>
+<p>Input: matrix = [["0"]] Output: 0</p>
+<p><strong>Tags:</strong>
 <code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
-<h2 id="Solve-1-Button-Up-DP-Memoization">Solve 1 Button Up DP (Memoization)</h2>
+<h2 id="solve-1-button-up-dp-memoization">Solve 1 Button Up DP
+(Memoization)</h2>
 <p>題目要求找出最大的方塊的面積，首先我們需要推導出通式，對於i,j索引，我們要檢查3個位置分別為</p>
 <ul>
-<li>[i-1][j]，[i][j-1]，[i-1][j-1]<br>
+<li>[i-1][j]，[i][j-1]，[i-1][j-1]
 這3個位置必須都為1才能形成一個方形，因此我們可以使用兩次min操作來檢查這3個位置是否都為1，我們就是記住對角線的元素是否為1且上下area是否為1，因此我們會將dp[i][j]的結果與size做比較，最後取平方。</li>
 </ul>
 <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">## Code C++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="keyword">int</span> maximalSquare(<span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;char&gt;&gt;&amp; <span class="keyword">matrix</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="keyword">matrix</span>.<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="keyword">matrix</span>[<span class="number">0</span>].<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;dp(m, <span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">size</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">// row, col, init</span></span><br><span class="line">                <span class="keyword">if</span> ( !i || !j || <span class="keyword">matrix</span>[i][j] == <span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">matrix</span>[i][j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">min</span>(<span class="keyword">min</span>(dp[i][j<span class="number">-1</span>], dp[i<span class="number">-1</span>][j]), dp[i<span class="number">-1</span>][j<span class="number">-1</span>]) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">size</span> = <span class="keyword">max</span>(<span class="keyword">size</span>, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">size</span> * <span class="keyword">size</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Time complexity: $O(mn)$ 巡過整個矩陣需要的次數</li>
-<li>Space complexity: $O(mn)$ 需要m * n的空間來儲存運算結果</li>
+<li>Time complexity: <span class="math inline">\(O(mn)\)</span>
+巡過整個矩陣需要的次數</li>
+<li>Space complexity: <span class="math inline">\(O(mn)\)</span> 需要m *
+n的空間來儲存運算結果</li>
 </ul>
 
     </div>
@@ -385,7 +388,8 @@ Output: 0</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 221. Maximal Square</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solve-1-Button-Up-DP-Memoization"><span class="nav-number">1.3.</span> <span class="nav-text">Solve 1 Button Up DP (Memoization)</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#leetcode-221.-maximal-square"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 221. Maximal Square</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#description"><span class="nav-number">1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#example"><span class="nav-number">1.2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solve-1-button-up-dp-memoization"><span class="nav-number">1.3.</span> <span class="nav-text">Solve 1 Button Up DP
+(Memoization)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -465,13 +469,13 @@ Output: 0</p>
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">23k</span>
+    <span title="Symbols count total">8k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">21 mins.</span>
+    <span title="Reading time total">28 mins.</span>
 </div><div>
   <span id="sitetime"></span>
   <script language=javascript>

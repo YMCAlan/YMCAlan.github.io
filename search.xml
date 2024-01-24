@@ -1,35 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Cervical Lymph Node Classification</title>
+    <url>/2023/08/06/Cervical-Lymph-Node-Classification/</url>
+    <content><![CDATA[<h1 id="論文標題">論文標題</h1>
+<p>基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類</p>
+<p>RBKD: Relational-Based Knowledge Distillation with Cross-Attention
+for Multi-Layer Distillation in Ultrasound Elastography Cervical Lymph
+Node Image Classification</p>
+<h2 id="簡介">簡介</h2>
+<p>淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預訓練，並透過知識蒸餾提高模型的準確性。</p>
+<h2 id="方法">方法</h2>
+<p>我們使用自蒸餾(self-distillation)訓練方法來訓練模型，並透過交互注意力的方式來將知識傳遞給學生模型，我們的訓練方式稱為RBKD，全名為
+Relational-Based Knowledge Distillation with Cross-Attention for
+Multi-Layer Distillation，架構如下圖所示 <img src="images/Cervical-Lymph-Node-Classification/rbkd.png" alt="rbkd.png"></p>
+<p>以上圖為例，首先輸入兩張經過資料增強的影像進入到老師與學生網路，接著我們提取出中間的特徵，通過我們所設計的CLCA模塊來將特徵進行轉換並計算損失函數。</p>
+<p>接著我們介紹CLCA模塊。</p>
+<p>CLCA為Cross-layer Cross-attention
+module，主要用於將前後兩層大小不同的特徵進行萃取，並進行交互注意力機制的作用。
+<img src="images/Cervical-Lymph-Node-Classification/clca.png" alt="clca.png"></p>
+<p>以上圖為例，我們將兩張不同大小的特徵圖經過Sample來進行上下採樣的動作，接著輸入進Projection，來將特徵轉換至更高維特徵空間進行學習，這邊要注意到經過採樣的特徵圖會與其原本的特徵圖經過相同的Projection，接著輸入進Cross-Attetion
+Module來進行交互注意力機制的作用，最後得到輸出來計算損失函數。</p>
+<h2 id="結論">結論</h2>
+<p>在我們的實驗當中，我們比較了監督式學習以及相關自監督式方法[47]進行比較，由結果看出，在不使用自監督式訓練的情況下，模型無法有效地判斷惡性腫瘤資料，但使用自監督式學習後在Sensitivity部分上升了許多，接著與我們提出的RBKD的方法，在F1-Score部分，與監督式學習提升了2.97%，與自監督式方法提升了0.62%，在Sensitivity則分別提高15.8%，以及2.97%。實驗結果證明我們所提出的方法可以有效地提取惡性腫瘤的特徵並辨識出來。
+<img src="images/Cervical-Lymph-Node-Classification/result.png" alt="result.png"></p>
+<p>[47] M. Caron et al., "Emerging properties in self-supervised vision
+transformers," in Proceedings of the IEEE/CVF international conference
+on computer vision, 2021, pp. 9650-9660.</p>
+]]></content>
+      <categories>
+        <category>Project</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Apply Network augmentation on YOLOV8</title>
     <url>/2023/08/06/Apply-Network-Augmentation-On-YOLOv8&#39;/</url>
-    <content><![CDATA[<h1>應用網路增強於YOLOv8輕量化模型</h1>
+    <content><![CDATA[<h1 id="應用網路增強於yolov8輕量化模型">應用網路增強於YOLOv8輕量化模型</h1>
 <h2 id="概述">概述</h2>
 <p>網路增強為訓練輕量化模型的一種訓練方法，透過動態調整模型大小來訓練模型，解決輕量化模型在訓練時under-fitting的問題，我們嘗試將此方法使用用YOLOv8物件偵測輕量化模型上，並且設計出專用api來將網路增強的模型轉換至原生yolov8模型，實作上具有相容性。</p>
 <h2 id="網路架構">網路架構</h2>
 <p>以下為yolov8模型架構圖以及子架構圖。</p>
 <ul>
 <li>Bootlenck為yolov8中主要組成的module，Bottleneck能夠靈活地調整輸入維度的特徵，同時又可以減少計算量。</li>
-<li>c2f(Faster Implementation of CSP Bottleneck with 2 convolutions)<br>
-為Yolov8中重要的module，c2f借鑒了在yolov7當中的E-ELAN的方法，讓模型訓練時可以保留豐富且多樣化梯度流資訊。<br>
-<img src="images/Yolov8/module.png" alt="module.png"><br>
-<img src="images/Yolov8/arch.png" alt="arch.png"></li>
+<li>c2f(Faster Implementation of CSP Bottleneck with 2 convolutions)
+為Yolov8中重要的module，c2f借鑒了在yolov7當中的E-ELAN的方法，讓模型訓練時可以保留豐富且多樣化梯度流資訊。
+<img src="images/Yolov8/module.png" alt="module.png"> <img src="images/Yolov8/arch.png" alt="arch.png"></li>
 </ul>
 <h2 id="訓練過程">訓練過程</h2>
-<p>下圖為Network Augmentation訓練示意圖，每一個step，我們會將圖片輸入進兩個模型，一個為Base Model，<br>
-另一個為Aug Model，這兩個模型差異為模型寬度不同且大模型的部分權重來自小模型，接著我們將模型輸出與真實標籤計算損失函數，並進行反向傳播的動作，<br>
-這樣的方法可以變相地幫助小模型進行學習。<br>
-<img src="images/Yolov8/train_process.png" alt="arch_aug.png"></p>
-<p>以下為網路增強後網路的示意圖。<br>
-<img src="images/Yolov8/arch_aug.png" alt="arch_aug.png"></p>
+<p>下圖為Network
+Augmentation訓練示意圖，每一個step，我們會將圖片輸入進兩個模型，一個為Base
+Model， 另一個為Aug
+Model，這兩個模型差異為模型寬度不同且大模型的部分權重來自小模型，接著我們將模型輸出與真實標籤計算損失函數，並進行反向傳播的動作，
+這樣的方法可以變相地幫助小模型進行學習。 <img src="images/Yolov8/train_process.png" alt="arch_aug.png"></p>
+<p>以下為網路增強後網路的示意圖。 <img src="images/Yolov8/arch_aug.png" alt="arch_aug.png"></p>
 <h2 id="總結">總結</h2>
-<p>在使用網路增強後，對比於原本監督式學習方法，mAP0.50:<br>
+<p>在使用網路增強後，對比於原本監督式學習方法，mAP0.50:
 0.95提升了0.07，由於我們使用網路架構對比原始paper更加複雜，任務也不一樣，所需要的特徵也不一樣，因此NetAug可能會傷害到物件偵測模型的效果。</p>
-<p><img src="images/Yolov8/result.png" alt="result.png"></p>
+<figure>
+<img src="images/Yolov8/result.png" alt="result.png">
+<figcaption aria-hidden="true">result.png</figcaption>
+</figure>
 <h2 id="參考">參考</h2>
 <blockquote>
-<p>Cai, H., Gan, C., Lin, J., &amp; Han, S. (2021). Network augmentation for tiny deep learning. <em>arXiv preprint arXiv:<br>
-2110.08890</em>.</p>
+<p>Cai, H., Gan, C., Lin, J., &amp; Han, S. (2021). Network augmentation
+for tiny deep learning. <em>arXiv preprint arXiv: 2110.08890</em>.</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -43,9 +81,10 @@
   <entry>
     <title>KnowledgeDistillation-On-YOLOv7</title>
     <url>/2023/10/04/KnowledgeDistillation-On-YOLOv7/</url>
-    <content><![CDATA[<h1>使用知識蒸餾於YOLOv7輕量化模型</h1>
+    <content><![CDATA[<h1 id="使用知識蒸餾於yolov7輕量化模型">使用知識蒸餾於YOLOv7輕量化模型</h1>
 <h2 id="概述">概述</h2>
-<p>知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized KD以及Cross Attention KD的方法來進行訓練。</p>
+<p>知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized
+KD以及Cross Attention KD的方法來進行訓練。</p>
 <h2 id="網路架構">網路架構</h2>
 <p>以下為YOLOv7網路架構，包含了Backbone、Neck、Head三個部分。</p>
 <ul>
@@ -53,29 +92,52 @@
 <li>Neck由ELAN-Eˇ並採用FPN以及PAN方式進行串接。</li>
 <li>Head由RepConv以及IK隱性知識組成。</li>
 </ul>
-<p><img src="images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="yolov7_arch.png"></p>
+<figure>
+<img src="images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="yolov7_arch.png">
+<figcaption aria-hidden="true">yolov7_arch.png</figcaption>
+</figure>
 <p>以下為YOLOv7使用的小模組。</p>
 <ul>
 <li>CBS為convolution、Batchnorm以及SiLU的組合。</li>
 <li>ELAN為YOLOv7提出架構，藉由concate不同層級的Conv輸出的</li>
 </ul>
-<p><img src="images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="yolov7_sub_arch.png"></p>
+<figure>
+<img src="images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="yolov7_sub_arch.png">
+<figcaption aria-hidden="true">yolov7_sub_arch.png</figcaption>
+</figure>
 <h2 id="訓練方法">訓練方法</h2>
-<p>我們所使用的知識蒸餾方法為Feature以及Logit KD，首先輸出一張影像進入到老師與學生網路，得到其中間層輸出的特徵層以及輸出，接著將中間輸出的特徵層通過CAKD Module，並計算CAKD Loss，接著將輸出計算KD Loss，以及學生的輸出計算Supervised Loss，最後將所有損失函數加總起來，並反向傳播到學生網路。</p>
-<p><img src="images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="kd_arch.png"></p>
-<p>我們設計了一個簡單的交叉注意力機制，首先將老師與學生網路特徵層攤平，接著進行矩陣乘法後通過softmax，變得到了一張Attention map接著再將老師特徵圖再乘過去，這樣的設計目的為先得到一張老師對學生特徵圖的Attention map，接著將老師不同通道特徵透Attention map中的權重進行線性組合，再與學生特徵去進行損失函數的計算。<br>
-<img src="images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
-<p>接著我們使用Customized KD方法，基本概念就是在計算除了Supervised Loss以外了Loss，再更新前去計算其梯度的相似程度，由於監督式學習仰賴標籤來進行訓練，因此來額外的其他Loss函數的梯度與Supervised Loss梯度的相似度，如果其更新方向大於90度變代表加入這個Loss以後並沒有幫助到學習。<br>
+<p>我們所使用的知識蒸餾方法為Feature以及Logit
+KD，首先輸出一張影像進入到老師與學生網路，得到其中間層輸出的特徵層以及輸出，接著將中間輸出的特徵層通過CAKD
+Module，並計算CAKD Loss，接著將輸出計算KD
+Loss，以及學生的輸出計算Supervised
+Loss，最後將所有損失函數加總起來，並反向傳播到學生網路。</p>
+<figure>
+<img src="images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="kd_arch.png">
+<figcaption aria-hidden="true">kd_arch.png</figcaption>
+</figure>
+<p>我們設計了一個簡單的交叉注意力機制，首先將老師與學生網路特徵層攤平，接著進行矩陣乘法後通過softmax，變得到了一張Attention
+map接著再將老師特徵圖再乘過去，這樣的設計目的為先得到一張老師對學生特徵圖的Attention
+map，接著將老師不同通道特徵透Attention
+map中的權重進行線性組合，再與學生特徵去進行損失函數的計算。 <img src="images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
+<p>接著我們使用Customized KD方法，基本概念就是在計算除了Supervised
+Loss以外了Loss，再更新前去計算其梯度的相似程度，由於監督式學習仰賴標籤來進行訓練，因此來額外的其他Loss函數的梯度與Supervised
+Loss梯度的相似度，如果其更新方向大於90度變代表加入這個Loss以後並沒有幫助到學習。
 <img src="images/KnowledgeDistillation-On-Yolov7/CKD.png" alt="CKD.png"></p>
 <h2 id="結果">結果</h2>
-<p>在我們的實現數據中，對比了只使用Supervised learning以及KD的結果，結果顯示使用Customized KD以及注意力機制KD可以將𝑚𝐴𝑃0.5和𝑚𝐴𝑃0.5:0.95分別提升2.78%和0.96%。<br>
-<img src="images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png" alt="YOLOv7_result.png"></p>
+<p>在我們的實現數據中，對比了只使用Supervised
+learning以及KD的結果，結果顯示使用Customized
+KD以及注意力機制KD可以將𝑚𝐴𝑃0.5和𝑚𝐴𝑃0.5:0.95分別提升2.78%和0.96%。 <img src="images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png" alt="YOLOv7_result.png"></p>
 <h2 id="參考">參考</h2>
 <blockquote>
-<p>Zhu, Yichen, and Yi Wang. “Student customized knowledge distillation: Bridging the gap between student and teacher.” Proceedings of the IEEE/CVF International Conference on Computer Vision. 2021.</p>
+<p>Zhu, Yichen, and Yi Wang. "Student customized knowledge distillation:
+Bridging the gap between student and teacher." Proceedings of the
+IEEE/CVF International Conference on Computer Vision. 2021.</p>
 </blockquote>
 <blockquote>
-<p>Wang, Chien-Yao, Alexey Bochkovskiy, and Hong-Yuan Mark Liao. “YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors.” Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2023.</p>
+<p>Wang, Chien-Yao, Alexey Bochkovskiy, and Hong-Yuan Mark Liao.
+"YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for
+real-time object detectors." Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition. 2023.</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -86,75 +148,43 @@
       </tags>
   </entry>
   <entry>
-    <title>Cervical Lymph Node Classification</title>
-    <url>/2023/08/06/Cervical-Lymph-Node-Classification/</url>
-    <content><![CDATA[<h1>論文標題</h1>
-<p>基於關聯知識蒸餾與交叉注意力的多層次蒸餾於頸部淋巴結彈性超音波影像分類</p>
-<p>RBKD: Relational-Based Knowledge Distillation with Cross-Attention for Multi-Layer Distillation in Ultrasound Elastography Cervical Lymph Node Image Classification</p>
-<h2 id="簡介">簡介</h2>
-<p>淋巴結在免疫系統中起著關鍵作用，抵禦外來病毒和細菌入侵。頸部淋巴結腫瘤的診斷通常需要耗時且需要醫生依賴病人的生活習慣和理學檢查。為了解決這個問題，彈性超音波影像成為另一種選擇，先進行影像檢查，再根據結果決定是否需要進一步的診斷。然而，彈性超音波影像中的特徵不明顯，增加了醫生的判斷困難。因此，我們採用深度學習來尋找良性和惡性腫瘤之間的特徵，以提高診斷準確性。我們使用自監督式學習方法進行預訓練，並透過知識蒸餾提高模型的準確性。</p>
-<h2 id="方法">方法</h2>
-<p>我們使用自蒸餾(self-distillation)訓練方法來訓練模型，並透過交互注意力的方式來將知識傳遞給學生模型，我們的訓練方式稱為RBKD，全名為<br>
-Relational-Based Knowledge Distillation with Cross-Attention for Multi-Layer Distillation，架構如下圖所示<br>
-<img src="images/Cervical-Lymph-Node-Classification/rbkd.png" alt="rbkd.png"></p>
-<p>以上圖為例，首先輸入兩張經過資料增強的影像進入到老師與學生網路，接著我們提取出中間的特徵，通過我們所設計的CLCA模塊來將特徵進行轉換並計算損失函數。</p>
-<p>接著我們介紹CLCA模塊。</p>
-<p>CLCA為Cross-layer Cross-attention module，主要用於將前後兩層大小不同的特徵進行萃取，並進行交互注意力機制的作用。<br>
-<img src="images/Cervical-Lymph-Node-Classification/clca.png" alt="clca.png"></p>
-<p>以上圖為例，我們將兩張不同大小的特徵圖經過Sample來進行上下採樣的動作，接著輸入進Projection，來將特徵轉換至更高維特徵空間進行學習，這邊要注意到經過採樣的特徵圖會與其原本的特徵圖經過相同的Projection，接著輸入進Cross-Attetion Module來進行交互注意力機制的作用，最後得到輸出來計算損失函數。</p>
-<h2 id="結論">結論</h2>
-<p>在我們的實驗當中，我們比較了監督式學習以及相關自監督式方法[47]進行比較，由結果看出，在不使用自監督式訓練的情況下，模型無法有效地判斷惡性腫瘤資料，但使用自監督式學習後在Sensitivity部分上升了許多，接著與我們提出的RBKD的方法，在F1-Score部分，與監督式學習提升了2.97%，與自監督式方法提升了0.62%，在Sensitivity則分別提高15.8%，以及2.97%。實驗結果證明我們所提出的方法可以有效地提取惡性腫瘤的特徵並辨識出來。<br>
-<img src="images/Cervical-Lymph-Node-Classification/result.png" alt="result.png"></p>
-<p>[47]	M. Caron et al., “Emerging properties in self-supervised vision transformers,” in Proceedings of the IEEE/CVF international conference on computer vision, 2021, pp. 9650-9660.</p>
-]]></content>
-      <categories>
-        <category>Project</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode 1137.N-th Tribonacci Number</title>
     <url>/2023/09/13/LeetCode-1137-N-th-Tribonacci-Number/</url>
-    <content><![CDATA[<h1>LeetCode 1137. N-th Tribonacci Number</h1>
+    <content><![CDATA[<h1 id="leetcode-1137.-n-th-tribonacci-number">LeetCode 1137. N-th
+Tribonacci Number</h1>
 <p><a href="https://leetcode.com/problems/n-th-tribonacci-number/">Link</a></p>
-<h2 id="Description">Description</h2>
-<p>The Tribonacci sequence Tn is defined as follows:<br>
-T0 = 0, T1 = 1, T2 = 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n &gt;= 0.<br>
-Given n, return the value of Tn.</p>
-<h2 id="Example">Example</h2>
+<h2 id="description">Description</h2>
+<p>The Tribonacci sequence Tn is defined as follows: T0 = 0, T1 = 1, T2
+= 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n &gt;= 0. Given n, return the
+value of Tn.</p>
+<h2 id="example">Example</h2>
 <p>Example 1:</p>
-<p>Input: n = 4<br>
-Output: 4<br>
-Explanation:<br>
-T_3 = 0 + 1 + 1 = 2<br>
-T_4 = 1 + 1 + 2 = 4<br>
-Example 2:</p>
-<p>Input: n = 25<br>
-Output: 1389537</p>
-<p><strong>Tags:</strong><br>
-<code>Dynamic Programming(DP)</code></p>
-<h2 id="Solve-1">Solve 1</h2>
+<p>Input: n = 4 Output: 4 Explanation: T_3 = 0 + 1 + 1 = 2 T_4 = 1 + 1 +
+2 = 4 Example 2:</p>
+<p>Input: n = 25 Output: 1389537</p>
+<p><strong>Tags:</strong> <code>Dynamic Programming(DP)</code></p>
+<h2 id="solve-1">Solve 1</h2>
 <p>此題跟費波那契數列解題方式基本一樣，使用Recursive方式解題。</p>
 <figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta">## Code C++</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tribonacci(n<span class="number">-1</span>) + tribonacci(n<span class="number">-2</span>) + tribonacci(n<span class="number">-3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>不過這段程式碼在測資是不過的，時間複雜度超過了。</p>
-<ul>
-<li>Time complexity: $O(3^n)$ 每個項下面都會分成3個項目，以Tree方式看其每一個子運算都會以指數量級增長</li>
-<li>Space complexity: $O(n)$ 需要n層來儲存調用Function的狀態.</li>
-</ul>
-<h2 id="Solve-2">Solve 2</h2>
+<p>不過這段程式碼在測資是不過的，時間複雜度超過了。 * Time complexity:
+<span class="math inline">\(O(3^n)\)</span>
+每個項下面都會分成3個項目，以Tree方式看其每一個子運算都會以指數量級增長
+* Space complexity: <span class="math inline">\(O(n)\)</span>
+需要n層來儲存調用Function的狀態.</p>
+<h2 id="solve-2">Solve 2</h2>
 <p>先初始化基本條件，藉由陣列索引的方式來做DP。</p>
 <figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        vector&lt;<span class="built_in">int</span>&gt; arr&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                arr.push<span class="constructor">_back(<span class="params">arr</span>[<span class="params">i</span>-1] + <span class="params">arr</span>[<span class="params">i</span>-2] + <span class="params">arr</span>[<span class="params">i</span>-3])</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Time complexity: $O(n)$ 一個迴圈就搞定了。</li>
-<li>Space complexity: $O(n)$ 需要長度為n+1的陣列來儲存運算好的數值。</li>
+<li>Time complexity: <span class="math inline">\(O(n)\)</span>
+一個迴圈就搞定了。</li>
+<li>Space complexity: <span class="math inline">\(O(n)\)</span>
+需要長度為n+1的陣列來儲存運算好的數值。</li>
 </ul>
 <h2 id="結論">結論</h2>
 <p>在實作上都不要使用Recursive避免時間複雜度爆炸影響效率。</p>
-<h1>參考</h1>
-<p><a href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度 —遞迴(上)</a></p>
+<h1 id="參考">參考</h1>
+<p><a href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度
+—遞迴(上)</a></p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -164,35 +194,134 @@ Output: 1389537</p>
       </tags>
   </entry>
   <entry>
+    <title>LeetCode-746-Min Cost Climbing Stairs</title>
+    <url>/2023/09/18/LeetCode-746-Min-Cost-Climbing-Stairs/</url>
+    <content><![CDATA[<h1 id="leetcode-746.-min-cost-climbing-stairs">LeetCode 746. Min Cost
+Climbing Stairs</h1>
+<p><a href="https://leetcode.com/problems/min-cost-climbing-stairs/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
+<h2 id="description">Description</h2>
+<p>You are given an integer array cost where cost[i] is the cost of ith
+step on a staircase. Once you pay the cost, you can either climb one or
+two steps.</p>
+<p>You can either start from the step with index 0, or the step with
+index 1.</p>
+<p>Return the minimum cost to reach the top of the floor.</p>
+<h2 id="example">Example</h2>
+<p>Example 1:</p>
+<p>Input: cost = [10,15,20] Output: 15 Explanation: You will start at
+index 1. - Pay 15 and climb two steps to reach the top. The total cost
+is 15. Example 2:</p>
+<p>Input: cost = [1,100,1,1,1,100,1,1,100,1] Output: 6 Explanation: You
+will start at index 0. - Pay 1 and climb two steps to reach index 2. -
+Pay 1 and climb two steps to reach index 4. - Pay 1 and climb two steps
+to reach index 6. - Pay 1 and climb one step to reach index 7. - Pay 1
+and climb two steps to reach index 9. - Pay 1 and climb one step to
+reach the top. The total cost is 6.</p>
+<p><strong>Tags:</strong>
+<code>Dynamic Programming(DP)</code>,<code>Easy</code></p>
+<h2 id="solve-1-button-up-dp-memoization">Solve 1 Button Up DP
+(Memoization)</h2>
+<p>跟爬梯子題目變化版，題目為找到最小爬梯子所需要的成本，我們需要累加每一次的cost，因此需要加上cost[i]，那基本case為cost[0]、cost[1]先複製到dp
+array上，接著我們推論dp[2]，
+dp[2]有可能接受來自step1的dp[2-1]或者step2的dp[2-2]，因此我們要比較他們的大小，這樣dp[i]就被推導出來。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = cost.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(l, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; l; i++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">min</span>(dp[i<span class="number">-1</span>], dp[i<span class="number">-2</span>]) + cost[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dp[l<span class="number">-1</span>], dp[l<span class="number">-2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: <span class="math inline">\(O(n)\)</span>
+需跑n次</li>
+<li>Space complexity: <span class="math inline">\(O(n)\)</span>
+需要n的空間來儲存運算結果</li>
+</ul>
+<h2 id="solve-2-optimization-dp---reduce-on-space-to-o1">Solve 2
+Optimization DP - Reduce <span class="math inline">\(O(n)\)</span> space
+to <span class="math inline">\(O(1)\)</span></h2>
+<p>Space complexity
+優化版，從題目我們可以看出只需要去比較來自step1的cost或來自step2的cost，所以我們可以只使用兩個變數來儲存他們。</p>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> minCostClimbingStairs(vector&lt;<span class="built_in">int</span>&gt;&amp; cost) &#123;</span><br><span class="line">        <span class="built_in">int</span> n = cost.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">int</span> curr = cost[<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">int</span> prev = cost[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        for (<span class="built_in">int</span> i = <span class="number">2</span> ; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">int</span> temp = <span class="built_in">min</span>(curr, prev) + cost[i];</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(curr, prev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: <span class="math inline">\(O(n)\)</span>
+需跑n次</li>
+<li>Space complexity: <span class="math inline">\(O(1)\)</span>
+只需要兩個變數來儲存運算結果，不論n有多大</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-221-Maximal-Square</title>
+    <url>/2023/09/21/LeetCode-221-Maximal-Square/</url>
+    <content><![CDATA[<h1 id="leetcode-221.-maximal-square">LeetCode 221. Maximal Square</h1>
+<p><a href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
+<h2 id="description">Description</h2>
+<p>Given an m x n binary matrix filled with 0's and 1's, find the
+largest square containing only 1's and return its area.</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg"></p>
+<h2 id="example">Example</h2>
+<p>Example 1:</p>
+<p>Input: matrix =
+[["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+Output: 4</p>
+<p>Example 2:</p>
+<p>Input: matrix = [["0","1"],["1","0"]] Output: 1</p>
+<p>Example 3:</p>
+<p>Input: matrix = [["0"]] Output: 0</p>
+<p><strong>Tags:</strong>
+<code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
+<h2 id="solve-1-button-up-dp-memoization">Solve 1 Button Up DP
+(Memoization)</h2>
+<p>題目要求找出最大的方塊的面積，首先我們需要推導出通式，對於i,j索引，我們要檢查3個位置分別為</p>
+<ul>
+<li>[i-1][j]，[i][j-1]，[i-1][j-1]
+這3個位置必須都為1才能形成一個方形，因此我們可以使用兩次min操作來檢查這3個位置是否都為1，我們就是記住對角線的元素是否為1且上下area是否為1，因此我們會將dp[i][j]的結果與size做比較，最後取平方。</li>
+</ul>
+<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="keyword">int</span> maximalSquare(<span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;char&gt;&gt;&amp; <span class="keyword">matrix</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="keyword">matrix</span>.<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="keyword">matrix</span>[<span class="number">0</span>].<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;dp(m, <span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">size</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">// row, col, init</span></span><br><span class="line">                <span class="keyword">if</span> ( !i || !j || <span class="keyword">matrix</span>[i][j] == <span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">matrix</span>[i][j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">min</span>(<span class="keyword">min</span>(dp[i][j<span class="number">-1</span>], dp[i<span class="number">-1</span>][j]), dp[i<span class="number">-1</span>][j<span class="number">-1</span>]) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">size</span> = <span class="keyword">max</span>(<span class="keyword">size</span>, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">size</span> * <span class="keyword">size</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: <span class="math inline">\(O(mn)\)</span>
+巡過整個矩陣需要的次數</li>
+<li>Space complexity: <span class="math inline">\(O(mn)\)</span> 需要m *
+n的空間來儲存運算結果</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>LeetCode 198. House Robber</title>
     <url>/2023/09/13/LeetCode-198-House-Robber/</url>
-    <content><![CDATA[<h1>LeetCode 198. House Robber</h1>
+    <content><![CDATA[<h1 id="leetcode-198.-house-robber">LeetCode 198. House Robber</h1>
 <p><a href="https://leetcode.com/problems/house-robber/description/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
-<h2 id="Description">Description</h2>
-<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
-<p>Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.</p>
-<h2 id="Example">Example</h2>
+<h2 id="description">Description</h2>
+<p>You are a professional robber planning to rob houses along a street.
+Each house has a certain amount of money stashed, the only constraint
+stopping you from robbing each of them is that adjacent houses have
+security systems connected and it will automatically contact the police
+if two adjacent houses were broken into on the same night.</p>
+<p>Given an integer array nums representing the amount of money of each
+house, return the maximum amount of money you can rob tonight without
+alerting the police.</p>
+<h2 id="example">Example</h2>
 <p>Example 1:</p>
-<p>Input: nums = [1,2,3,1]<br>
-Output: 4<br>
-Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).<br>
-Total amount you can rob = 1 + 3 = 4.<br>
-Example 2:</p>
-<p>Input: nums = [2,7,9,3,1]<br>
-Output: 12<br>
-Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).<br>
-Total amount you can rob = 2 + 9 + 1 = 12.</p>
-<p>Constraints:<br>
-1 &lt;= nums.length &lt;= 100<br>
-0 &lt;= nums[i] &lt;= 400</p>
-<p><strong>Tags:</strong><br>
-<code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
-<h2 id="Solve-1">Solve 1</h2>
-<p>題目基本上就是找一個陣列當中，隔行元素相加求最大值問題，從Example2觀察可以得知 2 + 9 + 1 這個情況是由 2 + 9 往後推導出來的，接著 2 + 9 是由 2 推導出來的，因此我們變可以將問題轉換成子問題，首先處理只有兩個元素的情況，就是去比較第一跟第二元素的大小，再來處理之後的情況，每次比較大小需要加上當前nums[i]的大小進去比較，這樣才可以有累加的效果出現。</p>
+<p>Input: nums = [1,2,3,1] Output: 4 Explanation: Rob house 1 (money =
+1) and then rob house 3 (money = 3). Total amount you can rob = 1 + 3 =
+4. Example 2:</p>
+<p>Input: nums = [2,7,9,3,1] Output: 12 Explanation: Rob house 1 (money
+= 2), rob house 3 (money = 9) and rob house 5 (money = 1). Total amount
+you can rob = 2 + 9 + 1 = 12.</p>
+<p>Constraints: 1 &lt;= nums.length &lt;= 100 0 &lt;= nums[i] &lt;=
+400</p>
+<h2 id="solve-1">Solve 1</h2>
+<p>題目基本上就是找一個陣列當中，隔行元素相加求最大值問題，從Example2觀察可以得知
+2 + 9 + 1 這個情況是由 2 + 9 往後推導出來的，接著 2 + 9 是由 2
+推導出來的，因此我們變可以將問題轉換成子問題，首先處理只有兩個元素的情況，就是去比較第一跟第二元素的大小，再來處理之後的情況，每次比較大小需要加上當前nums[i]的大小進去比較，這樣才可以有累加的效果出現。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// nums: [2, 7, 9, 3, 1]</span></span><br><span class="line">        <span class="comment">// Ex2:  [2, 0, 0, 0, 0]</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-2</span>] + nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Time complexity: $O(n)$</li>
-<li>Space complexity: $O(n)$</li>
+<li>Time complexity: <span class="math inline">\(O(n)\)</span></li>
+<li>Space complexity: <span class="math inline">\(O(n)\)</span></li>
 </ul>
 ]]></content>
       <categories>
@@ -206,32 +335,30 @@ Total amount you can rob = 2 + 9 + 1 = 12.</p>
   <entry>
     <title>Leetcode-344 Reverse String</title>
     <url>/2024/01/04/Leetcode-344/</url>
-    <content><![CDATA[<h1>Intuition</h1>
+    <content><![CDATA[<h1 id="intuition">Intuition</h1>
 <!-- Describe your first thoughts on how to solve this problem. -->
-<p>反轉字串為經典題目，題目要求只能以空間複雜度 $$o(n)$$，也就是能in-place去操作字元。<br>
+<p>反轉字串為經典題目，題目要求只能以空間複雜度 <span class="math display">\[o(n)\]</span>，也就是能in-place去操作字元。<br>
 首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>
 從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?<br>
 就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>
 我們可以透過雙指標法來處理這個問題。</p>
-<h1>Approach</h1>
+<h1 id="approach">Approach</h1>
 <p><code>start</code>:表示指向第一個位置的指標。<br>
 <code>end</code>:表示指向最後一個位置的指標。<br>
 邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code>。<br>
 每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。</p>
-<h1>Complexity</h1>
+<h1 id="complexity">Complexity</h1>
 <ul>
-<li>Time complexity: $$O(n)$$</li>
+<li><p>Time complexity: <span class="math display">\[O(n)\]</span>
+<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
+<li><p>Space complexity: <span class="math display">\[O(1)\]</span>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
 </ul>
-<!-- Add your time complexity here, e.g. $$O(n)$$ -->
-<ul>
-<li>Space complexity: $$O(1)$$</li>
-</ul>
-<!-- Add your space complexity here, e.g. $$O(n)$$ -->
-<h1>Code</h1>
+<h1 id="code">Code</h1>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--)&#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1>Code</h1>
+<h1 id="code-1">Code</h1>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++)&#123;</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h1>Code</h1>
+<h1 id="code-2">Code</h1>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
@@ -244,28 +371,27 @@ Total amount you can rob = 2 + 9 + 1 = 12.</p>
   <entry>
     <title>矩陣概念與指標在C語言中</title>
     <url>/2023/12/19/array-in-c/</url>
-    <content><![CDATA[<h1>Introduction</h1>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
 <p>陣列為一種在記憶體空間連續分布的資料型態，陣列中的東西我們稱作元素(element)，陣列能夠透過元素的索引(index)來取得資料。</p>
-<h1>Array in C</h1>
+<h1 id="array-in-c">Array in C</h1>
 <p>以下為宣告陣列一個方式，arr宣告成有5個元素的矩陣，元素資料型態為int。<br>
-在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出 4 * 5 byte。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
-<p>輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure>
-<h1><code>arr</code> vs <code>&amp;arr</code></h1>
-<p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure>
+在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出
+4 * 5 byte。 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure></p>
+<h1 id="arr-vs-arr"><code>arr</code> vs <code>&amp;arr</code></h1>
+<p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">arr = <span class="number">0061F</span>F0C</span><br><span class="line">&amp;arr = <span class="number">0061F</span>F0C</span><br></pre></td></tr></table></figure>
-<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。<br>
+<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。
 但是當對陣列使用<code>&amp;</code>，會回傳指標並且指向的是一個陣列並且需要特定的長度，所以其形態為<code>int(*)[5]</code>，很明顯的看到這兩個東西雖然有相同一樣的數值，但所表現出來的東西是完全不同的。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* ptr = arr;</span><br><span class="line"><span class="type">int</span> (*ptr2arr)[<span class="number">5</span>] = &amp;arr;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr      is %p\n&quot;</span>, (<span class="type">void</span>*)arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr     is %p\n&quot;</span>, (<span class="type">void</span>*)&amp;arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr + 1  is %p\n&quot;</span>, (<span class="type">void</span>*)(arr + <span class="number">1</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr + 1 is %p\n&quot;</span>, (<span class="type">void</span>*)(&amp;arr + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<p><code>ptr + 1</code> 代表從 arr[0] -&gt; arr[1]<br>
-而 <code>&amp;arr + 1</code> 代表從 int(<em>)[5] -&gt; int (</em>)[5]<br>
-<code>&amp;arr + 1</code> 位移了一整個陣列的大小。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure>
-<h1><code>*(&amp;arr + 1)</code></h1>
-<p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值<br>
+<p><code>ptr + 1</code> 代表從 arr[0] -&gt; arr[1] 而
+<code>&amp;arr + 1</code> 代表從 int(<em>)[5] -&gt; int (</em>)[5]
+<code>&amp;arr + 1</code> 位移了一整個陣列的大小。 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure></p>
+<h1 id="arr-1"><code>*(&amp;arr + 1)</code></h1>
+<p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值
 ，<code>&amp;arr</code>為指標指向一個陣列，所以裡面存放的是一個陣列的地址，所以取值後我們會得到是指標，陣列會隱性轉型成指向第一個陣列的指標喔。</p>
 ]]></content>
       <categories>
@@ -275,25 +401,27 @@ Total amount you can rob = 2 + 9 + 1 = 12.</p>
   <entry>
     <title>Leetcode-Daily-1743</title>
     <url>/2023/11/10/Leetcode-Daily-1743/</url>
-    <content><![CDATA[<h1>LeetCode 1743. Restore the Array From Adjacent Pairs</h1>
+    <content><![CDATA[<h1 id="leetcode-1743.-restore-the-array-from-adjacent-pairs">LeetCode
+1743. Restore the Array From Adjacent Pairs</h1>
 <p><a href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&amp;envId=2023-11-10">Link</a></p>
-<h1>Intuition</h1>
-<p>雖然題目為給定相鄰矩陣來回推本來陣列是甚麼，但將圖畫出來其實就可以看出這題是一個關於無向圖的traversal，那麼我們會遇到的問題就是如何找到起始位置，因此我們透過map STL中資料型態先建構一張圖，<br>
-map中第一個元素為節點數值，第二元素則為其連接的節點數值，由於有多個連接點的可能，我們宣告其為vector<int>，接著我們檢查連接點數量是否為1來決定是否為圖中的根結點，找到節點後我們只要透過DFS來尋過整張圖就好，由於這張圖其實就是linked List，<br>
+<h1 id="intuition">Intuition</h1>
+<p>雖然題目為給定相鄰矩陣來回推本來陣列是甚麼，但將圖畫出來其實就可以看出這題是一個關於無向圖的traversal，那麼我們會遇到的問題就是如何找到起始位置，因此我們透過map
+STL中資料型態先建構一張圖，
+map中第一個元素為節點數值，第二元素則為其連接的節點數值，由於有多個連接點的可能，我們宣告其為vector<int>，接著我們檢查連接點數量是否為1來決定是否為圖中的根結點，找到節點後我們只要透過DFS來尋過整張圖就好，由於這張圖其實就是linked
+List，
 因此我們不需要任何的資料結構來儲存節點是否已經尋訪，我們只要使用prev變數來記住前一次節點是否尋過。</int></p>
-<h1>Approach</h1>
+<h1 id="approach">Approach</h1>
 <!-- Describe your approach to solving the problem. -->
-<h1>Complexity</h1>
+<h1 id="complexity">Complexity</h1>
 <ul>
-<li>Time complexity: $O(n)$</li>
+<li><p>Time complexity: <span class="math inline">\(O(n)\)</span>
+<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
+<li><p>Space complexity: <span class="math inline">\(O(n)\)</span>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
 </ul>
-<!-- Add your time complexity here, e.g. $$O(n)$$ -->
-<ul>
-<li>Space complexity: $O(n)$</li>
-</ul>
-<!-- Add your space complexity here, e.g. $$O(n)$$ -->
-<h1>Code</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">restoreArray</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; adjacentPairs)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = adjacentPairs.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : adjacentPairs)&#123;</span><br><span class="line">            mp[p[<span class="number">0</span>]].<span class="built_in">push_back</span>(p[<span class="number">1</span>]);</span><br><span class="line">            mp[p[<span class="number">1</span>]].<span class="built_in">push_back</span>(p[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> root = <span class="built_in">find_root</span>(mp);</span><br><span class="line">        <span class="built_in">dfs</span>(root, INT_MAX, mp, nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> prev, unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp,vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        nums.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> neigbor : mp[root])&#123;</span><br><span class="line">            <span class="keyword">if</span> (neigbor != prev)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(neigbor, root, mp, nums);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_root</span><span class="params">(unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: mp)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p.second.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">                root = p.first;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+<h1 id="code">Code</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">restoreArray</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; adjacentPairs)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = adjacentPairs.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : adjacentPairs)&#123;</span><br><span class="line">            mp[p[<span class="number">0</span>]].<span class="built_in">push_back</span>(p[<span class="number">1</span>]);</span><br><span class="line">            mp[p[<span class="number">1</span>]].<span class="built_in">push_back</span>(p[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> root = <span class="built_in">find_root</span>(mp);</span><br><span class="line">        <span class="built_in">dfs</span>(root, INT_MAX, mp, nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> prev, unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp,vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        nums.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> neigbor : mp[root])&#123;</span><br><span class="line">            <span class="keyword">if</span> (neigbor != prev)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(neigbor, root, mp, nums);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_root</span><span class="params">(unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: mp)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p.second.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">                root = p.first;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
@@ -302,63 +430,24 @@ map中第一個元素為節點數值，第二元素則為其連接的節點數�
       </tags>
   </entry>
   <entry>
-    <title>C語言中的變數宣告與解讀</title>
-    <url>/2023/12/16/define-and-read-in-c/</url>
-    <content><![CDATA[<h1>Introduction</h1>
-<p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
-<h1>Right-left Rule</h1>
-<p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
-<h2 id="符號">符號</h2>
-<p>以下有3個基本的運算子，</p>
+    <title>字元概念在C語言中</title>
+    <url>/2023/12/16/char-in-c/</url>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>在C語言中，如果要宣告一個字串是需要透過矩陣進行宣告的，不能像C++那樣去宣告string</p>
 <ul>
-<li><code>*</code>讀為 “指標指向的是” “as pointer to …” 只會在 (辨識字) 左邊出現</li>
-<li><code>[]</code>讀為 “陣列元素為” “array of …” 只會在 (辨識字) 右邊出現</li>
-<li><code>()</code>讀為 “函數回傳值” “function (parameter) returning” 只會在 (辨識字) 右邊出現</li>
+<li>宣告字串陣列，不給定長度情況下,
+結尾可能出現亂碼，由於沒有結束字符。</li>
 </ul>
-<p>辨識子就是函數名稱或變數名稱喔</p>
-<h1>步驟</h1>
-<ol>
-<li>找到辨識字，解讀為 xxx是 或者 xxx is/ as</li>
-<li>往辨識字的右邊看，如果看到
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c1[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of …</li>
-<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function returning …<br>
-直到遇到 單獨的 <code>)</code></li>
-<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
+<li>宣告字串陣列, 不給定長度形況下, 這樣才是安全的宣告方式</li>
 </ul>
-</li>
-<li>接著往辨識字的左邊看
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c2[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>*</code>  解讀為 指向的是， pointer to</li>
-<li><code>datatype</code> 就照念就好。</li>
+<li>宣告字串陣列, 使用兩個引號, 編譯器會自動加上'\0', 非常安全以及好用
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">char c3[] <span class="operator">=</span> <span class="string">&quot;abc&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li>宣告字串陣列,給定長度以及初始化的值 <figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">char c4<span class="selector-attr">[50]</span>;</span><br><span class="line"><span class="built_in">memset</span>(&amp;c4, &#x27;*&#x27;, sizeof(c4));</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
-</ol>
-<h1>以下為不合法的C語言宣告</h1>
-<ul>
-<li><code>[]()</code> 沒有陣列中的元素是函數</li>
-<li><code>()()</code> 沒有函數中回傳函數</li>
-<li><code>()[]</code> 沒有函數回傳陣列<br>
-但我們可以將其變成指標來使其合法</li>
-</ul>
-<h1>Example</h1>
-<p><code>int *ptr</code><br>
-declare ptr as pointer to <code>int</code><br>
-宣告一個ptr指向整數型別的指標</p>
-<p><code>int (*compare)(void*, void*)</code><br>
-declare compare as pointer to function (pointer to void, pointer to void) returning int<br>
-宣告一個compare的指標函數，其參數為(*void, *void),其回傳值為<code>int</code></p>
-<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code><br>
-declare d as pointer to function(ref to int, pointer to function (char*, char**) returning pointer to pointer to char) returning pointer to pointer to void.</p>
-<p><code>int ptr[]()</code><br>
-不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br>
-<code>int (*ptr[])()</code>  declare ptr as the array of pointer to function returning int</p>
-<h1>Reference</h1>
-<blockquote>
-<p><a href="https://magicjackting.pixnet.net/blog/post/60889356#note4">https://magicjackting.pixnet.net/blog/post/60889356#note4</a><br>
-<a href="https://hackmd.io/@sysprog/c-pointer">https://hackmd.io/@sysprog/c-pointer</a><br>
-<a href="https://cdecl.org/">https://cdecl.org/</a> 幫你翻譯宣告的網站</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>C</category>
@@ -367,73 +456,134 @@ declare d as pointer to function(ref to int, pointer to function (char*, char**)
   <entry>
     <title>Const &amp; Static &amp; Extern 在C語言</title>
     <url>/2023/12/28/const-static-c/</url>
-    <content><![CDATA[<h1><code>const</code> Introduction</h1>
-<p><code>const</code> 縮寫自 constant，代表 “恆定不變的”，是用來定義常量變數的關鍵字。</p>
+    <content><![CDATA[<h1 id="const-introduction"><code>const</code> Introduction</h1>
+<p><code>const</code> 縮寫自 constant，代表
+"恆定不變的"，是用來定義常量變數的關鍵字。</p>
 <ul>
-<li>被 <code>const</code> 修飾的變數不能更改，僅能進行讀取。</li>
-<li>被 <code>const</code> 修飾的函數參數在函數內不能被修改，這樣做作為一種保護機制，防止意外修改。不過，函數在使用時傳入的參數可以不是常量。</li>
+<li>被 <code>const</code> 修飾的變數不能更改，僅能進行讀取。<br>
+</li>
+<li>被 <code>const</code>
+修飾的函數參數在函數內不能被修改，這樣做作為一種保護機制，防止意外修改。不過，函數在使用時傳入的參數可以不是常量。</li>
 </ul>
-<p>備註:<br>
+<p>備註:
 <code>const int *p;</code>解讀為<code>p</code>為指標指向常量int(指向常量的指標)，指標可更改，但指向物不行更改。<br>
 <code>int* const p;</code>解讀為<code>p</code>為常量指標指向int，指標不可改，但指向內容物可以改。<br>
 <code>const int* const p;</code>解讀為<code>p</code>為常量指標指向常量int，皆不可以改。<br>
 基本上解讀原則會在<code>*</code>左右兩邊。<br>
-如果在星號左邊，表示某個靜態的資料型態，因此<code>const int *p;</code> == <code>int const *p</code>;這個是特例，都在星號左邊因此解讀上是一樣的。<br>
+如果在星號左邊，表示某個靜態的資料型態，因此<code>const int *p;</code>
+==
+<code>int const *p</code>;這個是特例，都在星號左邊因此解讀上是一樣的。<br>
 如果在星號右邊，則表示指標是常量。</p>
-<h1><code>static</code> Introduction</h1>
+<h1 id="static-introduction"><code>static</code> Introduction</h1>
 <p>Static表示靜態，能夠修改變數的儲存區域和生命週期，</p>
 <ul>
-<li>
-<p>靜態局部變數，在函數內被使用時只會初始化一次，可以維持某個函數中的狀態。</p>
+<li><p>靜態局部變數，在函數內被使用時只會初始化一次，可以維持某個函數中的狀態。</p>
 <ul>
 <li><strong>作用域</strong> : 僅限於宣告它的函數。</li>
 <li><strong>在函數外不可見</strong>：即便是在同一檔案的其他函數中也無法訪問。</li>
-</ul>
-</li>
-<li>
-<p>靜態全局變數，限制其使用範圍，只能在其對應到的檔案使用，避免命名衝突。</p>
+</ul></li>
+<li><p>靜態全局變數，限制其使用範圍，只能在其對應到的檔案使用，避免命名衝突。</p>
 <ul>
 <li><strong>作用域</strong>：限定在宣告它的檔案（編譯單位）。</li>
 <li><strong>檔案內可見</strong>：可以在檔案內的任何函數中訪問，但在其他檔案中不可見。</li>
-</ul>
-</li>
-<li>
-<p>靜態函數，與靜態變數一樣，只能在定義的檔案中使用，避免命名衝突。</p>
+</ul></li>
+<li><p>靜態函數，與靜態變數一樣，只能在定義的檔案中使用，避免命名衝突。</p>
 <ul>
 <li><strong>作用域</strong>：同樣也是限定在宣告它的檔案。</li>
 <li><strong>檔案內可見</strong>：只能在同一檔案中的其他函數中呼叫，無法在其他檔案中被呼叫。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1><code>Extern</code> Introduction</h1>
+<h1 id="extern-introduction"><code>Extern</code> Introduction</h1>
 <p><code>Extern</code>允許被修飾變數在不同的source file中被使用。</p>
-<p><code>extern &quot;C&quot;</code>讓在c++中也可以使用c的函示庫，不會造成命名衝突。</p>
+<p><code>extern "C"</code>讓在c++中也可以使用c的函示庫，不會造成命名衝突。</p>
 ]]></content>
       <categories>
         <category>C</category>
       </categories>
   </entry>
   <entry>
-    <title>字元概念在C語言中</title>
-    <url>/2023/12/16/char-in-c/</url>
-    <content><![CDATA[<h1>Introduction</h1>
-<p>在C語言中，如果要宣告一個字串是需要透過矩陣進行宣告的，不能像C++那樣去宣告string</p>
+    <title>C語言中的變數宣告與解讀</title>
+    <url>/2023/12/16/define-and-read-in-c/</url>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
+<h1 id="right-left-rule">Right-left Rule</h1>
+<p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
+<h2 id="符號">符號</h2>
+<p>以下有3個基本的運算子，</p>
 <ul>
-<li>宣告字串陣列，不給定長度情況下, 結尾可能出現亂碼，由於沒有結束字符。</li>
+<li><code>*</code>讀為 "指標指向的是" "as pointer to ..." 只會在
+(辨識字) 左邊出現</li>
+<li><code>[]</code>讀為 "陣列元素為" "array of ..." 只會在 (辨識字)
+右邊出現</li>
+<li><code>()</code>讀為 "函數回傳值" "function (parameter) returning"
+只會在 (辨識字) 右邊出現</li>
 </ul>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c1[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>辨識子就是函數名稱或變數名稱喔</p>
+<h1 id="步驟">步驟</h1>
+<ol type="1">
+<li>找到辨識字，解讀為 xxx是 或者 xxx is/ as</li>
+<li>往辨識字的右邊看，如果看到
 <ul>
-<li>宣告字串陣列, 不給定長度形況下, 這樣才是安全的宣告方式</li>
-</ul>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> c2[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of
+...</li>
+<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function
+returning ... 直到遇到 單獨的 <code>)</code></li>
+<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
+</ul></li>
+<li>接著往辨識字的左邊看
 <ul>
-<li>宣告字串陣列, 使用兩個引號, 編譯器會自動加上’\0’, 非常安全以及好用</li>
-</ul>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">char c3[] <span class="operator">=</span> <span class="string">&quot;abc&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<li><code>*</code> 解讀為 指向的是， pointer to</li>
+<li><code>datatype</code> 就照念就好。</li>
+</ul></li>
+</ol>
+<h1 id="以下為不合法的c語言宣告">以下為不合法的C語言宣告</h1>
 <ul>
-<li>宣告字串陣列,給定長度以及初始化的值</li>
+<li><code>[]()</code> 沒有陣列中的元素是函數</li>
+<li><code>()()</code> 沒有函數中回傳函數</li>
+<li><code>()[]</code> 沒有函數回傳陣列
+但我們可以將其變成指標來使其合法</li>
 </ul>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">char c4<span class="selector-attr">[50]</span>;</span><br><span class="line"><span class="built_in">memset</span>(&amp;c4, &#x27;*&#x27;, sizeof(c4));</span><br></pre></td></tr></table></figure>
+<h1 id="example">Example</h1>
+<p><code>int *ptr</code> declare ptr as pointer to <code>int</code>
+宣告一個ptr指向整數型別的指標</p>
+<p><code>int (*compare)(void*, void*)</code> declare compare as pointer
+to function (pointer to void, pointer to void) returning int<br>
+宣告一個compare的指標函數，其參數為(<em>void,
+</em>void),其回傳值為<code>int</code></p>
+<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code>
+declare d as pointer to function(ref to int, pointer to function (char*,
+char**) returning pointer to pointer to char) returning pointer to
+pointer to void.</p>
+<p><code>int ptr[]()</code>
+不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br>
+<code>int (*ptr[])()</code> declare ptr as the array of pointer to
+function returning int</p>
+<h1 id="reference">Reference</h1>
+<blockquote>
+<p>https://magicjackting.pixnet.net/blog/post/60889356#note4<br>
+https://hackmd.io/<span class="citation" data-cites="sysprog/c-pointer">@sysprog/c-pointer</span><br>
+https://cdecl.org/ 幫你翻譯宣告的網站</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>泛型程式設計在C語言中</title>
+    <url>/2023/12/18/generics-in-c/</url>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成
+* void* 指向void指標，使用強制轉型。 * macro(巨集)
+使用字元替換方式操作。 * _Generic(C11)</p>
+<h1 id="void">Void*</h1>
+<p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked
+list中指向不同型別的資料。
+使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
+<h1 id="macro">Macro</h1>
+<p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
+<h1 id="generic">_Generic</h1>
+<p>C11才有的關鍵字，</p>
 ]]></content>
       <categories>
         <category>C</category>
@@ -442,21 +592,23 @@ declare d as pointer to function(ref to int, pointer to function (char*, char**)
   <entry>
     <title>物件導向概念</title>
     <url>/2023/12/20/oop/</url>
-    <content><![CDATA[<h1>Introduction</h1>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
 <p>物件導向是程式設計中的一種概念，將程式中的元素視為一種物件，這些物件可以被賦予屬性、方法等等。此物件可以是抽象或現實中的實體概念。例如，車子具備汽油、座位等屬性，而其方法包括向前、向後等。</p>
-<h1>Definition</h1>
-<h2 id="Object">Object</h2>
+<h1 id="definition">Definition</h1>
+<h2 id="object">Object</h2>
 <p>對資料或行為的一種封裝，封裝成一個基本的模塊。物件可以是實體或抽象概念。</p>
-<h2 id="Class">Class</h2>
+<h2 id="class">Class</h2>
 <p>描述物件的抽象模板，基本上會定義一個物件有甚麼樣的屬性或方法，其實就是設計圖啦。</p>
-<h2 id="Instance">Instance</h2>
-<p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class 可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
-<h1>3 Concepts in OOP</h1>
-<h2 id="Inheritance-繼承">Inheritance 繼承</h2>
+<h2 id="instance">Instance</h2>
+<p>類別內實體化時的名稱，或者說宣告成立時，對於相同的 class
+可以實例化不同的類別屬性。每一個實例的狀態都可以不一樣或相同，彼此獨立。</p>
+<h1 id="concepts-in-oop">3 Concepts in OOP</h1>
+<h2 id="inheritance-繼承">Inheritance 繼承</h2>
 <p>繼承能夠擴展一個類別的屬性的同時保有原始類別屬性的一個方法。例如，球有很多種，如籃球、棒球、橄欖球，但它們背後都有一個抽象概念，即形狀。因此，可以定義一個類別為形狀，而這些球就是其擴展後的結果。我們稱作子類，而形狀我們就稱作父類。</p>
-<h2 id="Encapsulation-封裝">Encapsulation 封裝</h2>
-<p>將方法或屬性設置存取權限，在 C++ 中可以使用 public/private/protected 來控制權限。</p>
-<h2 id="Polymorphism-多型">Polymorphism 多型</h2>
+<h2 id="encapsulation-封裝">Encapsulation 封裝</h2>
+<p>將方法或屬性設置存取權限，在 C++ 中可以使用 public/private/protected
+來控制權限。</p>
+<h2 id="polymorphism-多型">Polymorphism 多型</h2>
 <p>對於一個方法，是否有不同的結果。在射擊遊戲中，左鍵為射擊，右鍵為開鏡。同樣是滑鼠點擊的事件，但效果卻不一樣，這就是多型。</p>
 <ul>
 <li>Function Overriding (覆寫): 允許子類重新覆蓋父類方法。</li>
@@ -473,7 +625,8 @@ declare d as pointer to function(ref to int, pointer to function (char*, char**)
     繼承-->函數覆寫;
     繼承-->函數重載;
     方法-.-函數覆寫;
-    方法-.-函數重載;</pre>]]></content>
+    方法-.-函數重載;</pre>
+]]></content>
       <categories>
         <category>OOP</category>
       </categories>
@@ -482,37 +635,15 @@ declare d as pointer to function(ref to int, pointer to function (char*, char**)
       </tags>
   </entry>
   <entry>
-    <title>泛型程式設計在C語言中</title>
-    <url>/2023/12/18/generics-in-c/</url>
-    <content><![CDATA[<h1>Introduction</h1>
-<p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成</p>
-<ul>
-<li>void* 指向void指標，使用強制轉型。</li>
-<li>macro(巨集) 使用字元替換方式操作。</li>
-<li>_Generic(C11)</li>
-</ul>
-<h1>Void*</h1>
-<p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked list中指向不同型別的資料。<br>
-使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
-<h1>Macro</h1>
-<p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
-<h1>_Generic</h1>
-<p>C11才有的關鍵字，</p>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-  </entry>
-  <entry>
     <title>實作Stack堆疊使用C語言</title>
     <url>/2023/12/17/stack-c/</url>
-    <content><![CDATA[<h1>Introduction</h1>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
 <p>Stack為堆疊，為一種資料結構之一，先進入的資料會到後面才處理。</p>
 <ul>
 <li>First in First out (FIFO)</li>
 </ul>
 <p>ADT為抽象資料型態，將資料進行抽象化的動作，抽象化就是將一個概念或知識進行定義，只專注在這個資料是如何操作或使用的，並不用考慮其實作細節，這樣可以簡化程式設計師的負擔。</p>
-<h1>Method</h1>
+<h1 id="method">Method</h1>
 <p>以下列出Stack可以操作的方法</p>
 <ul>
 <li><code>createSTACK</code>:創建一個stack。</li>
@@ -523,12 +654,12 @@ declare d as pointer to function(ref to int, pointer to function (char*, char**)
 <li><code>isEmptyStack</code> :檢查是否為空的stack。</li>
 <li><code>sizeOfStack</code> :取得當前stack的大小。</li>
 </ul>
-<h1>ADT Implementation</h1>
-<p>在設計Stack上我們以Node來串接stack，每一個新進入的Node都會由stackTop所指向，而Node中的link則指向上一個Node，Node中以void*指標宣告，來接受任何型態的參數的指標。</p>
-<h2 id="Data-structure">Data structure</h2>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    Forward declaration</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stack</span> <span class="title">Stack</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stack_node</span> <span class="title">StackNode</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Definition of stack structure */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stack</span> &#123;</span></span><br><span class="line">    StackNode* top;  <span class="comment">// Pointer to the top node of the stack</span></span><br><span class="line">    <span class="type">int</span> size;         <span class="comment">// Current size of the stack</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Definition of stack node structure */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stack_node</span> &#123;</span></span><br><span class="line">    <span class="type">void</span>* data;            <span class="comment">// Pointer to the data stored in the node</span></span><br><span class="line">    StackNode* link;      <span class="comment">// Pointer to the next node in the stack</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="adt-implementation">ADT Implementation</h1>
+<p>在設計Stack上我們以Node來串接stack，每一個新進入的Node都會由stackTop所指向，而Node中的link則指向上一個Node，Node中以void*指標宣告，來接受任何型態的參數的指標。
+## Data structure <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    Forward declaration</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stack</span> <span class="title">Stack</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">stack_node</span> <span class="title">StackNode</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Definition of stack structure */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stack</span> &#123;</span></span><br><span class="line">    StackNode* top;  <span class="comment">// Pointer to the top node of the stack</span></span><br><span class="line">    <span class="type">int</span> size;         <span class="comment">// Current size of the stack</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Definition of stack node structure */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stack_node</span> &#123;</span></span><br><span class="line">    <span class="type">void</span>* data;            <span class="comment">// Pointer to the data stored in the node</span></span><br><span class="line">    StackNode* link;      <span class="comment">// Pointer to the next node in the stack</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Function prototypes */</span></span><br><span class="line"></span><br><span class="line">Stack* <span class="title function_">createStack</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyStack</span><span class="params">(Stack** stackPtr)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">pushStack</span><span class="params">(Stack* <span class="built_in">stack</span>, <span class="type">void</span>* dataInPtr)</span>;</span><br><span class="line"><span class="type">void</span>* <span class="title function_">popStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span>;</span><br><span class="line"><span class="type">void</span>* <span class="title function_">topStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmptyStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span>;</span><br><span class="line"><span class="type">int</span>	<span class="title function_">sizeOfStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">    Description: Creates a new stack and allocates memory for it.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Returns:</span></span><br><span class="line"><span class="comment">        - A pointer to the newly created stack, or NULL if memory allocation fails.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Stack* <span class="title function_">createStack</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Stack* <span class="built_in">stack</span> = (Stack*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Stack));</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">stack</span>) &#123;</span><br><span class="line">		<span class="built_in">stack</span>-&gt;size = <span class="number">0</span>;</span><br><span class="line">		<span class="built_in">stack</span>-&gt;top = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">stack</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Deallocates the resources occupied by the stack and sets the pointer to NULL.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stackPtr: Double pointer to the stack, pointing to the pointer to the stack.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyStack</span><span class="params">(Stack** stackPtr)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (stackPtr &amp;&amp; *stackPtr) &#123;</span><br><span class="line">		<span class="keyword">while</span> (!isEmptyStack(*stackPtr)) &#123;</span><br><span class="line">			popStack(*stackPtr);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">free</span>(*stackPtr);</span><br><span class="line">		*stackPtr = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Deallocates the resources occupied by the stack and sets the pointer to NULL.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stackPtr: Double pointer to the stack, pointing to the pointer to the stack.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">pushStack</span><span class="params">(Stack* <span class="built_in">stack</span>, <span class="type">void</span>* dataInPtr)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackNode* newPtr = (StackNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StackNode));</span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">stack</span> || !newPtr) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	newPtr-&gt;data = dataInPtr;</span><br><span class="line">	newPtr-&gt;link = <span class="built_in">stack</span>-&gt;top;</span><br><span class="line">	<span class="built_in">stack</span>-&gt;top = newPtr;</span><br><span class="line">	(<span class="built_in">stack</span>-&gt;size)++;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Removes and returns the top element from the stack.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stack: Pointer to the stack from which the element will be popped.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Returns:</span></span><br><span class="line"><span class="comment">		- A pointer to the data of the popped element, or NULL if the stack is empty.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">popStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (isEmptyStack(<span class="built_in">stack</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">void</span>* dataOutPtr = <span class="literal">NULL</span>;</span><br><span class="line">	StackNode* temp = <span class="built_in">stack</span>-&gt;top;</span><br><span class="line"></span><br><span class="line">	dataOutPtr = <span class="built_in">stack</span>-&gt;top-&gt;data;</span><br><span class="line">	<span class="built_in">stack</span>-&gt;top = <span class="built_in">stack</span>-&gt;top-&gt;link;</span><br><span class="line">	<span class="built_in">free</span>(temp);</span><br><span class="line">	(<span class="built_in">stack</span>-&gt;size)--;</span><br><span class="line">	<span class="keyword">return</span> dataOutPtr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Returns the data of the element at the top of the stack without removing it.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stack: Pointer to the stack for which the top element&#x27;s data will be retrieved.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Returns:</span></span><br><span class="line"><span class="comment">		- A pointer to the data of the top element, or NULL if the stack is empty.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">topStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (isEmptyStack(<span class="built_in">stack</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">stack</span>-&gt;top-&gt;data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Checks if the stack is empty.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stack: Pointer to the stack to be checked.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Returns:</span></span><br><span class="line"><span class="comment">		- true if the stack is empty or NULL, false otherwise.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmptyStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span>  (<span class="built_in">stack</span> == <span class="literal">NULL</span> || <span class="built_in">stack</span>-&gt;size == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Returns the current size of the stack.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stack: Pointer to the stack for which the size will be retrieved.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Returns:</span></span><br><span class="line"><span class="comment">		- The current size of the stack, or 0 if the stack is NULL.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sizeOfStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> (<span class="built_in">stack</span> != <span class="literal">NULL</span> ? <span class="built_in">stack</span>-&gt;size : <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">    Description: Creates a new stack and allocates memory for it.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Returns:</span></span><br><span class="line"><span class="comment">        - A pointer to the newly created stack, or NULL if memory allocation fails.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Stack* <span class="title function_">createStack</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Stack* <span class="built_in">stack</span> = (Stack*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Stack));</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">stack</span>) &#123;</span><br><span class="line">		<span class="built_in">stack</span>-&gt;size = <span class="number">0</span>;</span><br><span class="line">		<span class="built_in">stack</span>-&gt;top = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">stack</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Deallocates the resources occupied by the stack and sets the pointer to NULL.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stackPtr: Double pointer to the stack, pointing to the pointer to the stack.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyStack</span><span class="params">(Stack** stackPtr)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (stackPtr &amp;&amp; *stackPtr) &#123;</span><br><span class="line">		<span class="keyword">while</span> (!isEmptyStack(*stackPtr)) &#123;</span><br><span class="line">			popStack(*stackPtr);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">free</span>(*stackPtr);</span><br><span class="line">		*stackPtr = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Deallocates the resources occupied by the stack and sets the pointer to NULL.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stackPtr: Double pointer to the stack, pointing to the pointer to the stack.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">pushStack</span><span class="params">(Stack* <span class="built_in">stack</span>, <span class="type">void</span>* dataInPtr)</span></span><br><span class="line">&#123;</span><br><span class="line">	StackNode* newPtr = (StackNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(StackNode));</span><br><span class="line">	<span class="keyword">if</span> (!<span class="built_in">stack</span> || !newPtr) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	newPtr-&gt;data = dataInPtr;</span><br><span class="line">	newPtr-&gt;link = <span class="built_in">stack</span>-&gt;top;</span><br><span class="line">	<span class="built_in">stack</span>-&gt;top = newPtr;</span><br><span class="line">	(<span class="built_in">stack</span>-&gt;size)++;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Removes and returns the top element from the stack.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stack: Pointer to the stack from which the element will be popped.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Returns:</span></span><br><span class="line"><span class="comment">		- A pointer to the data of the popped element, or NULL if the stack is empty.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">popStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (isEmptyStack(<span class="built_in">stack</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">void</span>* dataOutPtr = <span class="literal">NULL</span>;</span><br><span class="line">	StackNode* temp = <span class="built_in">stack</span>-&gt;top;</span><br><span class="line"></span><br><span class="line">	dataOutPtr = <span class="built_in">stack</span>-&gt;top-&gt;data;</span><br><span class="line">	<span class="built_in">stack</span>-&gt;top = <span class="built_in">stack</span>-&gt;top-&gt;link;</span><br><span class="line">	<span class="built_in">free</span>(temp);</span><br><span class="line">	(<span class="built_in">stack</span>-&gt;size)--;</span><br><span class="line">	<span class="keyword">return</span> dataOutPtr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Returns the data of the element at the top of the stack without removing it.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stack: Pointer to the stack for which the top element&#x27;s data will be retrieved.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Returns:</span></span><br><span class="line"><span class="comment">		- A pointer to the data of the top element, or NULL if the stack is empty.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">topStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (isEmptyStack(<span class="built_in">stack</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">stack</span>-&gt;top-&gt;data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Checks if the stack is empty.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stack: Pointer to the stack to be checked.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Returns:</span></span><br><span class="line"><span class="comment">		- true if the stack is empty or NULL, false otherwise.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmptyStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span>  (<span class="built_in">stack</span> == <span class="literal">NULL</span> || <span class="built_in">stack</span>-&gt;size == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Description: Returns the current size of the stack.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Parameters:</span></span><br><span class="line"><span class="comment">		- stack: Pointer to the stack for which the size will be retrieved.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Returns:</span></span><br><span class="line"><span class="comment">		- The current size of the stack, or 0 if the stack is NULL.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sizeOfStack</span><span class="params">(Stack* <span class="built_in">stack</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> (<span class="built_in">stack</span> != <span class="literal">NULL</span> ? <span class="built_in">stack</span>-&gt;size : <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>C</category>
       </categories>
@@ -537,54 +668,16 @@ declare d as pointer to function(ref to int, pointer to function (char*, char**)
       </tags>
   </entry>
   <entry>
-    <title>LeetCode-221-Maximal-Square</title>
-    <url>/2023/09/21/LeetCode-221-Maximal-Square/</url>
-    <content><![CDATA[<h1>LeetCode 221. Maximal Square</h1>
-<p><a href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
-<h2 id="Description">Description</h2>
-<p>Given an m x n binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.</p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg" alt></p>
-<h2 id="Example">Example</h2>
-<p>Example 1:</p>
-<p>Input: matrix = [[“1”,“0”,“1”,“0”,“0”],[“1”,“0”,“1”,“1”,“1”],[“1”,“1”,“1”,“1”,“1”],[“1”,“0”,“0”,“1”,“0”]]<br>
-Output: 4</p>
-<p>Example 2:</p>
-<p>Input: matrix = [[“0”,“1”],[“1”,“0”]]<br>
-Output: 1</p>
-<p>Example 3:</p>
-<p>Input: matrix = [[“0”]]<br>
-Output: 0</p>
-<p><strong>Tags:</strong><br>
-<code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
-<h2 id="Solve-1-Button-Up-DP-Memoization">Solve 1 Button Up DP (Memoization)</h2>
-<p>題目要求找出最大的方塊的面積，首先我們需要推導出通式，對於i,j索引，我們要檢查3個位置分別為</p>
-<ul>
-<li>[i-1][j]，[i][j-1]，[i-1][j-1]<br>
-這3個位置必須都為1才能形成一個方形，因此我們可以使用兩次min操作來檢查這3個位置是否都為1，我們就是記住對角線的元素是否為1且上下area是否為1，因此我們會將dp[i][j]的結果與size做比較，最後取平方。</li>
-</ul>
-<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="keyword">int</span> maximalSquare(<span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;char&gt;&gt;&amp; <span class="keyword">matrix</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="keyword">matrix</span>.<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="keyword">matrix</span>[<span class="number">0</span>].<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;dp(m, <span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">size</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">// row, col, init</span></span><br><span class="line">                <span class="keyword">if</span> ( !i || !j || <span class="keyword">matrix</span>[i][j] == <span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">matrix</span>[i][j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">min</span>(<span class="keyword">min</span>(dp[i][j<span class="number">-1</span>], dp[i<span class="number">-1</span>][j]), dp[i<span class="number">-1</span>][j<span class="number">-1</span>]) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">size</span> = <span class="keyword">max</span>(<span class="keyword">size</span>, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">size</span> * <span class="keyword">size</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: $O(mn)$ 巡過整個矩陣需要的次數</li>
-<li>Space complexity: $O(mn)$ 需要m * n的空間來儲存運算結果</li>
-</ul>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>void*指標以及 void**指標的介紹與用法</title>
     <url>/2023/12/12/void-in-c/</url>
-    <content><![CDATA[<h1>Introduction</h1>
-<p><code>void</code>為C語言中關鍵字，<br>
-<code>void</code>為c/c++中的內建類型功能有3種</p>
-<ul>
-<li>函數回傳void，表示不會會傳任何值。</li>
-<li>用於函數參數，表示此函數不接受任何參數，Ex <code>void func(void);</code></li>
-<li>用於指標宣告時，表示此指標為通用的，可以進行強制轉型。</li>
-</ul>
-<h1>Example</h1>
-<p><code>void*</code>指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型，能夠修改被指向的資料。<br>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
+<p><code>void</code>為C語言中關鍵字，
+<code>void</code>為c/c++中的內建類型功能有3種 *
+函數回傳void，表示不會會傳任何值。 *
+用於函數參數，表示此函數不接受任何參數，Ex <code>void func(void);</code>
+* 用於指標宣告時，表示此指標為通用的，可以進行強制轉型。</p>
+<h1 id="example">Example</h1>
+<p><code>void*</code>指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型，能夠修改被指向的資料。
 <code>void**</code>指標的指標，如果今天要更改指標指向的對象，就可以使用或者我們需要接受函數裡面變數的指標，就需要用到指標的指標來接受。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">set</span><span class="params">(<span class="type">void</span>* x)</span>&#123;</span><br><span class="line">    *(<span class="type">int</span>*)x = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_ptr</span><span class="params">(<span class="type">void</span>** x)</span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">9</span>;</span><br><span class="line">    *x = &amp;a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>* p_x = &amp;x; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    <span class="built_in">set</span>(p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, x);</span><br><span class="line"></span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    set_ptr((<span class="type">void</span>**)&amp;p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, *p_x);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -594,62 +687,6 @@ Output: 0</p>
       <tags>
         <tag>C</tag>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode-746-Min Cost Climbing Stairs</title>
-    <url>/2023/09/18/LeetCode-746-Min-Cost-Climbing-Stairs/</url>
-    <content><![CDATA[<h1>LeetCode 746. Min Cost Climbing Stairs</h1>
-<p><a href="https://leetcode.com/problems/min-cost-climbing-stairs/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
-<h2 id="Description">Description</h2>
-<p>You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.</p>
-<p>You can either start from the step with index 0, or the step with index 1.</p>
-<p>Return the minimum cost to reach the top of the floor.</p>
-<h2 id="Example">Example</h2>
-<p>Example 1:</p>
-<p>Input: cost = [10,15,20]<br>
-Output: 15<br>
-Explanation: You will start at index 1.</p>
-<ul>
-<li>Pay 15 and climb two steps to reach the top.<br>
-The total cost is 15.<br>
-Example 2:</li>
-</ul>
-<p>Input: cost = [1,100,1,1,1,100,1,1,100,1]<br>
-Output: 6<br>
-Explanation: You will start at index 0.</p>
-<ul>
-<li>Pay 1 and climb two steps to reach index 2.</li>
-<li>Pay 1 and climb two steps to reach index 4.</li>
-<li>Pay 1 and climb two steps to reach index 6.</li>
-<li>Pay 1 and climb one step to reach index 7.</li>
-<li>Pay 1 and climb two steps to reach index 9.</li>
-<li>Pay 1 and climb one step to reach the top.<br>
-The total cost is 6.</li>
-</ul>
-<p><strong>Tags:</strong><br>
-<code>Dynamic Programming(DP)</code>,<code>Easy</code></p>
-<h2 id="Solve-1-Button-Up-DP-Memoization">Solve 1 Button Up DP (Memoization)</h2>
-<p>跟爬梯子題目變化版，題目為找到最小爬梯子所需要的成本，我們需要累加每一次的cost，因此需要加上cost[i]，那基本case為cost[0]、cost[1]先複製到dp array上，接著我們推論dp[2]，<br>
-dp[2]有可能接受來自step1的dp[2-1]或者step2的dp[2-2]，因此我們要比較他們的大小，這樣dp[i]就被推導出來。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minCostClimbingStairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = cost.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(l, <span class="number">0</span>);</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; l; i++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">min</span>(dp[i<span class="number">-1</span>], dp[i<span class="number">-2</span>]) + cost[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dp[l<span class="number">-1</span>], dp[l<span class="number">-2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: $O(n)$ 需跑n次</li>
-<li>Space complexity: $O(n)$ 需要n的空間來儲存運算結果</li>
-</ul>
-<h2 id="Solve-2-Optimization-DP-Reduce-O-n-space-to-O-1">Solve 2 Optimization DP - Reduce $O(n)$ space to $O(1)$</h2>
-<p>Space complexity 優化版，從題目我們可以看出只需要去比較來自step1的cost或來自step2的cost，所以我們可以只使用兩個變數來儲存他們。</p>
-<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> minCostClimbingStairs(vector&lt;<span class="built_in">int</span>&gt;&amp; cost) &#123;</span><br><span class="line">        <span class="built_in">int</span> n = cost.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">int</span> curr = cost[<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">int</span> prev = cost[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        for (<span class="built_in">int</span> i = <span class="number">2</span> ; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">int</span> temp = <span class="built_in">min</span>(curr, prev) + cost[i];</span><br><span class="line">            prev = curr;</span><br><span class="line">            curr = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(curr, prev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: $O(n)$ 需跑n次</li>
-<li>Space complexity: $O(1)$ 只需要兩個變數來儲存運算結果，不論n有多大</li>
-</ul>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>DP</tag>
       </tags>
   </entry>
 </search>
