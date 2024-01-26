@@ -134,17 +134,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">14</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">20</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -274,46 +274,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="const-introduction"><code>const</code> Introduction</h1>
-<p><code>const</code> 縮寫自 constant，代表
-"恆定不變的"，是用來定義常量變數的關鍵字。</p>
+        <h1><code>const</code> Introduction</h1>
+<p><code>const</code> 縮寫自 constant，代表 “恆定不變的”，是用來定義常量變數的關鍵字。</p>
 <ul>
-<li>被 <code>const</code> 修飾的變數不能更改，僅能進行讀取。<br>
-</li>
-<li>被 <code>const</code>
-修飾的函數參數在函數內不能被修改，這樣做作為一種保護機制，防止意外修改。不過，函數在使用時傳入的參數可以不是常量。</li>
+<li>被 <code>const</code> 修飾的變數不能更改，僅能進行讀取。</li>
+<li>被 <code>const</code> 修飾的函數參數在函數內不能被修改，這樣做作為一種保護機制，防止意外修改。不過，函數在使用時傳入的參數可以不是常量。</li>
 </ul>
-<p>備註:
+<p>備註:<br>
 <code>const int *p;</code>解讀為<code>p</code>為指標指向常量int(指向常量的指標)，指標可更改，但指向物不行更改。<br>
 <code>int* const p;</code>解讀為<code>p</code>為常量指標指向int，指標不可改，但指向內容物可以改。<br>
 <code>const int* const p;</code>解讀為<code>p</code>為常量指標指向常量int，皆不可以改。<br>
 基本上解讀原則會在<code>*</code>左右兩邊。<br>
-如果在星號左邊，表示某個靜態的資料型態，因此<code>const int *p;</code>
-==
-<code>int const *p</code>;這個是特例，都在星號左邊因此解讀上是一樣的。<br>
+如果在星號左邊，表示某個靜態的資料型態，因此<code>const int *p;</code> == <code>int const *p</code>;這個是特例，都在星號左邊因此解讀上是一樣的。<br>
 如果在星號右邊，則表示指標是常量。</p>
-<h1 id="static-introduction"><code>static</code> Introduction</h1>
+<h1><code>static</code> Introduction</h1>
 <p>Static表示靜態，能夠修改變數的儲存區域和生命週期，</p>
 <ul>
-<li><p>靜態局部變數，在函數內被使用時只會初始化一次，可以維持某個函數中的狀態。</p>
+<li>
+<p>靜態局部變數，在函數內被使用時只會初始化一次，可以維持某個函數中的狀態。</p>
 <ul>
 <li><strong>作用域</strong> : 僅限於宣告它的函數。</li>
 <li><strong>在函數外不可見</strong>：即便是在同一檔案的其他函數中也無法訪問。</li>
-</ul></li>
-<li><p>靜態全局變數，限制其使用範圍，只能在其對應到的檔案使用，避免命名衝突。</p>
+</ul>
+</li>
+<li>
+<p>靜態全局變數，限制其使用範圍，只能在其對應到的檔案使用，避免命名衝突。</p>
 <ul>
 <li><strong>作用域</strong>：限定在宣告它的檔案（編譯單位）。</li>
 <li><strong>檔案內可見</strong>：可以在檔案內的任何函數中訪問，但在其他檔案中不可見。</li>
-</ul></li>
-<li><p>靜態函數，與靜態變數一樣，只能在定義的檔案中使用，避免命名衝突。</p>
+</ul>
+</li>
+<li>
+<p>靜態函數，與靜態變數一樣，只能在定義的檔案中使用，避免命名衝突。</p>
 <ul>
 <li><strong>作用域</strong>：同樣也是限定在宣告它的檔案。</li>
 <li><strong>檔案內可見</strong>：只能在同一檔案中的其他函數中呼叫，無法在其他檔案中被呼叫。</li>
-</ul></li>
 </ul>
-<h1 id="extern-introduction"><code>Extern</code> Introduction</h1>
+</li>
+</ul>
+<h1><code>Extern</code> Introduction</h1>
 <p><code>Extern</code>允許被修飾變數在不同的source file中被使用。</p>
-<p><code>extern "C"</code>讓在c++中也可以使用c的函示庫，不會造成命名衝突。</p>
+<p><code>extern &quot;C&quot;</code>讓在c++中也可以使用c的函示庫，不會造成命名衝突。</p>
 
     </div>
 
@@ -395,7 +396,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#const-introduction"><span class="nav-number">1.</span> <span class="nav-text">const Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static-introduction"><span class="nav-number">2.</span> <span class="nav-text">static Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#extern-introduction"><span class="nav-number">3.</span> <span class="nav-text">Extern Introduction</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">const Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">static Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Extern Introduction</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -411,20 +412,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
