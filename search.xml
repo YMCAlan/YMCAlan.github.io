@@ -37,74 +37,6 @@ on computer vision, 2021, pp. 9650-9660.</p>
       </tags>
   </entry>
   <entry>
-    <title>LeetCode 198. House Robber</title>
-    <url>/2023/09/13/LeetCode-198-House-Robber/</url>
-    <content><![CDATA[<h1 id="leetcode-198.-house-robber">LeetCode 198. House Robber</h1>
-<p><a href="https://leetcode.com/problems/house-robber/description/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
-<h1 id="intuition">Intuition</h1>
-<p>題目基本上就是找一個陣列當中，隔行元素相加求最大值問題，從Example2觀察可以得知
-2 + 9 + 1 這個情況是由 2 + 9 往後推導出來的，<br>
-接著 2 + 9 是由 2 推導出來的，因此我們變可以將問題轉換成子問題。<br>
-首先處理只有兩個元素的情況，就是去比較第一跟第二元素的大小，再來處理之後的情況，每次比較大小需要加上當前nums[i]的大小進去比較，<br>
-這樣才可以有累加的效果出現。</p>
-<h1 id="approach">Approach</h1>
-<h1 id="complexity">Complexity</h1>
-<ul>
-<li><p>Time complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
-<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
-<li><p>Space complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
-<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>{</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// nums: [2, 7, 9, 3, 1]</span></span><br><span class="line">        <span class="comment">// Ex2:  [2, 0, 0, 0, 0]</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++){</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">1</span>){</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-2</span>] + nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span>{</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[n<span class="number">-1</span>];</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>Dynamic Programming</tag>
-        <tag>Medium</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode-221-Maximal-Square</title>
-    <url>/2023/09/21/LeetCode-221-Maximal-Square/</url>
-    <content><![CDATA[<h1 id="leetcode-221.-maximal-square">LeetCode 221. Maximal Square</h1>
-<p><a href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
-<h2 id="description">Description</h2>
-<p>Given an m x n binary matrix filled with 0's and 1's, find the
-largest square containing only 1's and return its area.</p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg"></p>
-<h2 id="example">Example</h2>
-<p>Example 1:</p>
-<p>Input: matrix =
-[["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
-Output: 4</p>
-<p>Example 2:</p>
-<p>Input: matrix = [["0","1"],["1","0"]] Output: 1</p>
-<p>Example 3:</p>
-<p>Input: matrix = [["0"]] Output: 0</p>
-<p><strong>Tags:</strong>
-<code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
-<h2 id="solve-1-button-up-dp-memoization">Solve 1 Button Up DP
-(Memoization)</h2>
-<p>題目要求找出最大的方塊的面積，首先我們需要推導出通式，對於i,j索引，我們要檢查3個位置分別為</p>
-<ul>
-<li>[i-1][j]，[i][j-1]，[i-1][j-1]
-這3個位置必須都為1才能形成一個方形，因此我們可以使用兩次min操作來檢查這3個位置是否都為1，我們就是記住對角線的元素是否為1且上下area是否為1，因此我們會將dp[i][j]的結果與size做比較，最後取平方。</li>
-</ul>
-<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="keyword">int</span> maximalSquare(<span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;char&gt;&gt;&amp; <span class="keyword">matrix</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="keyword">matrix</span>.<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="keyword">matrix</span>[<span class="number">0</span>].<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;dp(m, <span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">size</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">// row, col, init</span></span><br><span class="line">                <span class="keyword">if</span> ( !i || !j || <span class="keyword">matrix</span>[i][j] == <span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">matrix</span>[i][j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">min</span>(<span class="keyword">min</span>(dp[i][j<span class="number">-1</span>], dp[i<span class="number">-1</span>][j]), dp[i<span class="number">-1</span>][j<span class="number">-1</span>]) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">size</span> = <span class="keyword">max</span>(<span class="keyword">size</span>, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">size</span> * <span class="keyword">size</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: <span class="math inline">\(O(mn)\)</span>
-巡過整個矩陣需要的次數</li>
-<li>Space complexity: <span class="math inline">\(O(mn)\)</span> 需要m *
-n的空間來儲存運算結果</li>
-</ul>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>KnowledgeDistillation-On-YOLOv7</title>
     <url>/2023/10/04/KnowledgeDistillation-On-YOLOv7/</url>
     <content><![CDATA[<h1 id="使用知識蒸餾於yolov7輕量化模型">使用知識蒸餾於YOLOv7輕量化模型</h1>
@@ -174,227 +106,6 @@ Computer Vision and Pattern Recognition. 2023.</p>
       </tags>
   </entry>
   <entry>
-    <title>Leetcode 344 Reverse String</title>
-    <url>/2024/01/04/Leetcode-344/</url>
-    <content><![CDATA[<p><a href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a>
-# Intuition</p>
-<!-- Describe your first thoughts on how to solve this problem. -->
-<p>反轉字串為經典題目，題目要求只能以空間複雜度 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.215ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 1863 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"/></g><g data-mml-node="mo" transform="translate(485,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(874,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1474,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>，也就是能in-place去操作字元。<br>
-首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>
-從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?<br>
-就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>
-我們可以透過雙指標法來處理這個問題。</p>
-<h1 id="approach">Approach</h1>
-<p><code>start</code>:表示指向第一個位置的指標。<br>
-<code>end</code>:表示指向最後一個位置的指標。<br>
-邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code>。<br>
-每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。</p>
-<h1 id="complexity">Complexity</h1>
-<ul>
-<li><p>Time complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
-<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
-<li><p>Space complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
-<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
-</ul>
-<h1 id="code">Code</h1>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--){</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="code-1">Code</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++){</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-<h1 id="code-2">Code</h1>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>String</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Leetcode-Daily-1743</title>
-    <url>/2023/11/10/Leetcode-Daily-1743/</url>
-    <content><![CDATA[<h1 id="leetcode-1743.-restore-the-array-from-adjacent-pairs">LeetCode
-1743. Restore the Array From Adjacent Pairs</h1>
-<p><a href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&amp;envId=2023-11-10">Link</a></p>
-<h1 id="intuition">Intuition</h1>
-<p>雖然題目為給定相鄰矩陣來回推本來陣列是甚麼，但將圖畫出來其實就可以看出這題是一個關於無向圖的traversal，那麼我們會遇到的問題就是如何找到起始位置，因此我們透過map
-STL中資料型態先建構一張圖，
-map中第一個元素為節點數值，第二元素則為其連接的節點數值，由於有多個連接點的可能，我們宣告其為vector<int>，接著我們檢查連接點數量是否為1來決定是否為圖中的根結點，找到節點後我們只要透過DFS來尋過整張圖就好，由於這張圖其實就是linked
-List，
-因此我們不需要任何的資料結構來儲存節點是否已經尋訪，我們只要使用prev變數來記住前一次節點是否尋過。</int></p>
-<h1 id="approach">Approach</h1>
-<!-- Describe your approach to solving the problem. -->
-<h1 id="complexity">Complexity</h1>
-<ul>
-<li><p>Time complexity: <span class="math inline">\(O(n)\)</span>
-<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
-<li><p>Space complexity: <span class="math inline">\(O(n)\)</span>
-<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
-</ul>
-<h1 id="code">Code</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">restoreArray</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; adjacentPairs)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = adjacentPairs.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : adjacentPairs)&#123;</span><br><span class="line">            mp[p[<span class="number">0</span>]].<span class="built_in">push_back</span>(p[<span class="number">1</span>]);</span><br><span class="line">            mp[p[<span class="number">1</span>]].<span class="built_in">push_back</span>(p[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> root = <span class="built_in">find_root</span>(mp);</span><br><span class="line">        <span class="built_in">dfs</span>(root, INT_MAX, mp, nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> prev, unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp,vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        nums.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> neigbor : mp[root])&#123;</span><br><span class="line">            <span class="keyword">if</span> (neigbor != prev)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(neigbor, root, mp, nums);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_root</span><span class="params">(unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: mp)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p.second.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">                root = p.first;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>graph</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Apply Network augmentation on YOLOV8</title>
-    <url>/2023/08/06/Apply-Network-Augmentation-On-YOLOv8&#39;/</url>
-    <content><![CDATA[<h1 id="應用網路增強於yolov8輕量化模型">應用網路增強於YOLOv8輕量化模型</h1>
-<h2 id="概述">概述</h2>
-<p>網路增強為訓練輕量化模型的一種訓練方法，透過動態調整模型大小來訓練模型，解決輕量化模型在訓練時under-fitting的問題，我們嘗試將此方法使用用YOLOv8物件偵測輕量化模型上，並且設計出專用api來將網路增強的模型轉換至原生yolov8模型，實作上具有相容性。</p>
-<h2 id="網路架構">網路架構</h2>
-<p>以下為yolov8模型架構圖以及子架構圖。</p>
-<ul>
-<li>Bootlenck為yolov8中主要組成的module，Bottleneck能夠靈活地調整輸入維度的特徵，同時又可以減少計算量。</li>
-<li>c2f(Faster Implementation of CSP Bottleneck with 2 convolutions)
-為Yolov8中重要的module，c2f借鑒了在yolov7當中的E-ELAN的方法，讓模型訓練時可以保留豐富且多樣化梯度流資訊。
-<img src="images/Yolov8/module.png" alt="module.png"> <img src="images/Yolov8/arch.png" alt="arch.png"></li>
-</ul>
-<h2 id="訓練過程">訓練過程</h2>
-<p>下圖為Network
-Augmentation訓練示意圖，每一個step，我們會將圖片輸入進兩個模型，一個為Base
-Model， 另一個為Aug
-Model，這兩個模型差異為模型寬度不同且大模型的部分權重來自小模型，接著我們將模型輸出與真實標籤計算損失函數，並進行反向傳播的動作，
-這樣的方法可以變相地幫助小模型進行學習。 <img src="images/Yolov8/train_process.png" alt="arch_aug.png"></p>
-<p>以下為網路增強後網路的示意圖。 <img src="images/Yolov8/arch_aug.png" alt="arch_aug.png"></p>
-<h2 id="總結">總結</h2>
-<p>在使用網路增強後，對比於原本監督式學習方法，mAP0.50:
-0.95提升了0.07，由於我們使用網路架構對比原始paper更加複雜，任務也不一樣，所需要的特徵也不一樣，因此NetAug可能會傷害到物件偵測模型的效果。</p>
-<figure>
-<img src="images/Yolov8/result.png" alt="result.png">
-<figcaption aria-hidden="true">result.png</figcaption>
-</figure>
-<h2 id="參考">參考</h2>
-<blockquote>
-<p>Cai, H., Gan, C., Lin, J., &amp; Han, S. (2021). Network augmentation
-for tiny deep learning. <em>arXiv preprint arXiv: 2110.08890</em>.</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Project</category>
-      </categories>
-      <tags>
-        <tag>YOLO</tag>
-        <tag>Network Augmentation</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode 1137.N-th Tribonacci Number</title>
-    <url>/2023/09/13/LeetCode-1137-N-th-Tribonacci-Number/</url>
-    <content><![CDATA[<h1 id="leetcode-1137.-n-th-tribonacci-number">LeetCode 1137. N-th
-Tribonacci Number</h1>
-<p><a href="https://leetcode.com/problems/n-th-tribonacci-number/">Link</a></p>
-<h2 id="description">Description</h2>
-<p>The Tribonacci sequence Tn is defined as follows: T0 = 0, T1 = 1, T2
-= 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n &gt;= 0. Given n, return the
-value of Tn.</p>
-<h2 id="example">Example</h2>
-<p>Example 1:</p>
-<p>Input: n = 4 Output: 4 Explanation: T_3 = 0 + 1 + 1 = 2 T_4 = 1 + 1 +
-2 = 4 Example 2:</p>
-<p>Input: n = 25 Output: 1389537</p>
-<p><strong>Tags:</strong> <code>Dynamic Programming(DP)</code></p>
-<h2 id="solve-1">Solve 1</h2>
-<p>此題跟費波那契數列解題方式基本一樣，使用Recursive方式解題。</p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta">## Code C++</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tribonacci(n<span class="number">-1</span>) + tribonacci(n<span class="number">-2</span>) + tribonacci(n<span class="number">-3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>不過這段程式碼在測資是不過的，時間複雜度超過了。 * Time complexity:
-<span class="math inline">\(O(3^n)\)</span>
-每個項下面都會分成3個項目，以Tree方式看其每一個子運算都會以指數量級增長
-* Space complexity: <span class="math inline">\(O(n)\)</span>
-需要n層來儲存調用Function的狀態.</p>
-<h2 id="solve-2">Solve 2</h2>
-<p>先初始化基本條件，藉由陣列索引的方式來做DP。</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        vector&lt;<span class="built_in">int</span>&gt; arr&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                arr.push<span class="constructor">_back(<span class="params">arr</span>[<span class="params">i</span>-1] + <span class="params">arr</span>[<span class="params">i</span>-2] + <span class="params">arr</span>[<span class="params">i</span>-3])</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Time complexity: <span class="math inline">\(O(n)\)</span>
-一個迴圈就搞定了。</li>
-<li>Space complexity: <span class="math inline">\(O(n)\)</span>
-需要長度為n+1的陣列來儲存運算好的數值。</li>
-</ul>
-<h2 id="結論">結論</h2>
-<p>在實作上都不要使用Recursive避免時間複雜度爆炸影響效率。</p>
-<h1 id="參考">參考</h1>
-<p><a href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度
-—遞迴(上)</a></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>DP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>矩陣概念與指標在C語言中</title>
-    <url>/2023/12/19/array-in-c/</url>
-    <content><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>陣列為一種在記憶體空間連續分布的資料型態，陣列中的東西我們稱作元素(element)，陣列能夠透過元素的索引(index)來取得資料。</p>
-<h1 id="array-in-c">Array in C</h1>
-<p>以下為宣告陣列一個方式，arr宣告成有5個元素的矩陣，元素資料型態為int。<br>
-在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出
-4 * 5 byte。 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
-輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure></p>
-<h1 id="arr-vs-arr"><code>arr</code> vs <code>&amp;arr</code></h1>
-<p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">arr = <span class="number">0061F</span>F0C</span><br><span class="line">&amp;arr = <span class="number">0061F</span>F0C</span><br></pre></td></tr></table></figure>
-<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。
-但是當對陣列使用<code>&amp;</code>，會回傳指標並且指向的是一個陣列並且需要特定的長度，所以其形態為<code>int(*)[5]</code>，很明顯的看到這兩個東西雖然有相同一樣的數值，但所表現出來的東西是完全不同的。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* ptr = arr;</span><br><span class="line"><span class="type">int</span> (*ptr2arr)[<span class="number">5</span>] = &amp;arr;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr      is %p\n&quot;</span>, (<span class="type">void</span>*)arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr     is %p\n&quot;</span>, (<span class="type">void</span>*)&amp;arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr + 1  is %p\n&quot;</span>, (<span class="type">void</span>*)(arr + <span class="number">1</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr + 1 is %p\n&quot;</span>, (<span class="type">void</span>*)(&amp;arr + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<p><code>ptr + 1</code> 代表從 arr[0] -&gt; arr[1] 而
-<code>&amp;arr + 1</code> 代表從 int(<em>)[5] -&gt; int (</em>)[5]
-<code>&amp;arr + 1</code> 位移了一整個陣列的大小。 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure></p>
-<h1 id="arr-1"><code>*(&amp;arr + 1)</code></h1>
-<p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值
-，<code>&amp;arr</code>為指標指向一個陣列，所以裡面存放的是一個陣列的地址，所以取值後我們會得到是指標，陣列會隱性轉型成指向第一個陣列的指標喔。</p>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Leetcode-541</title>
-    <url>/2024/01/25/Leetcode-541/</url>
-    <content><![CDATA[<p><a href="https://leetcode.com/problems/reverse-string-ii/description/">link</a>
-# Intuition
-給定字串<code>s</code>以及整數<code>k</code>的情況下，翻轉在每<code>2k</code>個字母中前<code>k</code>個字母，題目考點在於對於邊界條件的設定與迴圈概念。<br>
-如果字串再最後不足<code>2k</code>個字串，一樣要翻轉前<code>k</code>個。
-* Loop condition * Bound condition
-<!-- Describe your first thoughts on how to solve this problem. --></p>
-<h1 id="approach">Approach</h1>
-<!-- Describe your approach to solving the problem. -->
-<p>首先我們需要一個取得子串長度<code>len</code>，迴圈的計數為從<code>0</code>開始每次跳<code>2k</code>元素，<br>
-所以是<code>for(int i = 0; i &lt; len; i += (2k)</code>。<br>
-接著是條件的設立，我們需要從第<code>i</code>個元素往後數<code>k - 1</code>個進行翻轉，這邊減一是因為包含第一個元素，<br>
-我們必須檢查是否超出字串長度大小，所以條件為<code>if (i + k - 1) &lt; len</code>，滿足條樣的條件便可以進行翻轉。
-否則只能翻轉到最後一個元素<code>reserve(s, i, len - 1)</code>。</p>
-<h1 id="complexity">Complexity</h1>
-<ul>
-<li>Time complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="8.788ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 3884.4 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(2252.2,0)"><path data-c="2217" d="M229 286Q216 420 216 436Q216 454 240 464Q241 464 245 464T251 465Q263 464 273 456T283 436Q283 419 277 356T270 286L328 328Q384 369 389 372T399 375Q412 375 423 365T435 338Q435 325 425 315Q420 312 357 282T289 250L355 219L425 184Q434 175 434 161Q434 146 425 136T401 125Q393 125 383 131T328 171L270 213Q283 79 283 63Q283 53 276 44T250 35Q231 35 224 44T216 63Q216 80 222 143T229 213L171 171Q115 130 110 127Q106 124 100 124Q87 124 76 134T64 161Q64 166 64 169T67 175T72 181T81 188T94 195T113 204T138 215T170 230T210 250L74 315Q65 324 65 338Q65 353 74 363T98 374Q106 374 116 368T171 328L229 286Z"/></g><g data-mml-node="mi" transform="translate(2974.4,0)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/></g><g data-mml-node="mo" transform="translate(3495.4,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
-<!-- Add your time complexity here, e.g. $$O(n)$$ -->
-外迴圈所執行的次數為<code>m = (len / 2k)</code>，<code>m</code>則是而reverse函數的則是執行<code>k / 2</code>次</li>
-<li>Space complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
-<!-- Add your space complexity here, e.g. $$O(n)$$ --></li>
-</ul>
-<h1 id="code">Code</h1>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span>* reverseStr(<span class="type">char</span>* s, <span class="type">int</span> k) {</span><br><span class="line">    <span class="type">int</span> len = strlen(s);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i += (<span class="number">2</span> * k)){</span><br><span class="line">        <span class="keyword">if</span> (i + k - <span class="number">1</span> &lt; len){</span><br><span class="line">            reverse(s, i, i + k - <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span>{</span><br><span class="line">            reverse(s, i, len - <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> reverse(<span class="type">char</span>* s, <span class="type">int</span> <span class="keyword">start</span>, <span class="type">int</span> <span class="keyword">end</span>){</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="keyword">start</span>, j = <span class="keyword">end</span>; i &lt; j; i++, j<span class="comment">--){</span></span><br><span class="line">        <span class="type">char</span> <span class="keyword">temp</span> = s[i];</span><br><span class="line">        s[i] = s[j];</span><br><span class="line">        s[j] = <span class="keyword">temp</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseStr</span><span class="params">(string s, <span class="type">int</span> k)</span> </span>{</span><br><span class="line">        <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i += <span class="number">2</span> * k){</span><br><span class="line">            <span class="keyword">if</span> (i + k &lt; size){</span><br><span class="line">                <span class="built_in">reverse</span>(s, i, i + k - <span class="number">1</span>);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span>{</span><br><span class="line">                <span class="built_in">reverse</span>(s, i, size - <span class="number">1</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string&amp;s , <span class="type">int</span> start, <span class="type">int</span> end)</span></span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--){</span><br><span class="line">            <span class="built_in">swap</span>(s[i], s[j]);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>String</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode-746-Min Cost Climbing Stairs</title>
     <url>/2023/09/18/LeetCode-746-Min-Cost-Climbing-Stairs/</url>
     <content><![CDATA[<h1 id="leetcode-746.-min-cost-climbing-stairs">LeetCode 746. Min Cost
@@ -453,6 +164,232 @@ to <span class="math inline">\(O(1)\)</span></h2>
       </tags>
   </entry>
   <entry>
+    <title>LeetCode 1137.N-th Tribonacci Number</title>
+    <url>/2023/09/13/LeetCode-1137-N-th-Tribonacci-Number/</url>
+    <content><![CDATA[<h1 id="leetcode-1137.-n-th-tribonacci-number">LeetCode 1137. N-th
+Tribonacci Number</h1>
+<p><a href="https://leetcode.com/problems/n-th-tribonacci-number/">Link</a></p>
+<h2 id="description">Description</h2>
+<p>The Tribonacci sequence Tn is defined as follows: T0 = 0, T1 = 1, T2
+= 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n &gt;= 0. Given n, return the
+value of Tn.</p>
+<h2 id="example">Example</h2>
+<p>Example 1:</p>
+<p>Input: n = 4 Output: 4 Explanation: T_3 = 0 + 1 + 1 = 2 T_4 = 1 + 1 +
+2 = 4 Example 2:</p>
+<p>Input: n = 25 Output: 1389537</p>
+<p><strong>Tags:</strong> <code>Dynamic Programming(DP)</code></p>
+<h2 id="solve-1">Solve 1</h2>
+<p>此題跟費波那契數列解題方式基本一樣，使用Recursive方式解題。</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta">## Code C++</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tribonacci(n<span class="number">-1</span>) + tribonacci(n<span class="number">-2</span>) + tribonacci(n<span class="number">-3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>不過這段程式碼在測資是不過的，時間複雜度超過了。 * Time complexity:
+<span class="math inline">\(O(3^n)\)</span>
+每個項下面都會分成3個項目，以Tree方式看其每一個子運算都會以指數量級增長
+* Space complexity: <span class="math inline">\(O(n)\)</span>
+需要n層來儲存調用Function的狀態.</p>
+<h2 id="solve-2">Solve 2</h2>
+<p>先初始化基本條件，藉由陣列索引的方式來做DP。</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="built_in">int</span> tribonacci(<span class="built_in">int</span> n) &#123;</span><br><span class="line">        vector&lt;<span class="built_in">int</span>&gt; arr&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                arr.push<span class="constructor">_back(<span class="params">arr</span>[<span class="params">i</span>-1] + <span class="params">arr</span>[<span class="params">i</span>-2] + <span class="params">arr</span>[<span class="params">i</span>-3])</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            return arr<span class="literal">[<span class="identifier">n</span>]</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: <span class="math inline">\(O(n)\)</span>
+一個迴圈就搞定了。</li>
+<li>Space complexity: <span class="math inline">\(O(n)\)</span>
+需要長度為n+1的陣列來儲存運算好的數值。</li>
+</ul>
+<h2 id="結論">結論</h2>
+<p>在實作上都不要使用Recursive避免時間複雜度爆炸影響效率。</p>
+<h1 id="參考">參考</h1>
+<p><a href="https://mycollegenotebook.medium.com/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6-%E9%81%9E%E8%BF%B4-%E4%B8%8A-f6d51a462394">時間複雜度
+—遞迴(上)</a></p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode 27 Remove Element</title>
+    <url>/2024/01/26/Leetcode-27/</url>
+    <content><![CDATA[<p><a href="https://leetcode.com/problems/remove-element/description/">Link</a>
+# Intuition
+對於最初始的想法，一定是使用一個額外的陣列來放入不用被移除的元素，<br>
+但是這違反題目要求。題目要求要<code>in-place</code>以及空間複雜度為<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>，<br>
+也就是我必須不藉由而外的空間處理。</p>
+<p>那這邊就必須要有兩個指標，一個指標負責找到不要被移除的元素，一個則負責放不要被移除元素的位置，<br>
+這個方法也就是雙指標法。</p>
+<h1 id="approach">Approach</h1>
+<p>首先我們需要<code>fast</code>來找到不需要被移除的元素的位置，這邊為甚麼不直接找要移除元素的位置呢?<br>
+原因為如果第一個元素就是要被移除元素的話，他就找不到地方放不要被移除的元素。<br>
+接著我們需要<code>slow</code>來放不要被移除元素的位置。
+邏輯上就是當找到不要被移除的元素時將該位置的元素移動到<code>slow</code>位置上，接著讓<code>slow++</code>，<br>
+準備為下一個不被移除的元素做準備。</p>
+<h1 id="complexity">Complexity</h1>
+<ul>
+<li>Time complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<code>fast</code>需要循過整個陣列找到所有不需要移除的元素。<br>
+</li>
+<li>Space complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<code>in-place</code>操作，不需要額外的空間。</li>
+</ul>
+<h1 id="code">Code</h1>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> val)</span> {</span><br><span class="line">    <span class="type">int</span> slow = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> fast = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; fast &lt; numsSize; fast++){</span><br><span class="line">        <span class="keyword">if</span> (nums[fast] != val){</span><br><span class="line">            nums[slow++] = nums[fast]; </span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++){</span><br><span class="line">            <span class="keyword">if</span>( nums[i] != val){</span><br><span class="line">                nums[index++] = nums[i];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode 344 Reverse String</title>
+    <url>/2024/01/04/Leetcode-344/</url>
+    <content><![CDATA[<p><a href="https://leetcode.com/problems/reverse-string/description/">Link</a>
+# Intuition</p>
+<!-- Describe your first thoughts on how to solve this problem. -->
+<p>反轉字串為經典題目，題目要求只能以空間複雜度 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.215ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 1863 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"/></g><g data-mml-node="mo" transform="translate(485,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(874,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1474,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>，也就是能in-place去操作字元。<br>
+首先需要觀察的是反轉子串過後的位置關係，以<code>h</code>來說位置從<code>s[0]</code>變成<code>s[n-1]</code>,而<code>e</code>變成<code>s[1]</code>到<code>s[n - 1 - i]</code>，<br>
+從上推導來看可以得到一個通式<code>swap(s[i], s[n - 1 - i])</code>，然後跑迴圈，接著處理邊界問題，甚麼時候字串會整個反轉完呢?<br>
+就是翻轉到字串中間的位置，整個字串就翻轉完了，也就是長度的一半，<br>
+我們可以透過雙指標法來處理這個問題。</p>
+<h1 id="approach">Approach</h1>
+<p><code>start</code>:表示指向第一個位置的指標。<br>
+<code>end</code>:表示指向最後一個位置的指標。<br>
+邊界中止條件為當兩個指標相遇也就是<code>start &gt;= end</code>。<br>
+每次指標都會遞增以及遞減來調整<code>start++</code>和<code>end--</code>。</p>
+<h1 id="complexity">Complexity</h1>
+<ul>
+<li><p>Time complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
+<li><p>Space complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
+</ul>
+<h1 id="code">Code</h1>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>* s, <span class="type">int</span> sSize)</span> {</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span>* start = s, *end = s + sSize - <span class="number">1</span>; start &lt; end; start++, end--){</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="code-1">Code</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverseString</span><span class="params">(vector&lt;<span class="type">char</span>&gt;&amp; s)</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() / <span class="number">2</span>; i++){</span><br><span class="line">            <span class="type">char</span> temp = s[i];</span><br><span class="line">            s[i] = s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>];</span><br><span class="line">            s[s.<span class="built_in">size</span>() - i - <span class="number">1</span>] = temp;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<h1 id="code-2">Code</h1>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        s[:] = s[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode 541 Reverse String II</title>
+    <url>/2024/01/25/Leetcode-541/</url>
+    <content><![CDATA[<p><a href="https://leetcode.com/problems/reverse-string-ii/description/">link</a>
+# Intuition
+給定字串<code>s</code>以及整數<code>k</code>的情況下，翻轉在每<code>2k</code>個字母中前<code>k</code>個字母，題目考點在於對於邊界條件的設定與迴圈概念。<br>
+如果字串再最後不足<code>2k</code>個字串，一樣要翻轉前<code>k</code>個。
+* Loop condition * Bound condition
+<!-- Describe your first thoughts on how to solve this problem. --></p>
+<h1 id="approach">Approach</h1>
+<!-- Describe your approach to solving the problem. -->
+<p>首先我們需要一個取得子串長度<code>len</code>，迴圈的計數為從<code>0</code>開始每次跳<code>2k</code>元素，<br>
+所以是<code>for(int i = 0; i &lt; len; i += (2k)</code>。<br>
+接著是條件的設立，我們需要從第<code>i</code>個元素往後數<code>k - 1</code>個進行翻轉，這邊減一是因為包含第一個元素，<br>
+我們必須檢查是否超出字串長度大小，所以條件為<code>if (i + k - 1) &lt; len</code>，滿足條樣的條件便可以進行翻轉。
+否則只能翻轉到最後一個元素<code>reserve(s, i, len - 1)</code>。</p>
+<h1 id="complexity">Complexity</h1>
+<ul>
+<li>Time complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="8.788ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 3884.4 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(2252.2,0)"><path data-c="2217" d="M229 286Q216 420 216 436Q216 454 240 464Q241 464 245 464T251 465Q263 464 273 456T283 436Q283 419 277 356T270 286L328 328Q384 369 389 372T399 375Q412 375 423 365T435 338Q435 325 425 315Q420 312 357 282T289 250L355 219L425 184Q434 175 434 161Q434 146 425 136T401 125Q393 125 383 131T328 171L270 213Q283 79 283 63Q283 53 276 44T250 35Q231 35 224 44T216 63Q216 80 222 143T229 213L171 171Q115 130 110 127Q106 124 100 124Q87 124 76 134T64 161Q64 166 64 169T67 175T72 181T81 188T94 195T113 204T138 215T170 230T210 250L74 315Q65 324 65 338Q65 353 74 363T98 374Q106 374 116 368T171 328L229 286Z"/></g><g data-mml-node="mi" transform="translate(2974.4,0)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/></g><g data-mml-node="mo" transform="translate(3495.4,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+外迴圈所執行的次數為<code>m = (len / 2k)</code>，<code>m</code>則是而reverse函數的則是執行<code>k / 2</code>次</li>
+<li>Space complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></li>
+</ul>
+<h1 id="code">Code</h1>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span>* reverseStr(<span class="type">char</span>* s, <span class="type">int</span> k) {</span><br><span class="line">    <span class="type">int</span> len = strlen(s);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i += (<span class="number">2</span> * k)){</span><br><span class="line">        <span class="keyword">if</span> (i + k - <span class="number">1</span> &lt; len){</span><br><span class="line">            reverse(s, i, i + k - <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span>{</span><br><span class="line">            reverse(s, i, len - <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> reverse(<span class="type">char</span>* s, <span class="type">int</span> <span class="keyword">start</span>, <span class="type">int</span> <span class="keyword">end</span>){</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="keyword">start</span>, j = <span class="keyword">end</span>; i &lt; j; i++, j<span class="comment">--){</span></span><br><span class="line">        <span class="type">char</span> <span class="keyword">temp</span> = s[i];</span><br><span class="line">        s[i] = s[j];</span><br><span class="line">        s[j] = <span class="keyword">temp</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">reverseStr</span><span class="params">(string s, <span class="type">int</span> k)</span> </span>{</span><br><span class="line">        <span class="type">int</span> size = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i += <span class="number">2</span> * k){</span><br><span class="line">            <span class="keyword">if</span> (i + k &lt; size){</span><br><span class="line">                <span class="built_in">reverse</span>(s, i, i + k - <span class="number">1</span>);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span>{</span><br><span class="line">                <span class="built_in">reverse</span>(s, i, size - <span class="number">1</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reverse</span><span class="params">(string&amp;s , <span class="type">int</span> start, <span class="type">int</span> end)</span></span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = start, j = end; i &lt; j; i++, j--){</span><br><span class="line">            <span class="built_in">swap</span>(s[i], s[j]);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Apply Network augmentation on YOLOV8</title>
+    <url>/2023/08/06/Apply-Network-Augmentation-On-YOLOv8&#39;/</url>
+    <content><![CDATA[<h1 id="應用網路增強於yolov8輕量化模型">應用網路增強於YOLOv8輕量化模型</h1>
+<h2 id="概述">概述</h2>
+<p>網路增強為訓練輕量化模型的一種訓練方法，透過動態調整模型大小來訓練模型，解決輕量化模型在訓練時under-fitting的問題，我們嘗試將此方法使用用YOLOv8物件偵測輕量化模型上，並且設計出專用api來將網路增強的模型轉換至原生yolov8模型，實作上具有相容性。</p>
+<h2 id="網路架構">網路架構</h2>
+<p>以下為yolov8模型架構圖以及子架構圖。</p>
+<ul>
+<li>Bootlenck為yolov8中主要組成的module，Bottleneck能夠靈活地調整輸入維度的特徵，同時又可以減少計算量。</li>
+<li>c2f(Faster Implementation of CSP Bottleneck with 2 convolutions)
+為Yolov8中重要的module，c2f借鑒了在yolov7當中的E-ELAN的方法，讓模型訓練時可以保留豐富且多樣化梯度流資訊。
+<img src="images/Yolov8/module.png" alt="module.png"> <img src="images/Yolov8/arch.png" alt="arch.png"></li>
+</ul>
+<h2 id="訓練過程">訓練過程</h2>
+<p>下圖為Network
+Augmentation訓練示意圖，每一個step，我們會將圖片輸入進兩個模型，一個為Base
+Model， 另一個為Aug
+Model，這兩個模型差異為模型寬度不同且大模型的部分權重來自小模型，接著我們將模型輸出與真實標籤計算損失函數，並進行反向傳播的動作，
+這樣的方法可以變相地幫助小模型進行學習。 <img src="images/Yolov8/train_process.png" alt="arch_aug.png"></p>
+<p>以下為網路增強後網路的示意圖。 <img src="images/Yolov8/arch_aug.png" alt="arch_aug.png"></p>
+<h2 id="總結">總結</h2>
+<p>在使用網路增強後，對比於原本監督式學習方法，mAP0.50:
+0.95提升了0.07，由於我們使用網路架構對比原始paper更加複雜，任務也不一樣，所需要的特徵也不一樣，因此NetAug可能會傷害到物件偵測模型的效果。</p>
+<figure>
+<img src="images/Yolov8/result.png" alt="result.png">
+<figcaption aria-hidden="true">result.png</figcaption>
+</figure>
+<h2 id="參考">參考</h2>
+<blockquote>
+<p>Cai, H., Gan, C., Lin, J., &amp; Han, S. (2021). Network augmentation
+for tiny deep learning. <em>arXiv preprint arXiv: 2110.08890</em>.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Project</category>
+      </categories>
+      <tags>
+        <tag>YOLO</tag>
+        <tag>Network Augmentation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode-Daily-1743</title>
+    <url>/2023/11/10/Leetcode-Daily-1743/</url>
+    <content><![CDATA[<h1 id="leetcode-1743.-restore-the-array-from-adjacent-pairs">LeetCode
+1743. Restore the Array From Adjacent Pairs</h1>
+<p><a href="https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/?envType=daily-question&amp;envId=2023-11-10">Link</a></p>
+<h1 id="intuition">Intuition</h1>
+<p>雖然題目為給定相鄰矩陣來回推本來陣列是甚麼，但將圖畫出來其實就可以看出這題是一個關於無向圖的traversal，那麼我們會遇到的問題就是如何找到起始位置，因此我們透過map
+STL中資料型態先建構一張圖，
+map中第一個元素為節點數值，第二元素則為其連接的節點數值，由於有多個連接點的可能，我們宣告其為vector<int>，接著我們檢查連接點數量是否為1來決定是否為圖中的根結點，找到節點後我們只要透過DFS來尋過整張圖就好，由於這張圖其實就是linked
+List，
+因此我們不需要任何的資料結構來儲存節點是否已經尋訪，我們只要使用prev變數來記住前一次節點是否尋過。</int></p>
+<h1 id="approach">Approach</h1>
+<!-- Describe your approach to solving the problem. -->
+<h1 id="complexity">Complexity</h1>
+<ul>
+<li><p>Time complexity: <span class="math inline">\(O(n)\)</span>
+<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
+<li><p>Space complexity: <span class="math inline">\(O(n)\)</span>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
+</ul>
+<h1 id="code">Code</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">restoreArray</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; adjacentPairs)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = adjacentPairs.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nums;</span><br><span class="line"></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; mp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : adjacentPairs)&#123;</span><br><span class="line">            mp[p[<span class="number">0</span>]].<span class="built_in">push_back</span>(p[<span class="number">1</span>]);</span><br><span class="line">            mp[p[<span class="number">1</span>]].<span class="built_in">push_back</span>(p[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> root = <span class="built_in">find_root</span>(mp);</span><br><span class="line">        <span class="built_in">dfs</span>(root, INT_MAX, mp, nums);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> prev, unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp,vector&lt;<span class="type">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        nums.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> neigbor : mp[root])&#123;</span><br><span class="line">            <span class="keyword">if</span> (neigbor != prev)&#123;</span><br><span class="line">                <span class="built_in">dfs</span>(neigbor, root, mp, nums);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_root</span><span class="params">(unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt;&amp; mp)</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> root = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: mp)&#123;</span><br><span class="line">            <span class="keyword">if</span> (p.second.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">                root = p.first;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>graph</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>字元概念在C語言中</title>
     <url>/2023/12/16/char-in-c/</url>
     <content><![CDATA[<h1 id="introduction">Introduction</h1>
@@ -475,6 +412,94 @@ to <span class="math inline">\(O(1)\)</span></h2>
       <categories>
         <category>C</category>
       </categories>
+  </entry>
+  <entry>
+    <title>泛型程式設計在C語言中</title>
+    <url>/2023/12/18/generics-in-c/</url>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成
+* void* 指向void指標，使用強制轉型。 * macro(巨集)
+使用字元替換方式操作。 * _Generic(C11)</p>
+<h1 id="void">Void*</h1>
+<p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked
+list中指向不同型別的資料。
+使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
+<h1 id="macro">Macro</h1>
+<p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
+<h1 id="generic">_Generic</h1>
+<p>C11才有的關鍵字，</p>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>LeetCode-221-Maximal-Square</title>
+    <url>/2023/09/21/LeetCode-221-Maximal-Square/</url>
+    <content><![CDATA[<h1 id="leetcode-221.-maximal-square">LeetCode 221. Maximal Square</h1>
+<p><a href="https://leetcode.com/problems/maximal-square/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
+<h2 id="description">Description</h2>
+<p>Given an m x n binary matrix filled with 0's and 1's, find the
+largest square containing only 1's and return its area.</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/26/max1grid.jpg"></p>
+<h2 id="example">Example</h2>
+<p>Example 1:</p>
+<p>Input: matrix =
+[["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+Output: 4</p>
+<p>Example 2:</p>
+<p>Input: matrix = [["0","1"],["1","0"]] Output: 1</p>
+<p>Example 3:</p>
+<p>Input: matrix = [["0"]] Output: 0</p>
+<p><strong>Tags:</strong>
+<code>Dynamic Programming(DP)</code>,<code>Medium</code></p>
+<h2 id="solve-1-button-up-dp-memoization">Solve 1 Button Up DP
+(Memoization)</h2>
+<p>題目要求找出最大的方塊的面積，首先我們需要推導出通式，對於i,j索引，我們要檢查3個位置分別為</p>
+<ul>
+<li>[i-1][j]，[i][j-1]，[i-1][j-1]
+這3個位置必須都為1才能形成一個方形，因此我們可以使用兩次min操作來檢查這3個位置是否都為1，我們就是記住對角線的元素是否為1且上下area是否為1，因此我們會將dp[i][j]的結果與size做比較，最後取平方。</li>
+</ul>
+<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    <span class="keyword">int</span> maximalSquare(<span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;char&gt;&gt;&amp; <span class="keyword">matrix</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="keyword">matrix</span>.<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = <span class="keyword">matrix</span>[<span class="number">0</span>].<span class="keyword">size</span>();</span><br><span class="line">        <span class="keyword">vector</span>&lt;<span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;dp(m, <span class="keyword">vector</span>&lt;<span class="keyword">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">size</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">// row, col, init</span></span><br><span class="line">                <span class="keyword">if</span> ( !i || !j || <span class="keyword">matrix</span>[i][j] == <span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">matrix</span>[i][j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">min</span>(<span class="keyword">min</span>(dp[i][j<span class="number">-1</span>], dp[i<span class="number">-1</span>][j]), dp[i<span class="number">-1</span>][j<span class="number">-1</span>]) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">size</span> = <span class="keyword">max</span>(<span class="keyword">size</span>, dp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">size</span> * <span class="keyword">size</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity: <span class="math inline">\(O(mn)\)</span>
+巡過整個矩陣需要的次數</li>
+<li>Space complexity: <span class="math inline">\(O(mn)\)</span> 需要m *
+n的空間來儲存運算結果</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>LeetCode 198. House Robber</title>
+    <url>/2023/09/13/LeetCode-198-House-Robber/</url>
+    <content><![CDATA[<h1 id="leetcode-198.-house-robber">LeetCode 198. House Robber</h1>
+<p><a href="https://leetcode.com/problems/house-robber/description/?envType=study-plan-v2&amp;envId=dynamic-programming">Link</a></p>
+<h1 id="intuition">Intuition</h1>
+<p>題目基本上就是找一個陣列當中，隔行元素相加求最大值問題，從Example2觀察可以得知
+2 + 9 + 1 這個情況是由 2 + 9 往後推導出來的，<br>
+接著 2 + 9 是由 2 推導出來的，因此我們變可以將問題轉換成子問題。<br>
+首先處理只有兩個元素的情況，就是去比較第一跟第二元素的大小，再來處理之後的情況，每次比較大小需要加上當前nums[i]的大小進去比較，<br>
+這樣才可以有累加的效果出現。</p>
+<h1 id="approach">Approach</h1>
+<h1 id="complexity">Complexity</h1>
+<ul>
+<li><p>Time complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
+<li><p>Space complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">## Code C++</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">rob</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>{</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// nums: [2, 7, 9, 3, 1]</span></span><br><span class="line">        <span class="comment">// Ex2:  [2, 0, 0, 0, 0]</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++){</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">1</span>){</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(dp[i<span class="number">-2</span>] + nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span>{</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(nums[i], dp[i<span class="number">-1</span>]);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> dp[n<span class="number">-1</span>];</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>Dynamic Programming</tag>
+        <tag>Medium</tag>
+      </tags>
   </entry>
   <entry>
     <title>Const &amp; Static &amp; Extern 在C語言</title>
@@ -525,114 +550,34 @@ to <span class="math inline">\(O(1)\)</span></h2>
       </categories>
   </entry>
   <entry>
-    <title>C語言中的變數宣告與解讀</title>
-    <url>/2023/12/16/define-and-read-in-c/</url>
+    <title>矩陣概念與指標在C語言中</title>
+    <url>/2023/12/19/array-in-c/</url>
     <content><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
-<h1 id="right-left-rule">Right-left Rule</h1>
-<p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
-<h2 id="符號">符號</h2>
-<p>以下有3個基本的運算子，</p>
-<ul>
-<li><code>*</code>讀為 "指標指向的是" "as pointer to ..." 只會在
-(辨識字) 左邊出現</li>
-<li><code>[]</code>讀為 "陣列元素為" "array of ..." 只會在 (辨識字)
-右邊出現</li>
-<li><code>()</code>讀為 "函數回傳值" "function (parameter) returning"
-只會在 (辨識字) 右邊出現</li>
-</ul>
-<p>辨識子就是函數名稱或變數名稱喔</p>
-<h1 id="步驟">步驟</h1>
-<ol type="1">
-<li>找到辨識字，解讀為 xxx是 或者 xxx is/ as</li>
-<li>往辨識字的右邊看，如果看到
-<ul>
-<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of
-...</li>
-<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function
-returning ... 直到遇到 單獨的 <code>)</code></li>
-<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
-</ul></li>
-<li>接著往辨識字的左邊看
-<ul>
-<li><code>*</code> 解讀為 指向的是， pointer to</li>
-<li><code>datatype</code> 就照念就好。</li>
-</ul></li>
-</ol>
-<h1 id="以下為不合法的c語言宣告">以下為不合法的C語言宣告</h1>
-<ul>
-<li><code>[]()</code> 沒有陣列中的元素是函數</li>
-<li><code>()()</code> 沒有函數中回傳函數</li>
-<li><code>()[]</code> 沒有函數回傳陣列
-但我們可以將其變成指標來使其合法</li>
-</ul>
-<h1 id="example">Example</h1>
-<p><code>int *ptr</code> declare ptr as pointer to <code>int</code>
-宣告一個ptr指向整數型別的指標</p>
-<p><code>int (*compare)(void*, void*)</code> declare compare as pointer
-to function (pointer to void, pointer to void) returning int<br>
-宣告一個compare的指標函數，其參數為(<em>void,
-</em>void),其回傳值為<code>int</code></p>
-<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code>
-declare d as pointer to function(ref to int, pointer to function (char*,
-char**) returning pointer to pointer to char) returning pointer to
-pointer to void.</p>
-<p><code>int ptr[]()</code>
-不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br>
-<code>int (*ptr[])()</code> declare ptr as the array of pointer to
-function returning int</p>
-<h1 id="reference">Reference</h1>
-<blockquote>
-<p>https://magicjackting.pixnet.net/blog/post/60889356#note4<br>
-https://hackmd.io/<span class="citation" data-cites="sysprog/c-pointer">@sysprog/c-pointer</span><br>
-https://cdecl.org/ 幫你翻譯宣告的網站</p>
-</blockquote>
+<p>陣列為一種在記憶體空間連續分布的資料型態，陣列中的東西我們稱作元素(element)，陣列能夠透過元素的索引(index)來取得資料。</p>
+<h1 id="array-in-c">Array in C</h1>
+<p>以下為宣告陣列一個方式，arr宣告成有5個元素的矩陣，元素資料型態為int。<br>
+在我的系統底下，int佔4個byte，對於arr來說使用sizeof測量陣列大小時會輸出
+4 * 5 byte。 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The arr have %d byte\n&quot;</span>, (<span class="type">int</span>)<span class="keyword">sizeof</span>(arr));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The array of address = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;The first element in array&#x27;s address = %p\n&quot;</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+輸入如下，我們就看到了這個矩陣佔20byte同時輸出其地址，而這個地址是陣列的第一個元素的地址
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The arr have 20 byte</span><br><span class="line">The array of address = 0061FF0C</span><br><span class="line">The first element in array&#x27;s address = 0061FF0C</span><br></pre></td></tr></table></figure></p>
+<h1 id="arr-vs-arr"><code>arr</code> vs <code>&amp;arr</code></h1>
+<p>在以下的程式中，兩種輸出的東西，都是一樣的，但他們背後代表的資料型態是不一樣的。
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;arr = %p\n&quot;</span>, arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;&amp;arr = %p\n&quot;</span>, &amp;arr);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">arr = <span class="number">0061F</span>F0C</span><br><span class="line">&amp;arr = <span class="number">0061F</span>F0C</span><br></pre></td></tr></table></figure>
+<p>首先使用指標方式，<code>ptr</code>為指標，指向的是<code>int</code>，因此我們可以將地址代入進去。
+但是當對陣列使用<code>&amp;</code>，會回傳指標並且指向的是一個陣列並且需要特定的長度，所以其形態為<code>int(*)[5]</code>，很明顯的看到這兩個東西雖然有相同一樣的數值，但所表現出來的東西是完全不同的。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* ptr = arr;</span><br><span class="line"><span class="type">int</span> (*ptr2arr)[<span class="number">5</span>] = &amp;arr;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr      is %p\n&quot;</span>, (<span class="type">void</span>*)arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr     is %p\n&quot;</span>, (<span class="type">void</span>*)&amp;arr);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of arr + 1  is %p\n&quot;</span>, (<span class="type">void</span>*)(arr + <span class="number">1</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Address of &amp;arr + 1 is %p\n&quot;</span>, (<span class="type">void</span>*)(&amp;arr + <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+<p><code>ptr + 1</code> 代表從 arr[0] -&gt; arr[1] 而
+<code>&amp;arr + 1</code> 代表從 int(<em>)[5] -&gt; int (</em>)[5]
+<code>&amp;arr + 1</code> 位移了一整個陣列的大小。 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Address of arr      is 0061FF04</span><br><span class="line">Address of &amp;arr     is 0061FF04</span><br><span class="line">Address of arr + 1  is 0061FF08</span><br><span class="line">Address of &amp;arr + 1 is 0061FF18</span><br></pre></td></tr></table></figure></p>
+<h1 id="arr-1"><code>*(&amp;arr + 1)</code></h1>
+<p>上面式子最後回傳的是一個指標，為甚麼呢?首先我們先解讀<code>&amp;arr</code>這個回傳了一個指標指向一個陣列且大小為5，接著我們依照<code>*</code>操作來依址取值
+，<code>&amp;arr</code>為指標指向一個陣列，所以裡面存放的是一個陣列的地址，所以取值後我們會得到是指標，陣列會隱性轉型成指向第一個陣列的指標喔。</p>
 ]]></content>
       <categories>
         <category>C</category>
       </categories>
-  </entry>
-  <entry>
-    <title>泛型程式設計在C語言中</title>
-    <url>/2023/12/18/generics-in-c/</url>
-    <content><![CDATA[<h1 id="introduction">Introduction</h1>
-<p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成
-* void* 指向void指標，使用強制轉型。 * macro(巨集)
-使用字元替換方式操作。 * _Generic(C11)</p>
-<h1 id="void">Void*</h1>
-<p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked
-list中指向不同型別的資料。
-使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
-<h1 id="macro">Macro</h1>
-<p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
-<h1 id="generic">_Generic</h1>
-<p>C11才有的關鍵字，</p>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>void*指標以及 void**指標的介紹與用法</title>
-    <url>/2023/12/12/void-in-c/</url>
-    <content><![CDATA[<h1 id="introduction">Introduction</h1>
-<p><code>void</code>為C語言中關鍵字，
-<code>void</code>為c/c++中的內建類型功能有3種 *
-函數回傳void，表示不會會傳任何值。 *
-用於函數參數，表示此函數不接受任何參數，Ex <code>void func(void);</code>
-* 用於指標宣告時，表示此指標為通用的，可以進行強制轉型。</p>
-<h1 id="example">Example</h1>
-<p><code>void*</code>指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型，能夠修改被指向的資料。
-<code>void**</code>指標的指標，如果今天要更改指標指向的對象，就可以使用或者我們需要接受函數裡面變數的指標，就需要用到指標的指標來接受。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">set</span><span class="params">(<span class="type">void</span>* x)</span>&#123;</span><br><span class="line">    *(<span class="type">int</span>*)x = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_ptr</span><span class="params">(<span class="type">void</span>** x)</span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">9</span>;</span><br><span class="line">    *x = &amp;a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>* p_x = &amp;x; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    <span class="built_in">set</span>(p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, x);</span><br><span class="line"></span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    set_ptr((<span class="type">void</span>**)&amp;p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, *p_x);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>C</category>
-      </categories>
-      <tags>
-        <tag>C</tag>
-        <tag>C++</tag>
-      </tags>
   </entry>
   <entry>
     <title>物件導向概念</title>
@@ -711,5 +656,95 @@ list中指向不同型別的資料。
       <tags>
         <tag>Stack</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>void*指標以及 void**指標的介紹與用法</title>
+    <url>/2023/12/12/void-in-c/</url>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
+<p><code>void</code>為C語言中關鍵字，
+<code>void</code>為c/c++中的內建類型功能有3種 *
+函數回傳void，表示不會會傳任何值。 *
+用於函數參數，表示此函數不接受任何參數，Ex <code>void func(void);</code>
+* 用於指標宣告時，表示此指標為通用的，可以進行強制轉型。</p>
+<h1 id="example">Example</h1>
+<p><code>void*</code>指標長用於函數參數輸入，使用者可以依據輸入資料型態進行強制轉型，能夠修改被指向的資料。
+<code>void**</code>指標的指標，如果今天要更改指標指向的對象，就可以使用或者我們需要接受函數裡面變數的指標，就需要用到指標的指標來接受。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">set</span><span class="params">(<span class="type">void</span>* x)</span>&#123;</span><br><span class="line">    *(<span class="type">int</span>*)x = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">set_ptr</span><span class="params">(<span class="type">void</span>** x)</span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">9</span>;</span><br><span class="line">    *x = &amp;a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>* p_x = &amp;x; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    <span class="built_in">set</span>(p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, x);</span><br><span class="line"></span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Before set a = %d\n&quot;</span>, x);</span><br><span class="line">    set_ptr((<span class="type">void</span>**)&amp;p_x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After set a = %d\n\n&quot;</span>, *p_x);</span><br><span class="line"></span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C語言中的變數宣告與解讀</title>
+    <url>/2023/12/16/define-and-read-in-c/</url>
+    <content><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>解讀C語言的宣告式，平常看起來不太重要，但面對一些特殊的宣告式我們仍要有一個辦法去解讀他。</p>
+<h1 id="right-left-rule">Right-left Rule</h1>
+<p>Right-left Rule指得是解讀C語言宣告式的一個法則。</p>
+<h2 id="符號">符號</h2>
+<p>以下有3個基本的運算子，</p>
+<ul>
+<li><code>*</code>讀為 "指標指向的是" "as pointer to ..." 只會在
+(辨識字) 左邊出現</li>
+<li><code>[]</code>讀為 "陣列元素為" "array of ..." 只會在 (辨識字)
+右邊出現</li>
+<li><code>()</code>讀為 "函數回傳值" "function (parameter) returning"
+只會在 (辨識字) 右邊出現</li>
+</ul>
+<p>辨識子就是函數名稱或變數名稱喔</p>
+<h1 id="步驟">步驟</h1>
+<ol type="1">
+<li>找到辨識字，解讀為 xxx是 或者 xxx is/ as</li>
+<li>往辨識字的右邊看，如果看到
+<ul>
+<li><code>[]</code> 解讀為 xxx是陣列，其元素為 xxx is the array of
+...</li>
+<li><code>()</code> 解讀為 xxx是函數, 其回傳值為 xxx is the function
+returning ... 直到遇到 單獨的 <code>)</code></li>
+<li>如果遇到<code>(</code>則代表中間有其他東西要解讀，多半是遇到函數，要解讀其參數為何</li>
+</ul></li>
+<li>接著往辨識字的左邊看
+<ul>
+<li><code>*</code> 解讀為 指向的是， pointer to</li>
+<li><code>datatype</code> 就照念就好。</li>
+</ul></li>
+</ol>
+<h1 id="以下為不合法的c語言宣告">以下為不合法的C語言宣告</h1>
+<ul>
+<li><code>[]()</code> 沒有陣列中的元素是函數</li>
+<li><code>()()</code> 沒有函數中回傳函數</li>
+<li><code>()[]</code> 沒有函數回傳陣列
+但我們可以將其變成指標來使其合法</li>
+</ul>
+<h1 id="example">Example</h1>
+<p><code>int *ptr</code> declare ptr as pointer to <code>int</code>
+宣告一個ptr指向整數型別的指標</p>
+<p><code>int (*compare)(void*, void*)</code> declare compare as pointer
+to function (pointer to void, pointer to void) returning int<br>
+宣告一個compare的指標函數，其參數為(<em>void,
+</em>void),其回傳值為<code>int</code></p>
+<p><code>void **(*d) (int &amp;, char **(*)(char *, char **))</code>
+declare d as pointer to function(ref to int, pointer to function (char*,
+char**) returning pointer to pointer to char) returning pointer to
+pointer to void.</p>
+<p><code>int ptr[]()</code>
+不合法的宣告，宣告一個ptr為陣列其元素為函數，要修改為其元素為指標函數。<br>
+<code>int (*ptr[])()</code> declare ptr as the array of pointer to
+function returning int</p>
+<h1 id="reference">Reference</h1>
+<blockquote>
+<p>https://magicjackting.pixnet.net/blog/post/60889356#note4<br>
+https://hackmd.io/<span class="citation" data-cites="sysprog/c-pointer">@sysprog/c-pointer</span><br>
+https://cdecl.org/ 幫你翻譯宣告的網站</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
   </entry>
 </search>

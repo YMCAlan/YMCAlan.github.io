@@ -22,19 +22,20 @@
     var CONFIG = {"hostname":"ymcalan.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Const &amp; Static &amp; Extern 在C語言筆記">
+  <meta name="description" content="LeetCode 27 Remove Element">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Const &amp; Static &amp; Extern 在C語言">
-<meta property="og:url" content="https://ymcalan.github.io/2023/12/28/const-static-c/index.html">
+<meta property="og:title" content="Leetcode 27 Remove Element">
+<meta property="og:url" content="https://ymcalan.github.io/2024/01/26/Leetcode-27/index.html">
 <meta property="og:site_name" content="Coding Life">
-<meta property="og:description" content="Const &amp; Static &amp; Extern 在C語言筆記">
+<meta property="og:description" content="LeetCode 27 Remove Element">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2023-12-28T06:54:32.000Z">
-<meta property="article:modified_time" content="2024-01-17T14:49:04.599Z">
+<meta property="article:published_time" content="2024-01-26T05:10:58.000Z">
+<meta property="article:modified_time" content="2024-01-26T05:39:38.401Z">
 <meta property="article:author" content="YuMingChang">
+<meta property="article:tag" content="String">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://ymcalan.github.io/2023/12/28/const-static-c/">
+<link rel="canonical" href="https://ymcalan.github.io/2024/01/26/Leetcode-27/">
 
 
 <script id="page-configurations">
@@ -50,7 +51,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2557320840896902"
      crossorigin="anonymous"></script>
 
-  <title>Const & Static & Extern 在C語言 | Coding Life - Hello World!</title>
+  <title>Leetcode 27 Remove Element | Coding Life - Hello World!</title>
   
 
 
@@ -84,7 +85,119 @@
   </style>
 </noscript>
 
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -199,7 +312,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="https://ymcalan.github.io/2023/12/28/const-static-c/">
+    <link itemprop="mainEntityOfPage" href="https://ymcalan.github.io/2024/01/26/Leetcode-27/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -212,7 +325,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Const & Static & Extern 在C語言
+          Leetcode 27 Remove Element
         </h1>
 
         <div class="post-meta">
@@ -221,23 +334,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2023-12-28 14:54:32" itemprop="dateCreated datePublished" datetime="2023-12-28T14:54:32+08:00">2023-12-28</time>
+              <time title="Created: 2024-01-26 13:10:58 / Modified: 13:39:38" itemprop="dateCreated datePublished" datetime="2024-01-26T13:10:58+08:00">2024-01-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-17 22:49:04" itemprop="dateModified" datetime="2024-01-17T22:49:04+08:00">2024-01-17</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
                 </span>
             </span>
 
@@ -254,16 +361,16 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>551</span>
+              <span>380</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
+              <span>1 mins.</span>
             </span>
-            <div class="post-description">Const & Static & Extern 在C語言筆記</div>
+            <div class="post-description">LeetCode 27 Remove Element</div>
 
         </div>
       </header>
@@ -274,46 +381,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="const-introduction"><code>const</code> Introduction</h1>
-<p><code>const</code> 縮寫自 constant，代表
-"恆定不變的"，是用來定義常量變數的關鍵字。</p>
+        <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-element/description/">Link</a>
+# Intuition
+對於最初始的想法，一定是使用一個額外的陣列來放入不用被移除的元素，<br>
+但是這違反題目要求。題目要求要<code>in-place</code>以及空間複雜度為<span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>，<br>
+也就是我必須不藉由而外的空間處理。</p>
+<p>那這邊就必須要有兩個指標，一個指標負責找到不要被移除的元素，一個則負責放不要被移除元素的位置，<br>
+這個方法也就是雙指標法。</p>
+<h1 id="approach">Approach</h1>
+<p>首先我們需要<code>fast</code>來找到不需要被移除的元素的位置，這邊為甚麼不直接找要移除元素的位置呢?<br>
+原因為如果第一個元素就是要被移除元素的話，他就找不到地方放不要被移除的元素。<br>
+接著我們需要<code>slow</code>來放不要被移除元素的位置。
+邏輯上就是當找到不要被移除的元素時將該位置的元素移動到<code>slow</code>位置上，接著讓<code>slow++</code>，<br>
+準備為下一個不被移除的元素做準備。</p>
+<h1 id="complexity">Complexity</h1>
 <ul>
-<li>被 <code>const</code> 修飾的變數不能更改，僅能進行讀取。<br>
+<li>Time complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<code>fast</code>需要循過整個陣列找到所有不需要移除的元素。<br>
 </li>
-<li>被 <code>const</code>
-修飾的函數參數在函數內不能被修改，這樣做作為一種保護機制，防止意外修改。不過，函數在使用時傳入的參數可以不是常量。</li>
+<li>Space complexity: <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></span>
+<code>in-place</code>操作，不需要額外的空間。</li>
 </ul>
-<p>備註:
-<code>const int *p;</code>解讀為<code>p</code>為指標指向常量int(指向常量的指標)，指標可更改，但指向物不行更改。<br>
-<code>int* const p;</code>解讀為<code>p</code>為常量指標指向int，指標不可改，但指向內容物可以改。<br>
-<code>const int* const p;</code>解讀為<code>p</code>為常量指標指向常量int，皆不可以改。<br>
-基本上解讀原則會在<code>*</code>左右兩邊。<br>
-如果在星號左邊，表示某個靜態的資料型態，因此<code>const int *p;</code>
-==
-<code>int const *p</code>;這個是特例，都在星號左邊因此解讀上是一樣的。<br>
-如果在星號右邊，則表示指標是常量。</p>
-<h1 id="static-introduction"><code>static</code> Introduction</h1>
-<p>Static表示靜態，能夠修改變數的儲存區域和生命週期，</p>
-<ul>
-<li><p>靜態局部變數，在函數內被使用時只會初始化一次，可以維持某個函數中的狀態。</p>
-<ul>
-<li><strong>作用域</strong> : 僅限於宣告它的函數。</li>
-<li><strong>在函數外不可見</strong>：即便是在同一檔案的其他函數中也無法訪問。</li>
-</ul></li>
-<li><p>靜態全局變數，限制其使用範圍，只能在其對應到的檔案使用，避免命名衝突。</p>
-<ul>
-<li><strong>作用域</strong>：限定在宣告它的檔案（編譯單位）。</li>
-<li><strong>檔案內可見</strong>：可以在檔案內的任何函數中訪問，但在其他檔案中不可見。</li>
-</ul></li>
-<li><p>靜態函數，與靜態變數一樣，只能在定義的檔案中使用，避免命名衝突。</p>
-<ul>
-<li><strong>作用域</strong>：同樣也是限定在宣告它的檔案。</li>
-<li><strong>檔案內可見</strong>：只能在同一檔案中的其他函數中呼叫，無法在其他檔案中被呼叫。</li>
-</ul></li>
-</ul>
-<h1 id="extern-introduction"><code>Extern</code> Introduction</h1>
-<p><code>Extern</code>允許被修飾變數在不同的source file中被使用。</p>
-<p><code>extern "C"</code>讓在c++中也可以使用c的函示庫，不會造成命名衝突。</p>
+<h1 id="code">Code</h1>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> val)</span> {</span><br><span class="line">    <span class="type">int</span> slow = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> fast = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; fast &lt; numsSize; fast++){</span><br><span class="line">        <span class="keyword">if</span> (nums[fast] != val){</span><br><span class="line">            nums[slow++] = nums[fast]; </span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> val)</span> </span>{</span><br><span class="line">        <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++){</span><br><span class="line">            <span class="keyword">if</span>( nums[i] != val){</span><br><span class="line">                nums[index++] = nums[i];</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -322,6 +413,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/String/" rel="tag"># String</a>
+          </div>
 
         
 
@@ -329,13 +423,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/20/oop/" rel="prev" title="物件導向概念">
-      <i class="fa fa-chevron-left"></i> 物件導向概念
+    <a href="/2024/01/25/Leetcode-541/" rel="prev" title="Leetcode 541 Reverse String II">
+      <i class="fa fa-chevron-left"></i> Leetcode 541 Reverse String II
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/01/04/Leetcode-344/" rel="next" title="Leetcode 344 Reverse String">
-      Leetcode 344 Reverse String <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -395,7 +486,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#const-introduction"><span class="nav-number">1.</span> <span class="nav-text">const Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static-introduction"><span class="nav-number">2.</span> <span class="nav-text">static Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#extern-introduction"><span class="nav-number">3.</span> <span class="nav-text">Extern Introduction</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#approach"><span class="nav-number">1.</span> <span class="nav-text">Approach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#complexity"><span class="nav-number">2.</span> <span class="nav-text">Complexity</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -622,6 +713,59 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '[object Object]';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
@@ -636,7 +780,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'YMCAlan.github.io',
       owner       : 'YMCAlan',
       admin       : ['YMCAlan'],
-      id          : '1fed8fe5c061b656db87a75d7507421a',
+      id          : '0752af6d656be77472f2fca3d3dd8753',
         language: 'zh-TW',
       distractionFreeMode: true
     });
