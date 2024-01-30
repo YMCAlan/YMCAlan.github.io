@@ -36,9 +36,10 @@
 <meta property="og:image" content="https://ymcalan.github.io/2023/10/04/KnowledgeDistillation-On-YOLOv7/images/KnowledgeDistillation-On-Yolov7/CKD.png">
 <meta property="og:image" content="https://ymcalan.github.io/2023/10/04/KnowledgeDistillation-On-YOLOv7/images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png">
 <meta property="article:published_time" content="2023-10-04T02:40:25.000Z">
-<meta property="article:modified_time" content="2024-01-08T06:23:15.928Z">
+<meta property="article:modified_time" content="2024-01-30T14:55:24.022Z">
 <meta property="article:author" content="YuMingChang">
-<meta property="article:tag" content="-YOLO -Knowledge Distillation">
+<meta property="article:tag" content="YOLO">
+<meta property="article:tag" content="Knowledge Distillation">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://ymcalan.github.io/2023/10/04/KnowledgeDistillation-On-YOLOv7/images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png">
 
@@ -237,7 +238,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-08 14:23:15" itemprop="dateModified" datetime="2024-01-08T14:23:15+08:00">2024-01-08</time>
+                <time title="Modified: 2024-01-30 22:55:24" itemprop="dateModified" datetime="2024-01-30T22:55:24+08:00">2024-01-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,63 +283,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="使用知識蒸餾於yolov7輕量化模型">使用知識蒸餾於YOLOv7輕量化模型</h1>
+        <h1>使用知識蒸餾於YOLOv7輕量化模型</h1>
 <h2 id="概述">概述</h2>
-<p>知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized
-KD以及Cross Attention KD的方法來進行訓練。</p>
+<p>知識蒸餾為深度學習技術之一，用於將大模型的知識轉移至小模型當中，以降低在推論時候的計算成本，本專案使用Customized KD以及Cross Attention KD的方法來進行訓練。</p>
 <h2 id="網路架構">網路架構</h2>
 <p>以下為YOLOv7網路架構，包含了Backbone、Neck、Head三個部分。</p>
 <ul>
 <li>Backbone主要由MaxPool以及ELAN組成。</li>
-<li>Neck由ELAN-Eˇ並採用FPN以及PAN方式進行串接。</li>
+<li>Neck由ELAN-E並採用FPN以及PAN方式進行串接。</li>
 <li>Head由RepConv以及IK隱性知識組成。</li>
 </ul>
-<figure>
-<img src="images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="yolov7_arch.png">
-<figcaption aria-hidden="true">yolov7_arch.png</figcaption>
-</figure>
-<p>以下為YOLOv7使用的小模組。</p>
+<p><img src="images/KnowledgeDistillation-On-Yolov7/yolov7_arch.png" alt="YOLOV7_arch.png"><br>
+以下為YOLOv7使用的小模組。</p>
 <ul>
 <li>CBS為convolution、Batchnorm以及SiLU的組合。</li>
 <li>ELAN為YOLOv7提出架構，藉由concate不同層級的Conv輸出的</li>
 </ul>
-<figure>
-<img src="images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="yolov7_sub_arch.png">
-<figcaption aria-hidden="true">yolov7_sub_arch.png</figcaption>
-</figure>
+<p><img src="images/KnowledgeDistillation-On-Yolov7/yolov7_sub_arch.png" alt="yolov7_sub_arch.png"></p>
 <h2 id="訓練方法">訓練方法</h2>
-<p>我們所使用的知識蒸餾方法為Feature以及Logit
-KD，首先輸出一張影像進入到老師與學生網路，得到其中間層輸出的特徵層以及輸出，接著將中間輸出的特徵層通過CAKD
-Module，並計算CAKD Loss，接著將輸出計算KD
-Loss，以及學生的輸出計算Supervised
-Loss，最後將所有損失函數加總起來，並反向傳播到學生網路。</p>
-<figure>
-<img src="images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="kd_arch.png">
-<figcaption aria-hidden="true">kd_arch.png</figcaption>
-</figure>
-<p>我們設計了一個簡單的交叉注意力機制，首先將老師與學生網路特徵層攤平，接著進行矩陣乘法後通過softmax，變得到了一張Attention
-map接著再將老師特徵圖再乘過去，這樣的設計目的為先得到一張老師對學生特徵圖的Attention
-map，接著將老師不同通道特徵透Attention
-map中的權重進行線性組合，再與學生特徵去進行損失函數的計算。 <img src="images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
-<p>接著我們使用Customized KD方法，基本概念就是在計算除了Supervised
-Loss以外了Loss，再更新前去計算其梯度的相似程度，由於監督式學習仰賴標籤來進行訓練，因此來額外的其他Loss函數的梯度與Supervised
-Loss梯度的相似度，如果其更新方向大於90度變代表加入這個Loss以後並沒有幫助到學習。
+<p>我們所使用的知識蒸餾方法為Feature以及Logit KD，首先輸出一張影像進入到老師與學生網路，得到其中間層輸出的特徵層以及輸出，接著將中間輸出的特徵層通過CAKD Module，並計算CAKD Loss，接著將輸出計算KD Loss，以及學生的輸出計算Supervised Loss，最後將所有損失函數加總起來，並反向傳播到學生網路。</p>
+<p><img src="images/KnowledgeDistillation-On-Yolov7/kd_arch.png" alt="kd_arch.png"></p>
+<p>我們設計了一個簡單的交叉注意力機制，首先將老師與學生網路特徵層攤平，接著進行矩陣乘法後通過softmax，變得到了一張Attention map接著再將老師特徵圖再乘過去，這樣的設計目的為先得到一張老師對學生特徵圖的Attention map，接著將老師不同通道特徵透Attention map中的權重進行線性組合，再與學生特徵去進行損失函數的計算。<br>
+<img src="images/KnowledgeDistillation-On-Yolov7/CAKD.png" alt="CAKD.png"></p>
+<p>接著我們使用Customized KD方法，基本概念就是在計算除了Supervised Loss以外了Loss，再更新前去計算其梯度的相似程度，由於監督式學習仰賴標籤來進行訓練，因此來額外的其他Loss函數的梯度與Supervised Loss梯度的相似度，如果其更新方向大於90度變代表加入這個Loss以後並沒有幫助到學習。<br>
 <img src="images/KnowledgeDistillation-On-Yolov7/CKD.png" alt="CKD.png"></p>
 <h2 id="結果">結果</h2>
-<p>在我們的實現數據中，對比了只使用Supervised
-learning以及KD的結果，結果顯示使用Customized
-KD以及注意力機制KD可以將𝑚𝐴𝑃0.5和𝑚𝐴𝑃0.5:0.95分別提升2.78%和0.96%。 <img src="images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png" alt="YOLOv7_result.png"></p>
+<p>在我們的實現數據中，對比了只使用Supervised learning以及KD的結果，結果顯示使用Customized KD以及注意力機制KD可以將𝑚𝐴𝑃0.5和𝑚𝐴𝑃0.5:0.95分別提升2.78%和0.96%。<br>
+<img src="images/KnowledgeDistillation-On-Yolov7/YOLOv7_result.png" alt="YOLOv7_result.png"></p>
 <h2 id="參考">參考</h2>
 <blockquote>
-<p>Zhu, Yichen, and Yi Wang. "Student customized knowledge distillation:
-Bridging the gap between student and teacher." Proceedings of the
-IEEE/CVF International Conference on Computer Vision. 2021.</p>
+<p>Zhu, Yichen, and Yi Wang. “Student customized knowledge distillation: Bridging the gap between student and teacher.” Proceedings of the IEEE/CVF International Conference on Computer Vision. 2021.</p>
 </blockquote>
 <blockquote>
-<p>Wang, Chien-Yao, Alexey Bochkovskiy, and Hong-Yuan Mark Liao.
-"YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for
-real-time object detectors." Proceedings of the IEEE/CVF Conference on
-Computer Vision and Pattern Recognition. 2023.</p>
+<p>Wang, Chien-Yao, Alexey Bochkovskiy, and Hong-Yuan Mark Liao. “YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors.” Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2023.</p>
 </blockquote>
 
     </div>
@@ -349,7 +326,8 @@ Computer Vision and Pattern Recognition. 2023.</p>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/YOLO-Knowledge-Distillation/" rel="tag"># -YOLO -Knowledge Distillation</a>
+              <a href="/tags/YOLO/" rel="tag"># YOLO</a>
+              <a href="/tags/Knowledge-Distillation/" rel="tag"># Knowledge Distillation</a>
           </div>
 
         
@@ -424,7 +402,7 @@ Computer Vision and Pattern Recognition. 2023.</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%9F%A5%E8%AD%98%E8%92%B8%E9%A4%BE%E6%96%BCyolov7%E8%BC%95%E9%87%8F%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">使用知識蒸餾於YOLOv7輕量化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.2.</span> <span class="nav-text">網路架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%93%E7%B7%B4%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">訓練方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">結果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">參考</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">使用知識蒸餾於YOLOv7輕量化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.2.</span> <span class="nav-text">網路架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%93%E7%B7%B4%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">訓練方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">結果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">參考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

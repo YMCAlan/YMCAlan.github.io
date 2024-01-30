@@ -274,17 +274,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="introduction">Introduction</h1>
-<p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成
-* void* 指向void指標，使用強制轉型。 * macro(巨集)
-使用字元替換方式操作。 * _Generic(C11)</p>
-<h1 id="void">Void*</h1>
-<p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked
-list中指向不同型別的資料。
+        <h1>Introduction</h1>
+<p>泛型(Generics)，是一種無形別的程式，能夠將相同的演算法應用於不同的資料型別上，那麼C由於是強型別語言，無法透過語法直接達成泛型的效果，但可以透過以下三種方式來達成</p>
+<ul>
+<li>void* 指向void指標，使用強制轉型。</li>
+<li>macro(巨集) 使用字元替換方式操作。</li>
+<li>_Generic(C11)</li>
+</ul>
+<h1>Void*</h1>
+<p>我們可以透過void*在資料結構中進行強制轉型的動作，進而達到泛型效果，例如可以在一個linked list中指向不同型別的資料。<br>
 使用void方法就一定要用指標，讓實作時會比較複雜，但相對於macro來說是比較安全的。</p>
-<h1 id="macro">Macro</h1>
+<h1>Macro</h1>
 <p>Macro(巨集)是一種透過字串代換方式讓C語言能夠執行泛型操作，但比較難debug。</p>
-<h1 id="generic">_Generic</h1>
+<h1>_Generic</h1>
 <p>C11才有的關鍵字，</p>
 
     </div>
@@ -367,7 +369,7 @@ list中指向不同型別的資料。
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#void"><span class="nav-number">2.</span> <span class="nav-text">Void*</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#macro"><span class="nav-number">3.</span> <span class="nav-text">Macro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#generic"><span class="nav-number">4.</span> <span class="nav-text">_Generic</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Void*</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Macro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">_Generic</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
